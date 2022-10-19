@@ -31,12 +31,12 @@
 
 
 \begin{document}
-\title{近世代数基础 读书笔记 Reading Notes on Algebra}
-\author{Patrick X. Li\thanks{For my daughters Gaia and Sofia: Algebra is what we can find out from something like $1+1=2$.}\thanks{This note is mainly based on the classical works by Prof. Zhang He Rui (Ho-Jui Chang). He studied algebra in Universit\"at Hamburg, under E. Artin, E. Witt, etc. Later he returned to China and became one of the founders of modern mathematics and education in the country.}}
+\title{近世代数基础 读书笔记 \\Reading Notes on Algebra}
+\author{Patrick X. Li \thanks{This note is mainly based on the classical textbook of algebra by Prof. Zhang He Rui (张禾瑞, Ho-Jui Chang). He studied algebra in Universitaet Hamburg, under E. Artin, E. Witt, etc at 1930s. He returned to China in 1940s, first affiliated with Peking University and then Beijing Normal University, and became one of the founders of modern mathematics and education in the country.}  \thanks{To my daughters Gaia and Sofia: Algebra is what we can find out from something like $1+1=2$.}}
 
 
 
-\date{working in progress, dated at \today}
+\date{working in progress\\ \today}
 \maketitle
 
 
@@ -48,10 +48,10 @@
 
 \chapter{群论基础 (Basics of Group Theory)}
 
-\section{群的定义}
+\section{群的定义(Definition of Group)}
 
 \begin{definition}\label{def_group_1}
-一个非空集合G 对于一个代数运算(通常称为 乘法) 是一个\textbf{群}, 假如:
+一个非空集合G 对于一个代数运算(通常称为 乘法) 是一个\textbf{群 (Group)}, 如果满足以下条件:
 \begin{enumerate}
 \item[I.]{G对于这个代数运算来说是闭的;}
 \item[II.]{结合律成立:
@@ -60,7 +60,7 @@
 	\end{equation}
 对于G的任意三个元 a, b, c.}
 
-\item[III.]{对于G的任意两个元a, b 来说, 以下方程都在G里有解:
+\item[III.]{对于G的任意两个元a, b 来说, 下面的方程都在G里有解:
 \begin{equation}
 ax = b \mbox{ 和 } \, y a = b.
 \end{equation}
@@ -69,7 +69,7 @@ ax = b \mbox{ 和 } \, y a = b.
 \end{definition}
 
 \begin{definition}\label{def_group_2}
-一个非空集合G 对于一个代数运算(通常称为 乘法) 是一个\textbf{群}, 假如:
+一个非空集合G 对于一个代数运算(通常称为 乘法) 是一个\textbf{群 (Group)}, 如果满足以下条件:
 \begin{enumerate}
 \item[I.]{G对于这个代数运算来说是闭的;}
 \item[II.]{结合律成立:
@@ -77,7 +77,7 @@ ax = b \mbox{ 和 } \, y a = b.
 		a(bc) = (ab) c 	
 	\end{equation}
 对于G的任意三个元 a, b, c.}
-\item[IV.]{G 里至少存在一个 左单元e, 能让
+\item[IV.]{G 里至少存在一个 左单元e, 使得
 \begin{equation}
 ea = a
 \end{equation}
@@ -92,11 +92,11 @@ ea = a
 \end{definition}
 
 \begin{memo}
-第\ref{def_group_2} 定义 比 第\ref{def_group_1} 定义 方便应用.
+第\ref{def_group_2} 定义 比 第\ref{def_group_1} 定义 更加方便应用.
 \end{memo}
 
 \begin{definition}
-\textbf{有限群}: 一个群的元的个数是一个有限整数. 一个有限群的元的个数叫做这个群的\textbf{阶}.
+\textbf{有限群}: 一个群的元的个数是一个有限整数, 那么这个群称为 有限群(Finite Group). 一个有限群的元的个数叫做这个群的\textbf{阶(Order of the group)}.
 \end{definition}
 
 \begin{definition}
@@ -127,7 +127,7 @@ a^{-1} a = a a^{-1} = e
 \begin{equation}
 a^m = e
 \end{equation}
-的最小的正整数m叫做a的\textbf{阶}. 如果这样的一个m不存在,我们称a是\textbf{无限阶}的.
+的最小的正整数 $m$ 叫做 $a$ 的\textbf{阶 (Order of the element $a$)}. 如果这样的一个 $m$ 不存在,我们称 $a$ 是\textbf{无限阶}的.
 \end{definition}
 
 \begin{theorem}
@@ -186,7 +186,7 @@ a a_k = b
 \end{proof}
 
 \begin{definition}\label{def_finite_group}
-\textbf{有限群}的定义: 一个\textbf{有限}的不空集合G 对于一个代数运算(通常称为乘法)是一个群, 假如:
+\textbf{有限群(Finite Group)}的定义: 一个\textbf{有限}的不空集合G 对于一个代数运算(通常称为乘法)是一个群, 假如:
 \begin{enumerate}
 \item[I.]{G对于这个代数运算来说是闭的;}
 \item[II.]{结合律成立:
@@ -199,7 +199,7 @@ a a_k = b
 \end{definition}
 
 
-\section{群的同态(Group homomorphism)}
+\section{群的同态(Group Homomorphism)}
 
 \begin{theorem}\label{thm_group_homomorphism}
 \textbf{群的同态}: 假定G是一个群, $\overline{G}$是一个不空集合, 并有一个代数运算. 那么, 假定G与 $\overline{G}$ 对于他们的代数运算而言是同态(满射)的, 那么$\overline{G}$ 也是一个群.
@@ -251,7 +251,7 @@ a^{-1} a = e \longrightarrow \overline{a^{-1}} \overline{a} = \overline{e}
 
 \end{theorem}
 
-\section{变换群(Transformation groups)}
+\section{变换群(Transformation Group)}
 
 \begin{definition}
 假定一个集合A, A的一个\textbf{变换} 就是一个A到A自己的映射. 通常记为:
@@ -302,7 +302,7 @@ e: \quad a \longrightarrow a
 
 由此, 我们规定:
 \begin{definition}\label{def_transformation_group}
-一个集合A的若干个一一变换对于以上规定的代数运算作成的一个群叫做A的一个\textbf{变换群 (Transformation groups)}.
+一个集合A的若干个一一变换对于以上规定的代数运算作成的一个群叫做A的一个\textbf{变换群 (Transformation group)}.
 \end{definition}
 
 定理 \ref{thm_tau_group_nec_condition} 不足以证明变换群是否存在. 变换群是否存在由以下定理得出:
@@ -327,12 +327,12 @@ e: \quad a \longrightarrow a
 \end{memo}
 
 
-\section{置换群(Permutation groups)}
+\section{置换群(Permutation Group)}
 
 变换群的一个特例, 叫做置换群.
 
 \begin{definition}\label{def_permutation_groups}
-一个 \textbf{有限集合} 的一个一一变换叫做一个\textbf{置换}. 一个有限集合的若干个置换作成的一个群叫做一个\textbf{置换群(Permutation groups)}.
+一个 \textbf{有限集合} 的一个一一变换叫做一个\textbf{置换}. 一个有限集合的若干个置换作成的一个群叫做一个\textbf{置换群(Permutation group)}.
 \end{definition}
 
 \begin{memo}
@@ -403,10 +403,10 @@ n次对称群$S_n$的阶是$n!$.
 
 也就是说, 每一个有限群都可以在置换群里找到例子. 所以我们用置换群来举有限群的例子是最合理的事.
 
-\section{循环群(Cyclic groups)}
+\section{循环群(Cyclic Group)}
 
 \begin{memo}
-如果我们能把变换群(Transformation groups), 定义\ref{def_transformation_group}, 完全研究清楚, 那就等于把全体抽象群都研究清楚了. 同样, 如果能把置换群(Permutation groups), 定义\ref{def_permutation_groups}, 完全研究清楚, 也就等于把全体有限群都研究清楚了. 但是:
+如果我们能把变换群(Transformation group), 定义\ref{def_transformation_group}, 完全研究清楚, 那就等于把全体抽象群都研究清楚了. 同样, 如果能把置换群(Permutation group), 定义\ref{def_permutation_groups}, 完全研究清楚, 也就等于把全体有限群都研究清楚了. 但是:
 
 \begin{itemize}
 \item{经验告诉我们, 研究变换群或者置换群并不比研究抽象群容易. 所以, 研究抽象群一般还是用直接方法.}
@@ -472,7 +472,7 @@ G 包含模 n 的 n个剩余类. 规定以下的代数运算(加法):
 
 换而言之, 我们对于循环群的\textbf{存在问题, 数量问题, 构造问题}都已能解答, 循环群已完全在我们的掌握之中. 这一节的研讨是近世代数的研讨的一个缩影.
 
-\section{子群(Subgroups)}
+\section{子群(Subgroup)}
 
 研究群的一般方法可以利用一个群的子集来推测整个群的性质.
 
@@ -526,7 +526,7 @@ a, \, b \in H \Longrightarrow ab \in H \nonumber
 如上得到的 H 叫做\textbf{由 S 生成的子群}, 我们用符号 $(S)$ 来表示它.
 \end{definition}
 
-\section{子群的陪集(Coset of a subgroup)}
+\section{子群的陪集(Coset of a Subgroup)}
 
 这里, 我们利用群 $G$ 的一个子群 $H$ 做一个 $G$ 的分类, 然后由这个分类 我们可以推出几个重要的定理.
 
@@ -691,7 +691,7 @@ Hint: $a$ 生成一个阶是 $n$ 的子群. 由上述定理 \ref{theorem_countin
 假设群 $G$ 的阶是素数 $p$. 在 $G$ 中取一个不等于单位元的元 $a \neq e$, 那么 $a$ 生成 $G$ 的一个循环子群 $(a)$. 假设 $(a)$ 的阶是 $n$, 那么 $n \geq 2 \neq 1$. 而定理 \ref{theorem_counting_formula}, $n$ 可以整除 $p$, 但是 $p$ 是素数, 所以我们有 $n=p$ 而 $G = (a)$ 是一个循环群. 
 \end{proof}
 
-\section{不变子群(Normal subgroups)和商群(Quotient groups/Factor groups)}
+\section{不变子群和商群(Normal Subgroup and Quotient Group/Factor Group)}
 
 一般而言, 给定一个群 $G$, 一个子群 $H$, $H$ 的一个右陪集 $Ha$ 不一定等于 $H$ 的左陪集 $aH$. 但是存在以下特例:
 
@@ -843,7 +843,7 @@ $$ (xN) (yN) = (xy) N $$
 \end{equation*} 
 \end{memo}
 
-\section{同态与不变子群}
+\section{同态与不变子群(Homomorphism and Normal Subgroup)}
 
 在不变子群, 商群 和 同态映射之间 存在几个极端重要的关系.
 
@@ -871,7 +871,7 @@ $$ ab \longrightarrow ab N = (aN) (bN) .$$
 \end{memo}
 
 \begin{definition}
-假定 $\phi$ 是一个群 $G$ 到另一个群 $\overline{G}$ 的\textbf{同态满射}. $\overline{G}$ 的单位元 $\overline{e}$ 在 $\phi$ 之下的所有逆象所作成的 $G$ 的子集叫做同态满射 $\phi$ 的\textbf{核 (kernel)},表示为 $ker(\phi)$.
+假定 $\phi$ 是一个群 $G$ 到另一个群 $\overline{G}$ 的\textbf{同态满射 (surjective homomorphism, or epimorphism)}. $\overline{G}$ 的单位元 $\overline{e}$ 在 $\phi$ 之下的所有逆象所作成的 $G$ 的子集叫做同态满射 $\phi$ 的\textbf{核 (kernel)},表示为 $ker(\phi)$.
 
 \begin{equation}
 ker(\phi) = \{ a \in G \, | \, \phi(a) = \overline{e} \in \overline{G} \}
@@ -935,9 +935,9 @@ $$ \psi: \quad aN \longrightarrow \overline{a} = \phi (a), \quad \mbox{对于 } 
 \end{memo}
 
 
-\chapter{环(Rings)与域(Fields)}
+\chapter{环与域(Rings and Fields)}
 
-\section{加群与环的定义}
+\section{加群与环的定义(Additive Group and Ring)}
 
 环(Ring)的定义需要用到加群的概念.
 
@@ -1013,7 +1013,7 @@ a(b+c) & = ab + ac \\
 全体整数作成的集合对于普通的加法和乘法来说做成一个环.
 \end{memo}
 
-\section{交换律, 单位元, 零因子, 整环}
+\section{交换律, 单位元, 零因子, 整环(Integral Domain)}
 
 存在一些普通计算法在一个一般的环里不成立, 它们要在有附加条件的环里才能成立. 以下我们讨论环的三种重要附加条件.
 
@@ -1040,7 +1040,7 @@ a^n b^n = (ab)^n .
 \end{condition}
 
 \begin{definition}
-一个环 $R$ 的一个元 $e$ 叫做一个\textbf{单位元}, 假如对于 $R$ 的任意元来说, 都有
+一个环 $R$ 的一个元 $e$ 叫做一个\textbf{单位元 (multiplicative identity)}, 假如对于 $R$ 的任意元来说, 都有
 \begin{equation}
 e a = a e = a .
 \end{equation}
@@ -1132,7 +1132,7 @@ R = \{ \mbox{所有模 $n$ 的剩余类} \}.
 a \neq 0,\, b \neq 0 \, \mbox{  但是  }  ab = 0
 \end{equation}
 
-我们说, $a$ 是这个环的一个左零因子(left zero divisor), $b$ 是这个环的一个右零因子(right zero divisor).
+我们说, $a$ 是这个环的一个\textbf{左零因子(left zero divisor)}, $b$ 是这个环的一个\textbf{右零因子(right zero divisor)}.
 
 \end{definition}
 
@@ -1240,7 +1240,7 @@ bc = (ma ) (na) = (mn) a a = c b
 
 \end{memo}
 
-\section{除环(Division Ring), 域(Filed)}
+\section{除环和域(Division Ring and Field)}
 
 一般而言, 环的一个任意元不一定有一个逆元. 在极特殊的情况下, 一个环里的每一个元都有一个逆元. 例如:
 
@@ -1766,7 +1766,7 @@ a^{\phi(n)} \equiv 1 (n) .
 \end{proof}
 
 
-\section{子环(Subring), 环的同态(Ring Homomorphism)}
+\section{子环, 环的同态(Subring and Ring Homomorphism)}
 
 \begin{definition}
 一个环 $R$ 的一个子集 $S$ 叫做 $R$ 的一个 \textbf{子环}, 如果: $S$ 本身对于 $R$ 的代数运算来说作成一个环.
@@ -2901,7 +2901,7 @@ $S$不是 $F_{22}$ 的理想: 如果我们考虑
 \end{proof}
 
 
-\section{剩余类环(Quotient Ring/Residue Class Ring), 同态与理想}
+\section{剩余类环, 同态与理想(Quotient Ring/Residue Class Ring, Ring Homomorphism, and Ideal)}
 
 理想在环论中的地位 类似于 不变子群在群论中的地位.
 
@@ -5380,7 +5380,7 @@ Thus, $R$ is ED.
 
 \end{proof}
 
-\section{Factorization in Polynomial Ring}
+\section{Factorization in Polynomial Ring(多项式环上的分解)}
 
 \begin{memo}
 We know: $F$ is a field, then $F[x]$ is UFD (By Theorem \ref{theorem_Polynomial_ring_over_field_is_ED}, $F[x]$ over a field $F$ is ED, is also PID, is also UFD.)
@@ -6101,7 +6101,7 @@ as a product of finitely many irreducible polynomials.
 
 \end{proof}
 
-\section{Root of Polynomial}
+\section{Root of Polynomial(多项式的根)}
 
 Consider polynomial ring $I[x]$ over an integral domain $I$. 
 
