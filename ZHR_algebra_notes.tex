@@ -32,7 +32,7 @@
 
 \begin{document}
 \title{近世代数基础 读书笔记 \\Reading Notes on Algebra}
-\author{Patrick X. Li \thanks{This note is mainly based on the classical textbook of algebra by Prof. Zhang He Rui (张禾瑞, Ho-Jui Chang). He studied algebra in Universitaet Hamburg, under E. Artin, E. Witt, etc at 1930s. He returned to China in 1940s, first affiliated with Peking University and then Beijing Normal University, and became one of the founders of modern mathematics and education in the country.}  \thanks{To my daughters Gaia and Sofia: Algebra is what we can find out from something like $1+1=2$.}}
+\author{李锡灏\\Patrick X. Li \thanks{This note is mainly based on the classical textbook of algebra by Prof. Zhang He Rui (张禾瑞, Ho-Jui Chang). He studied algebra in Universitaet Hamburg, under E. Artin, E. Witt, etc at 1930s. He returned to China in 1940s, first affiliated with Peking University and then Beijing Normal University, and became one of the founders of modern mathematics and education in the country.}  \thanks{To my daughters Gaia and Sofia: Algebra is what we can find out from something like $1+1=2$.}}
 
 
 
@@ -51,7 +51,7 @@
 \section{群的定义(Definition of Group)}
 
 \begin{definition}\label{def_group_1}
-一个非空集合G 对于一个代数运算(通常称为 乘法) 是一个\textbf{群 (Group)}, 如果满足以下条件:
+一个非空集合 $G$ 对于一个代数运算(通常称为 乘法) 是一个\textbf{群 (group)}, 如果满足以下条件:
 \begin{enumerate}
 \item[I.]{G对于这个代数运算来说是闭的;}
 \item[II.]{结合律成立:
@@ -69,7 +69,7 @@ ax = b \mbox{ 和 } \, y a = b.
 \end{definition}
 
 \begin{definition}\label{def_group_2}
-一个非空集合G 对于一个代数运算(通常称为 乘法) 是一个\textbf{群 (Group)}, 如果满足以下条件:
+一个非空集合G 对于一个代数运算(通常称为 乘法) 是一个\textbf{群 (group)}, 如果满足以下条件:
 \begin{enumerate}
 \item[I.]{G对于这个代数运算来说是闭的;}
 \item[II.]{结合律成立:
@@ -77,13 +77,12 @@ ax = b \mbox{ 和 } \, y a = b.
 		a(bc) = (ab) c 	
 	\end{equation}
 对于G的任意三个元 a, b, c.}
-\item[IV.]{G 里至少存在一个 左单元e, 使得
+\item[IV.]{G 里至少存在一个 左单元e, 使得 对于G的任意元 $a \in G$ 都有
 \begin{equation}
-ea = a
+ea = a .
 \end{equation}
-对于G的任意元 $a \in G$ 都成立.
 }
-\item[V.]{对于G的每一个元, 在G里至少存在一个左逆元$a^{-1}$,能让
+\item[V.]{对于G的每一个元 a, 在G里至少存在一个左逆元$a^{-1}$, 使得
 \begin{equation}
 	a^{-1} a = e
 \end{equation}
@@ -96,61 +95,111 @@ ea = a
 \end{memo}
 
 \begin{definition}
-\textbf{有限群}: 一个群的元的个数是一个有限整数, 那么这个群称为 有限群(Finite Group). 一个有限群的元的个数叫做这个群的\textbf{阶(Order of the group)}.
+\textbf{有限群}: 一个群的元的个数是一个有限整数, 那么这个群称为 有限群(finite group). 一个有限群的元的个数叫做这个群的\textbf{阶(order of the group)}.
 \end{definition}
 
 \begin{definition}
-一个群叫做\textbf{交换群(Abelian group/Commutative group)}, 假如:
+一个群叫做\textbf{交换群(Abelian group/commutative group)}, 如果对于G的任何两个元a, b, 以下等式都成立:
 \begin{equation}
-ab= ba
+ab= ba .
 \end{equation}
-对于G的任何两个元a, b 都成立.
+
 \end{definition}
 
+\section{单位元, 逆元, 消去律 (Identity, Inverse, Cancellation Law)}
+
 \begin{theorem}
-一个群G有且只有一个元e, 使得:
+一个群G有且只有一个元e, 对于G的任意元 a, 以下等式都成立:
 \begin{equation}
-ea = ae = a
+ea = ae = a .
 \end{equation}
-对于G的任意元都对.
+
 \end{theorem}
+
+\begin{proof}
+First we want to show $ae = a$: By definition \ref{def_group_2} IV and V, there exists $ee=e$, $a a^{-1} = e$, $e a^{-1} =  a^{-1}$.
+
+\begin{align*}
+& ea^{-1} = a^{-1} \implies a e a^{-1} = a a^{-1} \\
+\implies & a e a^{-1} a = a a^{-1} a \implies a e e = e a \\
+\implies & a e = a
+\end{align*}
+
+Thus, we have $ea = a e = a$, $\forall a \in G$.
+
+Next we want to show the uniqueness of $e$: Assume there exists another $e'$ with $e' a = a e' = a$. Then, for $e$ with $ea = a e = a$, choose $a = e'$, this leads to $e e' = e' e = e'$. For $e'$ with $e' a = a e' = a$, choose $a= e$, this leads to $e' e = e e' = e$. Thus, $e' = e$.
+
+\end{proof}
+
+\begin{memo}
+一个群 $G$里面存在这样唯一的一个$e$, 我们称为 \textbf{单位元 (identity)}.
+\end{memo}
 
 \begin{theorem}
 对于一个群G的每一个元a来说, 在G里存在一个且只有一个元$a^{-1}$, 使得
 \begin{equation}
-a^{-1} a = a a^{-1} = e
+a^{-1} a = a a^{-1} = e .
 \end{equation}
 \end{theorem}
 
+
+\begin{proof}
+Assume there exists another inverse for $a \in G$, denoted as $a'$ with $a' a = a a' = e$.
+
+
+Then,
+\begin{align*}
+& a' a a^{-1} = e a^{-1} = a^{-1} \mbox{ \textbf{and} } a' a a^{-1} = a' e = a' \\
+\implies & a^{-1} = a'
+\end{align*}
+\end{proof}
+
+\begin{memo}
+给定一个群 $G$中的任意元$a$而言, $a^{-1}$ 称为 $a$ 的 \textbf{逆元 (inverse)}.
+\end{memo}
+
+
 \begin{definition}
-一个群G的一个元a. 能够使得
+对于一个群G的一个元a, 能够使得等式
 \begin{equation}
 a^m = e
 \end{equation}
-的最小的正整数 $m$ 叫做 $a$ 的\textbf{阶 (Order of the element $a$)}. 如果这样的一个 $m$ 不存在,我们称 $a$ 是\textbf{无限阶}的.
+成立的最小的正整数 $m$ 叫做 $a$ 的\textbf{阶 (order of the element $a$ in group $G$)}. 如果这样的一个 $m$ 不存在,我们称 $a$ 是\textbf{无限阶}的.
 \end{definition}
 
 \begin{theorem}
 一个群的代数运算(通常称为乘法)适合:
 \begin{enumerate}
-\item[III']{\textbf{消去律}: 如果$ax = a x'$, 那么$x = x'$; 如果$ya = y' a $, 那么$y = y'$.}
+\item[III']{\textbf{消去律 (cancellation law)}: 如果$ax = a x'$, 那么$x = x'$; 如果$ya = y' a $, 那么$y = y'$.}
 \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+\begin{align*}
+ax = a x' \implies a^{-1}a x = a^{-1} a x' \implies e x = e x' \implies x = x'
+\end{align*}
+
+With the same argument, we can show $ya = ya' \implies y = y'$.
+
+\end{proof}
+
 
 \begin{corollary}
 在一个群里, 方程
 \begin{equation}
 ax = b, \quad y a = b
 \end{equation}
-各有唯一的解.
+都有唯一的解.
 \end{corollary}
+
+\section{有限群的另一定义(Alternative Definition of Finite Group)}
 
 \begin{memo}
 通常而言, 条件I, II, III'(消去律) 不能构成群的定义, 有限群是特例. 例如: 
 \begin{equation}
 G = \{ \mbox{所有不等于零的整数} \}
 \end{equation}
-这样的$G$ 适合I, II, III': 消去律, 但是不适合III: 对于任意的$a$, $b$, 不一定 $ax=b$ 有解. (例如: $a=2$, $b=3$).
+这样的$G$ 适合I, II, III': 消去律, 但是不适合III: 对于任意的$a$, $b$, 不一定 $ax=b$ 有解. (假设 $a=2$, $b=3$).
 
 \end{memo}
 
@@ -186,15 +235,15 @@ a a_k = b
 \end{proof}
 
 \begin{definition}\label{def_finite_group}
-\textbf{有限群(Finite Group)}的定义: 一个\textbf{有限}的不空集合G 对于一个代数运算(通常称为乘法)是一个群, 假如:
+\textbf{有限群(finite group)}的定义: 一个\textbf{有限}的非空集合G 对于一个代数运算(通常称为乘法)是一个群, 如果满足以下条件:
 \begin{enumerate}
 \item[I.]{G对于这个代数运算来说是闭的;}
-\item[II.]{结合律成立:
+\item[II.]{结合律成立: 对于G的任意三个元 a, b, c, 有
 	\begin{equation}
 		a(bc) = (ab) c 	
 	\end{equation}
-对于G的任意三个元 a, b, c.}
-\item[III']{\textbf{消去律}: 如果$ax = a x'$, 那么$x = x'$; 如果$ya = y' a $, 那么$y = y'$.}
+}
+\item[III']{\textbf{消去律}: $ax = a x' \implies x = x'$; $ya = y' a \implies y = y'$.}
 \end{enumerate}
 \end{definition}
 
@@ -202,7 +251,7 @@ a a_k = b
 \section{群的同态(Group Homomorphism)}
 
 \begin{theorem}\label{thm_group_homomorphism}
-\textbf{群的同态}: 假定G是一个群, $\overline{G}$是一个不空集合, 并有一个代数运算. 那么, 假定G与 $\overline{G}$ 对于他们的代数运算而言是同态(满射)的, 那么$\overline{G}$ 也是一个群.
+\textbf{群的同态}: 假定G是一个群, $\overline{G}$是一个非空集合, 并有一个代数运算. 假定G与 $\overline{G}$ 对于他们的代数运算而言是 \textbf{同态(满射)(surjective homomorphism/epimorphism)}, 那么$\overline{G}$ 也是一个群.
 \end{theorem}
 
 \begin{proof}
@@ -2559,7 +2608,7 @@ R[x^2] \cong R[x] .
 \end{enumerate}
 \end{proof}
 
-\section{理想(Ideal subring)}
+\section{理想(Ideal Subring)}
 
 我们讨论一种重要的子环, 叫 理想子环. 这种子环在环论里的地位 类似于 不变子群在群论的地位.
 
