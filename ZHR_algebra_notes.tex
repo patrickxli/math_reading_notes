@@ -10,15 +10,40 @@
 \usepackage[colorlinks]{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{shapes,positioning}
+\usepackage{tikz-cd}
+
+\usepackage{framed}
 
 \tikzset{set/.style={draw,circle,inner sep=0pt,align=center}}
-
-
 \usepackage{centernot}
 
+\usetikzlibrary{backgrounds}
 
-\newtheorem{theorem}{定理}[section]
-\newtheorem{definition}{定义}[section]
+
+
+\newcommand{\ut}[1]{\underaccent{\sim}{#1}}
+\renewcommand{\vec}[1]{\ut{#1}}
+\newcommand{\uemph}[1]{\emph{\underline{#1}}}
+\newcommand{\ntarrow}{\xrightarrow{\hspace*{5pt} \bullet \hspace*{5pt}}}
+\newcommand{\sfbox}[1]{\fbox{\scriptsize #1}}
+
+
+\theoremstyle{definition}
+\newtheorem{protodefinition}{定义}[section]
+\newenvironment{definition}
+   {\colorlet{shadecolor}{black!15}\begin{shaded}\begin{protodefinition}}
+   {\end{protodefinition}\end{shaded}}
+
+
+\newtheorem{prototheorem}{定理}[section]
+\newenvironment{theorem}
+   {\colorlet{shadecolor}{pink!30}\begin{shaded}\begin{prototheorem}}
+   {\end{prototheorem}\end{shaded}}
+
+
+
+% \newtheorem{theorem}{定理}[section]
+% \newtheorem{definition}{定义}[section]
 \newtheorem{memo}{备注}[section]
 \newtheorem{example}{例子}[section]
 \newtheorem{corollary}{推论}[section]
@@ -72,7 +97,7 @@ ax = b \mbox{ 和 } \, y a = b.
 一个非空集合G 对于一个代数运算(通常称为 乘法) 是一个\textbf{群 (group)}, 如果满足以下条件:
 \begin{enumerate}
 \item[I.]{G对于这个代数运算来说是闭的;}
-\item[II.]{结合律成立:
+\item[II.]{结合律(associative law of composition)成立:
 	\begin{equation}
 		a(bc) = (ab) c 	
 	\end{equation}
@@ -132,7 +157,7 @@ Next we want to show the uniqueness of $e$: Assume there exists another $e'$ wit
 \end{proof}
 
 \begin{memo}
-一个群 $G$里面存在这样唯一的一个$e$, 我们称为 \textbf{单位元 (identity)}.
+一个群 $G$里面存在这样唯一的一个$e$, 我们称为 \textbf{单位元 (identity element, or identity in short)}.
 \end{memo}
 
 \begin{theorem}
@@ -167,7 +192,7 @@ a^m = e
 成立的最小的正整数 $m$ 叫做 $a$ 的\textbf{阶 (order of the element $a$ in group $G$)}. 如果这样的一个 $m$ 不存在,我们称 $a$ 是\textbf{无限阶}的.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{thm_group_cancellation_law}
 一个群的代数运算(通常称为乘法)适合:
 \begin{enumerate}
 \item[III']{\textbf{消去律 (cancellation law)}: 如果$ax = a x'$, 那么$x = x'$; 如果$ya = y' a $, 那么$y = y'$.}
@@ -261,11 +286,11 @@ $\overline{G}$ 满足条件I 和 II. 我们证明 $\overline{G}$ 也适合IV, V 
 \begin{itemize}
 \item{IV: $G$ 有单位元 $e$, 在给定的同态满射之下, $e$ 有象 $\overline{e}$:
 \begin{equation}
-e \longrightarrow \overline{e}
+e \longrightarrow \overline{e} .
 \end{equation}
 假定任意一个元 $\overline{a} \in \overline{G}$, $a$ 是 $\overline{a}$ 的一个逆象:
 \begin{equation}
-a \longrightarrow \overline{a}
+a \longrightarrow \overline{a} .
 \end{equation}
 那么, 我们有
 \begin{eqnarray}
@@ -278,7 +303,7 @@ a \longrightarrow \overline{a}
 
 \item{V: 假定任意元$\overline{a} \in \overline{G}$, $a$ 是 $\overline{a}$ 的逆象:
 \begin{equation}
-a \longrightarrow \overline{a}
+a \longrightarrow \overline{a} .
 \end{equation}
 
 $a$ 是群 $G$ 的元, 它有逆元 $a^{-1} \in G$. $a^{-1}$的象是 $\overline{a^{-1}} \in \overline{G}$. 那么,
@@ -303,7 +328,7 @@ a^{-1} a = e \longrightarrow \overline{a^{-1}} \overline{a} = \overline{e}
 \section{变换群(Transformation Group)}
 
 \begin{definition}
-假定一个集合A, A的一个\textbf{变换} 就是一个A到A自己的映射. 通常记为:
+假定一个集合A, A的一个\textbf{变换 (transformation)} 就是一个A到A自己的映射. 通常记为:
 \begin{equation}
 \tau: \quad a \longrightarrow a' = \tau(a)
 \end{equation}
@@ -326,24 +351,44 @@ S = \{ \tau, \lambda, \mu, \ldots  \}
 \tau  \lambda : \, a \longrightarrow (a^{\tau})^{\lambda} = a^{\tau \lambda}
 \end{equation}
 
-这个乘法顺序是\textbf{从左到右}, 有时候也记为: $\tau ; \lambda $.
+这个乘法顺序是\textbf{从左到右}, 有时候也记为: $\tau ; \lambda $.\footnote{$\tau ; \lambda $这样的记法在范畴论(Category Theory) 里更为普遍.}
 
-那么, 对于这个乘法来说, S有一个单位元, 就是A的\textbf{恒等变换}:
+那么, 对于这个乘法来说, S有一个单位元, 就是A的\textbf{恒等变换(identity, in short)}:
 \begin{equation}
 e: \quad a \longrightarrow a
 \end{equation}
 
 \begin{memo}
 一般而言, S不作成一个群, 因为一个任意的变换$\tau$ 不一定存在一个逆元.
-\end{memo}
 
-\begin{memo}
-虽然S本身一般不能作为一个群, 但它的一个 {\em 子集} 对于上述乘法来说却不见得不能作为一个群.
+虽然S本身一般不能作为一个群, 但它的一个 {\em 子集} 对于上述的乘法运算有可能作为一个群.
 \end{memo}
 
 \begin{theorem}
-假定G是集合A的若干个变换所作成的集合, 并且 G 包含恒等变换e, 若是对于上述乘法运算作成一个群, 那么G只包含A的一一变换 (一一变换为既是单射也是满射). \label{thm_tau_group_nec_condition}
+假定G是集合A的若干个变换所作成的集合, 并且 G 包含恒等变换e. 如果 G 对于上述乘法运算作成一个群, 那么G只包含A的一一变换 (一一变换(bijective) 既是单射(injective) 也是满射(surjective)). \label{thm_tau_group_nec_condition}
 \end{theorem}
+
+\begin{proof}
+By assumption, $G$ is a group. Given any element $\tau \in G$, there exists the inverse $\tau^{-1} \in G$ with
+\begin{align*}
+\tau^{-1} \tau = \tau \tau^{-1} = e .
+\end{align*}
+
+We need to show $\tau$ is a bijective: given any element $a \in A$, then
+\begin{align*}
+\tau^{-1} \tau: a \longrightarrow a^{\tau^{-1} \tau} = a^e = a
+\end{align*}
+
+So $\tau$ is surjective.
+
+Now assume $\tau(a) = \tau(b) \iff a^{\tau} = b^{\tau}$. Then
+\begin{align*}
+a^{\tau} = b^{\tau} \implies \big(a^{\tau})^{\tau^{-1}} = \big(b^{\tau}\big)^{\tau^{-1}} \implies a^e = b^e \implies a = b
+\end{align*}
+So $\tau$ is injective, and therefore $\tau$ is bijective.
+
+\end{proof}
+
 
 \begin{memo}
  定理 \ref{thm_tau_group_nec_condition} 给出G作成一个群的\textbf{必要条件}.
@@ -351,26 +396,86 @@ e: \quad a \longrightarrow a
 
 由此, 我们规定:
 \begin{definition}\label{def_transformation_group}
-一个集合A的若干个一一变换对于以上规定的代数运算作成的一个群叫做A的一个\textbf{变换群 (Transformation group)}.
+一个集合A的若干个一一变换(bijection)对于以上规定的代数运算作成的一个群叫做A的一个\textbf{变换群 (transformation group)}.
 \end{definition}
 
-定理 \ref{thm_tau_group_nec_condition} 不足以证明变换群是否存在. 变换群是否存在由以下定理得出:
+定理 \ref{thm_tau_group_nec_condition} 不足以证明变换群是否存在. 变换群是否存在由以下的 存在性定理得出:
 
 \begin{theorem}\label{thm_oneone_tau_group}
-一个集合A的所有一一变换作成一个变换群G. 
+一个集合A的所有一一变换作成一个变换群(transformation group) $G$. 
 \end{theorem}
 
+\begin{proof}
+We show $G$ maintains the conditions I, II, IV, V in Definition \ref{def_group_2}.
+
+\begin{itemize}
+\item[]{I. If $\tau_1: A \longrightarrow A$ and $\tau_2: A \longrightarrow A$ are bijective, so is $\tau_1 \tau_2 : A \longrightarrow A $. This means $\tau_1 , \tau_2 \in G \implies \tau_1 \tau_2 \in G$.}
+\item[]{II. Associative law holds for bijectives: $ \tau_1 ( \tau_2 \tau_3) = ( \tau_1 \tau_2 ) \tau_3 $.}
+\item[]{IV. The identity $e: A \longrightarrow A$ is bijective, thus $e \in G$ as the identiy of $G$.}
+\item[]{V. Given any bijective $\tau: A \longrightarrow A $, there exists the bijective $\tau^{-1} : A \longrightarrow A$ such that: If $\tau (b ) = a $, then $\tau^{-1}(a) = b $, denoted $b$ as $a^{\tau^{-1}} $. This implies that
+\begin{align*}
+\tau \big( \tau^{-1} (a) \big) = \big( a^{\tau^{-1}} \big)^{\tau} = a ,
+\end{align*}
+which shows $\tau^{-1} \tau = e$.
+}
+\end{itemize}
+
+\end{proof}
+
 \begin{memo}
-定理\ref{thm_oneone_tau_group} 并没有说, 除了全体一一变换所作成的集合为变换群, 就没有其他的变换群的存在.
+定理\ref{thm_oneone_tau_group} 并不是说, 全体一一变换所作成的集合 就是唯一的变换群. 
 \end{memo}
 
 \begin{memo}
-变换群一般不是交换群. 
+变换群(transformation group)一般不是交换群(commutative group). 
 \end{memo}
 
 \begin{theorem}\label{thm_all_groups_map_to_tau_group}
-任何一个群都同一个变换群\textbf{同构}.
+任何一个群都同一个变换群(transformation group)\textbf{同构}.
 \end{theorem}
+
+\begin{proof}
+Suppose a group $G$ with elements $a, b, c, \ldots$.
+Consider an arbitrary element from $G$, denoted as $x \in G$, we can construct a transformation:
+\begin{align*}
+\tau_x : g \longrightarrow gx, \quad \mbox{denote } g^{\tau_x} : = g x
+\end{align*}
+
+Thus, we have for a transformation $\tau_x$ for each element in $x \in G$. Collect these transformations as a set
+\begin{align*}
+\overline{G} = \{ \tau_a, \tau_b, \tau_c, \ldots \}
+\end{align*}
+
+We have a mapping:
+\begin{align*}
+\phi: G \longrightarrow \overline{G}, \quad \phi(x) = \tau_x
+\end{align*}
+
+By its construction, $\phi$ is surjective. Now we show $\phi$ is injective: Assume $x, y \in G$ with $x \neq y$, by (contrapositive) cancellation law shown in Theorem \ref{thm_group_cancellation_law}, $x \neq y \implies gx \neq gy$ for any $g \in G$. This means 
+\begin{align*}
+x \neq y \implies \tau_x \neq \tau_y .
+\end{align*}
+Thus, $\phi$ is injective, and thus $\phi$ is bijective.
+
+Now we show $\phi$ is group homomorphism:
+\begin{align*}
+g^{\tau_{xy}} \tau_{xy} (g) = g (xy) = (gx)y = \tau_y \big( \tau_x (g) \big) = \big( g^{\tau_x} \big)^{\tau_y} = g^{\tau_x \, \tau_y} 
+\end{align*}
+
+This means $\tau_x \tau_y = \tau_{xy}$.
+
+Therefore, by Theorem \ref{thm_group_homomorphism}, $\overline{G}$ is also a group.
+
+The last thing is to show $\overline{G}$ contains only bijectives. We need to show $\tau_e \in \overline{G} $ is identity of $\overline{G}$:
+\begin{align*}
+\tau_e (g) = g e = g 
+\end{align*}
+So $\tau_e$ is the identity in $\overline{G}$.  By Theorem \ref{thm_tau_group_nec_condition}, $\overline{G}$ is a group and it contains identity $\tau_e$, thus $\overline{G}$ is a transformation group.
+
+In summary, we show that $\overline{G}$ is a transformation group and $G \cong \overline{G}$.
+
+\end{proof}
+
 \begin{memo}
 变换群在群论中很重要: 定理\ref{thm_all_groups_map_to_tau_group} 说明了, 任意一个抽象群都能够在变换群里找到一个实例.
 \end{memo}
@@ -378,10 +483,10 @@ e: \quad a \longrightarrow a
 
 \section{置换群(Permutation Group)}
 
-变换群的一个特例, 叫做置换群.
+变换群(transformation group)的一个特例, 叫做置换群(permutation group): permutation group $\subset $ transformation group.
 
 \begin{definition}\label{def_permutation_groups}
-一个 \textbf{有限集合} 的一个一一变换叫做一个\textbf{置换}. 一个有限集合的若干个置换作成的一个群叫做一个\textbf{置换群(Permutation group)}.
+一个 \textbf{有限集合} 的一个一一变换叫做一个\textbf{置换 (permutation)}. 一个有限集合的若干个置换作成的一个群叫做一个\textbf{置换群(permutation group)}.
 \end{definition}
 
 \begin{memo}
@@ -389,19 +494,22 @@ e: \quad a \longrightarrow a
 \end{memo}
 
 \begin{definition}
-一个包含n个元的集合的全体置换作成的群叫做n次\textbf{对称群}. 我们用$S_n$表示.
+一个包含n个元的集合的全体置换作成的群叫做n次\textbf{对称群 (symmetric group)}. 我们用$S_n$表示.
 \end{definition}
 
 \begin{memo}
+一定程度上而言, permutation group $\subset$ symmetric group.
+
 n个元的置换一共有$n!$个. 因而, 我们有以下定理.
 \end{memo}
 
 \begin{theorem}\label{thm_Sn_rank}
-n次对称群$S_n$的阶是$n!$.
+n次对称群(symmetric group)$S_n$的阶是$n!$.
 \end{theorem}
 
+
 \begin{memo}
-因为$S_n$是有限群, 因此, 其元的个数称为群的阶. 定理 \ref{thm_Sn_rank} 指出$S_n$的元素个数为$n!$.
+因为$S_n$是有限群, 因此它的元的个数称为群的阶. 定理 \ref{thm_Sn_rank} 说明了 $S_n$ 的元素个数为 $n!$.
 \end{memo}
 
 \begin{memo}
@@ -430,7 +538,7 @@ n次对称群$S_n$的阶是$n!$.
 表示为 $(1\, 2)\, (3 \, 4)$.
 }
 \end{enumerate}
-基于以上的置换表达方式, 我们可以写出$S_4$:
+基于以上的置换表达方式, 我们可以写出$S_4$中的 $4! = 4 \times 3 \times 2 \times 1 = 24$个置换:
 \begin{eqnarray*}
 & & (1); \\
 & & (1\, 2), \, (3\, 4), \, (1\, 3), \, (2\, 4), \, (1\, 4), \, (2\, 3); \\
@@ -444,10 +552,14 @@ n次对称群$S_n$的阶是$n!$.
 每一个n个元的置换$\pi$都可以写成若干个互相没有共同数字(不相连的)循环置换的乘积.
 \end{theorem}
 
+\begin{proof}
+略. 此处证明考虑使用归纳法.
+\end{proof}
+
 由定理 \ref{thm_all_groups_map_to_tau_group}, 我们得出以下:
 
 \begin{theorem}
-每一个有限群都与一个置换群同构.
+每一个有限群(finite group)都与一个置换群(permutation group)同构.
 \end{theorem}
 
 也就是说, 每一个有限群都可以在置换群里找到例子. 所以我们用置换群来举有限群的例子是最合理的事.
@@ -455,17 +567,17 @@ n次对称群$S_n$的阶是$n!$.
 \section{循环群(Cyclic Group)}
 
 \begin{memo}
-如果我们能把变换群(Transformation group), 定义\ref{def_transformation_group}, 完全研究清楚, 那就等于把全体抽象群都研究清楚了. 同样, 如果能把置换群(Permutation group), 定义\ref{def_permutation_groups}, 完全研究清楚, 也就等于把全体有限群都研究清楚了. 但是:
+如果我们能把定义\ref{def_transformation_group} 中的 变换群(transformation group) 完全研究清楚, 那就等于把全体抽象群都研究清楚了. 同样, 如果能把定义\ref{def_permutation_groups} 中的 置换群(permutation group) 完全研究清楚, 也就等于把全体有限群都研究清楚了. 但是:
 
 \begin{itemize}
 \item{经验告诉我们, 研究变换群或者置换群并不比研究抽象群容易. 所以, 研究抽象群一般还是用直接方法.}
 \item{研究群的最大目的: 找出所有的抽象群, 或者说, 看看一共有多少个互相不同构的群存在.}
-\item{目前而言, 只有少数几类群已经完全弄清楚的. 例如: 循环群.}
+\item{目前而言, 只有少数几类群已经完全弄清楚的. 例如: 循环群(cyclic group).}
 \end{itemize}
 \end{memo}
 
 \begin{example}
-$G$是所有整数的集合. $G$对于普通加法作成一个群, 称为 \textbf{整数加群(Additive group of $\mathbf{Z}$)}.
+$G$是所有整数的集合. $G$对于普通加法作成一个群, 称为 \textbf{整数加群(additive group of $\mathbf{Z}$)}.
 
 这个群的全体的元都是1的乘方. 假如我们把G的代数运算不用 $+$ 而是用 $\circ$ 来表示, 那么 $m$ 可以表示为:
 \begin{equation}\nonumber
@@ -477,11 +589,11 @@ m = & \overbrace{1 + 1 + ... + 1}  & = & \overbrace{1 \circ 1 \circ ... \circ 1 
 \end{example}
 
 \begin{definition}
-若一个群$G$的每一个元都是$G$的某一个固定元$a$的乘方, 我们就把$G$叫做\textbf{循环群}. 我们也说, $G$是由元$a$所生成的, 并且用符号表示为:
+若一个群$G$的每一个元都是$G$的某一个固定元$a$的乘方, 我们就把$G$叫做\textbf{循环群 (cyclic group)}. 我们也说, $G$是由元$a$所生成的, 并且用符号表示为:
 \begin{equation}\nonumber
 G=(a)
 \end{equation}
-$a$ 叫做 $G$ 的一个生成元.
+$a$ 叫做 $G$ 的一个\textbf{生成元(generator of the group)}.
 \end{definition}
 
 \begin{example}\label{example_additive_group_Z_nZ}
@@ -489,9 +601,9 @@ G 包含模 n 的 n个剩余类. 规定以下的代数运算(加法):
 \begin{equation}
 [a] + [b] = [a+b] \nonumber
 \end{equation}
-那么, 对于这个代数运算而言, G作成一个群. 这个群叫做模n的\textbf{剩余类加群(Additive group of $\mathbf{ Z/nZ}$)}.
+那么, 对于这个代数运算而言, G作成一个群. 这个群叫做模n的\textbf{剩余类加群(additive group of $\mathbb{ Z} /n\mathbb{Z}$)}.
 
-剩余类加群是循环群, 因为$ [1] $是$G$的一个生成元: $G$的每一个元$ [m] $可以写成:
+剩余类加群 (additive group of $\mathbb{ Z} /n\mathbb{Z}$) 是循环群 (cyclic group), 因为 $ [1] $是$G$的一个生成元 (generator): $G$的每一个元$ [m] $可以写成:
 
 \begin{equation}\nonumber
 \begin{array}{cc}
@@ -504,8 +616,8 @@ G 包含模 n 的 n个剩余类. 规定以下的代数运算(加法):
 \begin{theorem}\label{thm_cyclic_group}
 假定G是一个由元$a$ 所生成的循环群. 那么G的构造完全由$a$的阶来决定:
 \begin{enumerate}
-\item{$a$的阶若是无限, 那么G与整数加群同构;}
-\item{$a$的阶若是一个有限整数$n$, 那么G与模$n$的剩余类加群同构.}
+\item{$a$的阶若是无限, 那么G与整数加群 $ \mathbb{ Z} $ (additive group of $\mathbb{Z}$) 同构;}
+\item{$a$的阶若是一个有限整数$n$, 那么G与模$n$的剩余类加群  $\mathbb{ Z} /n\mathbb{Z}$ (additive group of $\mathbb{ Z} /n\mathbb{Z}$) 同构.}
 \end{enumerate}
 \end{theorem}
 
@@ -517,23 +629,58 @@ G 包含模 n 的 n个剩余类. 规定以下的代数运算(加法):
 \end{enumerate}
 \end{memo}
 
-总结而言, 对于循环群, 一定有一个生成元, 这个元一定有一个固定的阶. 这个阶或是无限大, 或是一个正整数n. 抽象来看, 生成元的阶是无限大的循环群只有一个; 生成元的阶是给定的正整数n的循环群也只有一个.
+\begin{proof}
+Consider two cases.
+\begin{itemize}
+\item{The order of $a$ is infinite. In this case, it has $h = k \implies a^h = a^k$. (Otherwise if $a^h = a^k $ but $ h \neq k$, then suppose $h > k$, we can find $a^{h-k} = e $ which implies the order of $a$ is $h-k$ not infinite, thus contradiction!)
 
-换而言之, 我们对于循环群的\textbf{存在问题, 数量问题, 构造问题}都已能解答, 循环群已完全在我们的掌握之中. 这一节的研讨是近世代数的研讨的一个缩影.
+Thus, we have bijection:
+\begin{align*}
+\phi: G \longrightarrow \mathbb{ Z}, \quad \phi(a^k) = k
+\end{align*}
+
+Note that $\phi(a^{h} a^{k} ) = \phi(a^{h+k}) =  h+k = \phi(a^h) + \phi(a^k) $, thus $\phi$ is a group homomorphism. Therefore $G \cong \mathbb{Z}$.
+
+}
+\item{The order of $a$ is finite. Suppose the order of $a$ is $n$, which means $a^n = e$. This also means
+\begin{align*}
+a^h = a^k \iff n | h-k \iff h - k = n q \mbox{ for } q \in \mathbb{Z}
+\end{align*}
+
+This implies the mapping
+\begin{align*}
+\phi : G \longrightarrow  \mathbb{Z}/n\mathbb{Z}, \quad  \phi( a^k) =[k]
+\end{align*}
+is a bijection.
+
+$\phi$ is also a group homomorphism: 
+\begin{align*}
+\phi( a^h a^k ) = \phi(a^{h+k}) =[h+k] = [h] + [k]
+\end{align*}
+
+Thus, $\phi$ is isomorphism, i.e. $G \cong \mathbb{Z}/ n \mathbb{Z}$.
+}
+\end{itemize}
+
+\end{proof}
+
+总而言之, 对于循环群, 一定有一个生成元, 这个元一定有一个固定的阶. 这个阶要么是无限大, 要么是一个正整数n. 从群的同构的角度来看, 生成元的阶是无限大的循环群只有一个; 生成元的阶是给定的正整数n的循环群也只有一个.
+
+由此得出, 我们对于循环群的\textbf{存在问题, 数量问题, 构造问题}都已能解答. 也就是说, 我们已经完全掌握了循环群. 这一节的研究方法是近世代数研究的一个典型示范.
 
 \section{子群(Subgroup)}
 
-研究群的一般方法可以利用一个群的子集来推测整个群的性质.
+研究群的比较重要的一个方法 就是 利用一个群的子集来推测整个群的性质.
 
 \begin{definition}
-一个群 G 的一个子集 H 叫做 G 的一个\textbf{子群(Subgroup)}, 假如 H 对于 G 的代数运算来说作成一个群.
+给定一个群 G. 如果 G 的一个子集 H 对于 G 的代数运算来说作成一个群, 那么 H 叫做 G 的一个\textbf{子群(subgroup)}. 
 \end{definition}
 
 \begin{example}
 给定一个任意群 G, G 至少有两个子群:
 \begin{enumerate}
 \item{G;}
-\item{只包含单位元 $e$ 的子集.}
+\item{只包含单位元 $e$ 的子集: $\{ e\}$.}
 \end{enumerate}
 \end{example}
 
@@ -545,6 +692,21 @@ G 包含模 n 的 n个剩余类. 规定以下的代数运算(加法):
 \item[(ii) ]{$a \in H \Longrightarrow a^{-1} \in H$}
 \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+We use Definition \ref{def_group_2} to show H with (i) and (ii) is a group:
+
+\begin{itemize}
+\item[]{I, by (i).}
+\item[]{II. by (i) and associative law holds in $G$ also holds in $H \subseteq G$.}
+\item[]{IV. There exists at least one element $a\in H$, by (ii), $a^{-1} \in H$. By (i), $a^{-1} a = e \in H$, so $e \in H$.}
+\item[]{V. by (ii).}
+\end{itemize}
+
+On the other hand, if $H$ is a subgroup, (i) holds. Assume its identity is $e' \in H$. Given an arbitrary element $a \in H$, we have $e' a = a$ in $H$. $e'$ and $a$ also in $G$. By definition of group $G$, $ y a = a$ 
+has a unique solution in $G$, which is $y = e$. This means $e' = e \in H $. Again by definition of group $H$, $y a = e$ has a unique solution in $H$, which is $y = a^{-1} \in H$.
+\end{proof}
+
 
 \begin{corollary}
 假定 H 是群 G 的一个子群. 那么 H 的单位元就是 G 的单位元, H 的任意元 a 在 H 里的逆元就是 a 在 G 里的逆元.
@@ -559,6 +721,13 @@ G 包含模 n 的 n个剩余类. 规定以下的代数运算(加法):
 \end{enumerate}
 \end{theorem}
 
+\begin{proof}
+First, we show (i) and (ii) implies (iii): $a , b \in H$, by (ii), $b^{-1} \in H$. Then by (i) $a b^{-1} \in H$.
+
+Next, we show (iii) implies (i) and (ii): Suppose $a \in H$, then $a a^{-1} = e \in H$. Thus $e a^{-1} = a^{-1} \in H$. Suppose $a, b\in H$, then $b^{-1} \in H$, thus $ab = a (b^{-1})^{-1} \in H$.
+\end{proof}
+
+
 假如所给子集 H 是一个\textbf{有限集合}, 那么 H 作成子群的条件更加简单:
 
 \begin{theorem}
@@ -568,21 +737,32 @@ a, \, b \in H \Longrightarrow ab \in H \nonumber
 \end{equation}
 \end{theorem}
 
-现在我们要认识一种找一个子群的一般方法:
+\begin{proof}
+By Definition \ref{def_finite_group}, it is obvious.
+\end{proof}
 
-假定一个群 G, 我们任意取出一个不空子集 S 来. 利用 S 的元以及这些元的逆元作各种乘积. 我们做一个集合 H , 让它包含所有这样的乘积. 这样作出来的 H 是包含 S 的最小的子群.
+现在我们要认识一种 构建一个子群的一般方法:
+
+给定一个群 G, 我们任意取出一个不空子集 S . 利用 S 中的元素 以及这些元素的逆元作各种乘积. 我们做一个集合 H , 让它包含所有这样的乘积. 这样作出来的 H 是包含 S 的最小的子群.
 \begin{definition}
 如上得到的 H 叫做\textbf{由 S 生成的子群}, 我们用符号 $(S)$ 来表示它.
+
+如果 $S$ 只包含一个元素, $S = \{a\}$, 那么 $(S)$ 可以记为
+\begin{align*}
+(S) = (a)
+\end{align*}
 \end{definition}
 
 \section{子群的陪集(Coset of a Subgroup)}
 
-这里, 我们利用群 $G$ 的一个子群 $H$ 做一个 $G$ 的分类, 然后由这个分类 我们可以推出几个重要的定理.
+在这一节里, 我们利用群 $G$ 的一个子群 $H$ 做一个 $G$ 的分类, 然后由这个分类 我们可以推出几个重要的定理.
 
 \begin{example}\label{example_integer_additive_group}
-假定 整数加群 叫做 $\overline{G}$. 把包含所有 n 的倍数的集合叫做 $\overline{H}$:
+假定 整数加群 $ \mathbb{ Z} $ (additive group of $\mathbb{Z}$), 记为 $\overline{G}$. 
+
+把包含所有 n 的倍数的集合叫做 $\overline{H}$:
 \begin{equation}
-\overline{H} = \{ hn \}, \quad (h=\ldots, -2, -1, 0, 1, 2, \ldots)
+\overline{H} = \{ hn | h=\ldots, -2, -1, 0, 1, 2, \ldots \}
 \end{equation}
 $\overline{H}$是 $\overline{G}$ 的一个子群.
 
@@ -600,23 +780,69 @@ a \equiv b (n), \mbox{ 当且仅当 } a-b \in \overline{H} \mbox{  的时候}
 \end{example}
 
 
-下面我们做一个推广: 利用一个子群 H 来把一个群 G 分类. 我们规定一个 G 的元中间的关系 $\sim$ 为:
+下面我们做一个推广: 利用一个子群 H 来把一个群 G 分类. 我们规定 G 中的一个二元关系 $\sim$ 为:
 \begin{equation}
-a \sim b, \mbox{ 当且仅当 } a b^{-1} \in \overline{H} \mbox{  的时候}
+a \sim b, \mbox{ 当且仅当 } \, a b^{-1} \in H 
 \end{equation}
 
 这个关系$\sim$是一个等价关系. 利用这个等价关系, 我们可以得到一个 G 的分类:
 
-\begin{definition}
-由上面的等价关系$\sim$所决定的类的叫做子群 H 的\textbf{右陪集(Right coset)}.  包含元 $a$ 的右陪集用符号$Ha$ 表示. 
+\begin{definition}\label{def_right_coset}
+规定一个群 G 中的等价关系 $\sim$ 和 $G$ 的一个子群 $H$:
+\begin{align*}
+a \sim b \, \iff \, a b^{-1} \in H .
+\end{align*}
+
+由上面的等价关系$\sim$所决定的类的叫做子群 H 的\textbf{右陪集(right coset)}.  包含元 $a$ 的右陪集用符号$Ha$ 表示. 
 \end{definition}
 
 \begin{memo}
-用$Ha$表示包含元$a$的右陪集是由于以下的事实: 假如用$a$ 右乘 H 的每一个元, 就得到包含$a$的类, 也就是说, $$Ha= \{ ha \, | \, \forall h \in H \} .$$
+用$Ha$表示包含元$a$的右陪集, 是因为: 如果我们用$a$ 右乘 H 的每一个元, 就得到包含$a$的类, 也就是说, 
+\begin{align*}
+Ha= \{ ha \, | \, \forall h \in H \} .
+\end{align*}
+
+我们有以下的引理.
+
 \end{memo}
 
+\begin{lemma}\label{lemma_right_coset_def_equivalence}
+考虑 在一个群 G 和它的子群 $H$. 给定两个元素 $a, b \in G$. 那么,
+\begin{align*}
+ ab^{-1} \in H \iff Ha = Hb 
+\end{align*}
+
+其中
+\begin{align*}
+Ha= \{ ha \, | \, \forall h \in H \} , \quad Hb= \{ hb \, | \, \forall h \in H \} .
+\end{align*}
+
+\end{lemma}
+
+\begin{proof}
+Suppose $Ha = Hb$. Then,
+\begin{align*}
+& Ha = Hb \implies ea = a \in Ha = Hb \\
+\implies & a = h_b b \mbox{ for some } h_b \in H \\
+\implies & a b^{-1} = h_b b b^{-1} = h_b e = h_b \in H .
+\end{align*}
+
+So, we just show $Ha = Hb \implies ab^{-1} \in H$.
+
+Suppose $ab^{-1} \in H$, then
+\begin{align*}
+& \forall h_1 a \in Ha \implies h_1 a = h_1 a b^{-1} b \in Hb \mbox{ since } h_1 \in H, \,  a b^{-1} \in H \\
+\implies & Ha \subseteq Hb
+\end{align*}
+
+$ab^{-1} \in H \implies b a^{-1} =  (ab^{-1}) \in H$. Similarly, $b a^{-1} \in H \implies Hb \subseteq Ha$. Therefore, $ab^{-1} \in H \implies Ha = Hb$.
+
+
+
+\end{proof}
+
 \begin{example}
-考虑$G= S_3 = \{  (1), \, (12), \, (13), \, (23), \, (123), \, (132) \}$ 以及 $H = \{ (1), \, (12) \}$.
+考虑 $G= S_3 = \{  (1), \, (12), \, (13), \, (23), \, (123), \, (132) \}$ 以及 $H = \{ (1), \, (12) \} \subset G$.
 那么, 我们有下面的右陪集:
 \begin{eqnarray*}
 H(1) &=& \{ (1), \, (12) \} \\
@@ -627,17 +853,17 @@ H(23) &=& \{ (23), \, (132) \, \}
 {注意(132) 由以下得出: 
 \begin{equation*}
 (12) \, (23) =  \left( \begin{array}{ccc}
-1 & 2 & 3 \\
-2 & 1 & 3
+{\color{red} 1 } & 2 & 3 \\
+{ \color{red} 2 } & 1 & 3
 \end{array}  \right) \left(
 \begin{array}{ccc}
-1 & 2 & 3 \\
-1 & 3 & 2
+ 1  & { \color{red} 2 } & 3 \\
+1 & {\color{red} 3 } & 2
 \end{array}
 \right) = \left(
 \begin{array}{ccc}
-1 & 2 & 3 \\
-3 & 1 & 2
+{ \color{red} 1 } & 2 & 3 \\
+{ \color{red} 3 } & 1 & 2
 \end{array}
 \right) = 1 \rightarrow 3 \rightarrow 2 = (132) .
 \end{equation*}
@@ -649,30 +875,74 @@ H(23) &=& \{ (23), \, (132) \, \}
 
 右陪集是从等价关系$\sim$:
 \begin{equation}
-a \sim b, \mbox{ 当且仅当 } a b^{-1} \in \overline{H} \mbox{  的时候}
+a \sim b, \mbox{ 当且仅当 } a b^{-1} \in H
 \end{equation}
 出发得到的. 假如我们规定一个关系$\sim'$:
 \begin{equation}
-a \sim' b, \mbox{ 当且仅当 } b^{-1} a \in \overline{H} \mbox{  的时候}
+a \sim' b, \mbox{ 当且仅当 } b^{-1} a \in H
 \end{equation}
 这个关系$\sim'$也同样是一个等价关系. 利用这个等价关系, 我们可以得到 G 的另一个分类:
-\begin{definition}
-由等价关系$\sim'$所决定的类叫做子群 H 的\textbf{左陪集(Left coset)}. 包含元 $a$ 的左陪集用符号 $aH$ 来表示.
+
+\begin{definition}\label{def_left_coset}
+规定一个群 G 中的等价关系 $\sim'$ 和 $G$ 的一个子群 $H$:
+\begin{align*}
+a \sim' b \, \iff \, b^{-1} a \in H .
+\end{align*}
+
+由上面的等价关系$\sim'$所决定的类叫做子群 H 的\textbf{左陪集(left coset)}. 包含元 $a$ 的左陪集用符号 $aH$ 来表示.
 \end{definition}
 
-因为一个群的乘法不一定有交换律, 所以一般来说, $\sim$ 和 $\sim'$ 两个关系并不相同, 从而 $H$ 的右陪集和左陪集也不相同.
+类似于引理 \ref{lemma_right_coset_def_equivalence}, 我们有:
 
-但是一个子群的左右陪集有一个共同点:
+\begin{lemma}\label{lemma_left_coset_def_equivalence}
+考虑 在一个群 G 和它的子群 $H$. 给定两个元素 $a, b \in G$. 那么,
+\begin{align*}
+ b^{-1} a \in H \iff aH = bH 
+\end{align*}
+
+其中
+\begin{align*}
+aH = \{ ah \, | \, \forall h \in H \} , \quad bH = \{ bh \, | \, \forall h \in H \} .
+\end{align*}
+
+\end{lemma}
+
+因为一个群的乘法不一定有交换律, 所以一般来说, $\sim$ 和 $\sim'$ 两个关系并不相同, 因此 $H$ 的右陪集和左陪集也不相同.
+
+但是, 一个子群的左右陪集有一个共同点:
 \begin{theorem}\label{thm_left_right_coset}
 一个子群 $H$ 的右陪集的个数 和 左陪集的个数相等. 它们或者都是无限大, 或者都有限并且相等.
 \end{theorem}
 
-\begin{memo}
-定理 \ref{thm_left_right_coset} 可以由给定左右陪集的一一映射推理:
-\begin{equation*}
-\phi: \quad Ha \longrightarrow a^{-1} H
-\end{equation*}
-\end{memo}
+\begin{proof}
+Denote $S_r =\{ Ha | \forall a \in G \}$ and $S_l = \{ a H | \forall a \in G \}$. We construct a mapping
+\begin{align*}
+\phi: S_r \longrightarrow S_l, \quad \phi( Ha ) =  a^{-1} H .
+\end{align*}
+
+We want to show $\phi$ is bijection.
+
+\begin{enumerate}
+\item{$\phi$ is well-defined: By Lemma \ref{lemma_right_coset_def_equivalence} and Lemma \ref{lemma_left_coset_def_equivalence}, 
+\begin{align*}
+& Ha = Hb \iff a b^{-1}  \in H \\
+\implies & (a b^{-1})^{-1} = b a^{-1} \in H \\
+\iff & a^{-1} H = b^{-1} H
+\end{align*}
+}
+\item{$\phi$ is surjective: Given any $aH \in S_l$, there always exists $Ha^{-1} \in S_r$.}
+\item{$\phi$ is injective: Suppose $a^{-1} H = b^{-1} H$. Then again by Lemma \ref{lemma_right_coset_def_equivalence} and Lemma \ref{lemma_left_coset_def_equivalence},
+\begin{align*}
+& a^{-1} H = b^{-1} H \iff b a^{-1} \in H \\
+\implies & ab^{-1} = (b a^{-1} )^{-1} \in H \\
+\iff & Ha = Hb .
+\end{align*}
+}
+\end{enumerate}
+
+Thus, $\phi$ is bijective between $S_r$ and $S_l$. So $S_r$ and $S_l$ have the same number of elements (they have the same cardinality).
+
+\end{proof}
 
 \begin{definition}
 一个群的一个子群 $H$ 的右陪集(或左陪集) 的个数叫做 $H$ 在 $G$ 里的\textbf{指数(the index of $H$ in $G$), 表示为 $[G: H]$}.
@@ -685,16 +955,16 @@ a \sim' b, \mbox{ 当且仅当 } b^{-1} a \in \overline{H} \mbox{  的时候}
 \end{lemma}
 
 \begin{proof}
-Hint: 假定以下的一个 $H$ 到 $Ha$ 的一一映射:
-\begin{equation*}
-\phi: \quad h \longrightarrow ha
-\end{equation*}
+Construct a mapping from $H$ to $Ha$
+\begin{align*}
+\phi: H \longrightarrow Ha, \quad \phi(h) = ha .
+\end{align*}
 
-我们可以证明:
+We show that
 \begin{enumerate}
-\item{$\phi$ 存在: $\forall h \in H$, $\exists ! ha \in Ha $.}
-\item{$\phi$ 满射: $\forall ha \in Ha$, $\exists h \in H s.t. \phi(h) = ha $.}
-\item{$\phi$ 单射: 假如 $h_1 a = h_2 a$, 那么 $h_1 = h_2$. }
+\item{$\phi$ well-defined: $\forall h \in H$, there exists a unique $ ha $ and obviously $ ha \in Ha $.}
+\item{$\phi$ surjective: $\forall ha \in Ha$, the corresponding $h \in H$ gives $ \phi(h) = ha $.}
+\item{$\phi$ injective: if $h_1 a = h_2 a$, then $h_1 = h_2$ by cancellation law in group shown at Theorem \ref{thm_group_cancellation_law}. }
 \end{enumerate}
 
 \end{proof}
@@ -703,7 +973,7 @@ Hint: 假定以下的一个 $H$ 到 $Ha$ 的一一映射:
 由上述引理\ref{lemma_H_iso_Ha}, 我们得出以下两个重要定理:
 
 \begin{theorem}\label{theorem_counting_formula}
-假定 $H$ 是一个\textbf{有限群 $G$} 的一个子群. 那么 $H$ 的阶 $n$ 和它在 $G$ 里的指数 $j$ 都能整除 $G$ 的阶 $N$, 并且
+假定 $H$ 是一个\textbf{有限群 $G$} 的一个子群. 那么 $H$ 的阶 (order of $H$) $n$ 和它在 $G$ 里的指数 (index of $H$ in $G$) $j$ 都能整除 $G$ 的阶 (order of $G$) $N$, 并且
 \begin{equation}
 N = n j \label{eq_counting_formula}
 \end{equation}
@@ -711,46 +981,55 @@ N = n j \label{eq_counting_formula}
 \end{theorem}
 
 \begin{proof}
-Hint: $G$ 的 $N$ 个元被分为 $j$ 个右陪集, 而每个右陪集的指数和 $H$ 的阶 相等. 也就是说:
-\begin{equation}
-|G| = |H| \cdot [G : H] \iff \mbox{ ($G$ 的阶) = ($H$ 的阶) (右陪集 的个数) }  \nonumber
-\end{equation}
+The order of $G$ is $N$, the order of $H$ is $n$, and the index of $H$ in $G$ is $j$. They are all finite.
+
+The $N$ elements of $G$ split into $j$ right cosets. Each right coset has the same number of elements as $H$ by Lemma \ref{lemma_H_iso_Ha}, so each right coset has $n$ elements. This means
+\begin{align}
+& N= n j \\
+\iff & |G| = |H| \cdot [G : H] \\
+\iff & \mbox{ (order of $G$) = (order of $H$) (number of cosets) } . \label{eq_group_counting_formula}
+\end{align}
+
+Here Equation \ref{eq_group_counting_formula} is the importatnt \textbf{Counting Formula}.
+
 \end{proof}
 
 \begin{theorem}\label{theorem_finite_group_rank_divisable}
-一个有限群 $G$ 的任一个元 $a$ 的阶 $n$ 都整除 $G$ 的阶.
+一个有限群 $G$ 的任一个元 $a$ 的阶 (order of $a$ in $G$) $n$ 都整除 $G$ 的阶.
 
 \end{theorem}
 
 \begin{proof}
-Hint: $a$ 生成一个阶是 $n$ 的子群. 由上述定理 \ref{theorem_counting_formula}, $n$ 整除 $G$ 的阶.
+The order of $a$ in $G$ is $n$. This means $a$ generates a subgroup $H$ with its order is $ |H|= n$. By Theorem \ref{theorem_counting_formula}, $n$ divides the order of $G$, which is $|G| = |H| \cdot [G:H] = n \cdot [G:H]$.
 \end{proof}
 
 同理, 上述定理 \ref{theorem_counting_formula} 可得出以下:
-\begin{theorem}[Lagrange’s Theorem]
-假定 $H$ 是一个\textbf{有限群 $G$} 的一个子群. 那么 $H$ 的阶 整除 $G$ 的阶.
+\begin{theorem}[Lagrange's Theorem]
+假定 $H$ 是一个\textbf{有限群 $G$} 的一个子群. 那么 $H$ 的阶 (the order of $H$) 整除 $G$ 的阶 (the order of $G$).
 \end{theorem}
 
 
-\begin{memo}\label{memo_prime_cyclic_group}
+\begin{exercise}\label{exercise_prime_cyclic_group}
 阶是 素数 的群 一定是 循环群.
-\end{memo}
+\end{exercise}
 
 \begin{proof}
-假设群 $G$ 的阶是素数 $p$. 在 $G$ 中取一个不等于单位元的元 $a \neq e$, 那么 $a$ 生成 $G$ 的一个循环子群 $(a)$. 假设 $(a)$ 的阶是 $n$, 那么 $n \geq 2 \neq 1$. 而定理 \ref{theorem_counting_formula}, $n$ 可以整除 $p$, 但是 $p$ 是素数, 所以我们有 $n=p$ 而 $G = (a)$ 是一个循环群. 
+假设群 $G$ 的阶是素数 $p$. 在 $G$ 中取一个不等于单位元的元 $a \neq e$, 那么 $a$ 生成 $G$ 的一个循环子群 $(a)$. 假设 $(a)$ 的阶是 $n$, 那么因为 $a$ 不是单位元, 所以 $n \geq 2 \neq 1$. 而根据定理 \ref{theorem_counting_formula}, $n$ 可以整除 $p$, 但是 $p$ 是素数, 所以我们有 $n=p$ 而 $G = (a)$ 是一个循环群. 
 \end{proof}
+
+
 
 \section{不变子群和商群(Normal Subgroup and Quotient Group/Factor Group)}
 
-一般而言, 给定一个群 $G$, 一个子群 $H$, $H$ 的一个右陪集 $Ha$ 不一定等于 $H$ 的左陪集 $aH$. 但是存在以下特例:
+一般而言, 给定一个群 $G$, 一个子群 $H$, $H$ 的一个右陪集 $Ha$ 不一定等于 $H$ 的左陪集 $aH$. 但是存在以下特殊情况:
 
 \begin{definition}
-一个群 $G$ 的一个子群 $N$ 叫做一个\textbf{不变子群(Normal subgroup)}, 假若对于 $G$ 的每一个元 $a$ 来说, 都有:
+一个群 $G$ 的一个子群 $N$ 叫做一个\textbf{不变子群(Normal subgroup)}, 如果 有:
 \begin{equation*}
-Na = aN
+Na = aN, \quad \forall a \in G
 \end{equation*}
 
-一个不变子群 $N$ 的一个左(或者右)陪集叫做 $N$ 的一个\textbf{陪集(Coset)}.
+一个不变子群 $N$ 的一个左(或者右)陪集叫做 $N$ 的一个\textbf{陪集(coset)}.
 \end{definition}
 
 \begin{memo}
@@ -761,9 +1040,11 @@ Na = aN
 \begin{definition}
 群 $G$ 的一个子群 $N$ 如果有:
 \begin{equation}
-a \in N , \forall g \in G \Rightarrow g a g^{-1} \in N 
+\forall a \in N , \forall g \in G \Rightarrow g a g^{-1} \in N 
 \end{equation}
 那么这个子群 $N$ 是一个不变子群.
+
+如果 $a,b \in G$, 存在 $g \in G$ 使得 $b= g a g^{-1} $, 那么 $a$ 和 $b$ \textbf{共轭(conjugate)}. 
 \end{definition}
 
 根据这个定义, 我们有以下:
@@ -774,11 +1055,12 @@ a \in N , \forall g \in G \Rightarrow g a g^{-1} \in N
 
 \begin{proof}
 假定一个群之间的映射为: $\phi: G \rightarrow G'$, 它的核为 
-$$ker(\phi) = \{ a \, | \, \phi(a) = 1_{G'} \} . $$
+$$ker(\phi) = \{ a \, | \, \phi(a) = 1_{G'} \} \subset G. $$
 
-假设 $a \in ker(\phi)$, $\forall g \in G$, 我们有:
+假设 $\forall a \in ker(\phi)$, $\forall g \in G$, 我们有:
 $$ \phi(g a g^{-1}) = \phi(g) \phi(a) \phi(g^{-1}) = \phi(g) 1_{G'} \phi(g)^{-1} = 1_{G'} . $$
-所以, 我们得出 $ker(\phi)$ 是 $G$ 的一个不变子群.
+
+也就是说, $g a g^{-1} \in ker(\phi)$. 所以,  $ker(\phi)$ 是 $G$ 的一个不变子群.
 
 \end{proof}
 
@@ -786,29 +1068,35 @@ $$ \phi(g a g^{-1}) = \phi(g) \phi(a) \phi(g^{-1}) = \phi(g) 1_{G'} \phi(g)^{-1}
 \begin{definition}
 任意一个群 $G$, 它的\textbf{中心(center)} 包含 $G$ 的所有有以下性质的元 $n$:
 \begin{equation}
-Z = \{ n \, | \, na=an, \quad \forall a \in G \} \label{eq_group_center}
+Z = \{ n \in G \, | \, na=an, \quad \forall a \in G \} \label{eq_group_center}
 \end{equation}
 \end{definition}
 
 
-\begin{memo}
-一个群 $G$ 的中心 $Z$ 是 $G$ 的不变子群: 因为 $G$ 的单位元 $e$ 符合条件 $ea = ae$, 因此 $e \in Z$, 也就是说, $Z$ 是非空集合. 而且, $Z$ 是 $G$ 的子群:
+\begin{lemma}
+一个群 $G$ 的中心 (center) $Z$ 是 $G$ 的不变子群 (normal subgroup).
+\end{lemma}
+
+\begin{proof}
+首先, 因为 $G$ 的单位元 $e$ 符合条件 $ea = ae$, 因此 $e \in Z$, 也就是说, $Z$ 是非空集合.
+
+而且, $Z$ 是 $G$ 的子群:
 \begin{itemize}
 \item{$n_1 \in Z, \, n_2 \in Z \Rightarrow n_1 n_2 \in Z$: $n_1 a = a n_1$, $n_2 a = a n_2$ $\Rightarrow$ $n_1 n_2 a = n_1 a n_2 = a n_1 n_2$;}
 \item{$n \in Z \Rightarrow n^{-1} \in Z $: $n a =  a n $ $\Rightarrow$ $n^{-1} a = n^{-1} a n n^{-1} = n^{-1} n a n^{-1} = a n^{-1}$. }
 \end{itemize} 
 
+显然, $Za=aZ$, 因此, $Z$ 是 $G$ 的不变子群.
 
-显然, $Za=aZ$, 即 $Z$ 是 $G$ 的不变子群.
+\end{proof}
 
 
-\end{memo}
 
 \begin{memo}
 关于不变子群:
 \begin{itemize}
-\item{一个\textbf{交换群}的每一个子群H都是不变子群.}
-\item{所谓 $Na = aN$ 并不是说 $a$ 可以同 $N$ 中的每一个元交换, 而是说 $Na$ 和 $aN$ 这两个集合一样. 换而言之, 一个不变子群不一定是群的中心.}
+\item{一个\textbf{交换群 (Abelian group)} 的每一个子群H都是不变子群.}
+\item{所谓 $Na = aN$ 并不是说 $a$ 可以同 $N$ 中的每一个元交换, 而是说 $Na$ 和 $aN$ 这两个集合一样. 换而言之, 一个不变子群(normal subgroup) 不一定是群的中心(center).}
 \end{itemize}
 \end{memo}
 
@@ -824,57 +1112,70 @@ aNa^{-1} = N
 \end{theorem}
 
 \begin{proof}
-Hint: 如果 $N$ 是不变子群, 那么, $aNa^{-1} = (aN)a^{-1} =  (Na) a^{-1} = N(a a^{-1}) = Ne = N$.
+如果 $N$ 是不变子群, 那么, $\forall a \in G$, $aNa^{-1} = (aN)a^{-1} =  (Na) a^{-1} = N(a a^{-1}) = Ne = N$.
 
-如果对于 $G$ 的任意一个元 $a$ 都有 $aNa^{-1} = N$, 那么, $Na = (aNa^{-1})a = (aN) (a^{-1} a) = (a N) e = aN$.
+如果对于 $\forall a \in G$, 都有 $aNa^{-1} = N$, 那么, 任意的$n \in N$ 都可以写成 $a n_1 a^{-1}$的形式. 也就是说,
+\begin{align*}
+ Na &= \{ na | \forall n \in N, \forall a \in G\} \\
+&= \{ a n_1 a^{-1} a | \forall a \in G, \, n_1 \in N \} \\
+&= (a N a^{-1} ) a .
+\end{align*}
+ 
+因此, 我们可以推出 $Na = (aNa^{-1})a = (aN) (a^{-1} a) = (a N) e = aN$.
 \end{proof}
 
 \begin{theorem}\label{thm_coset_iff_2}
 一个群G的一个子群N是一个不变子群的充分必要条件是:
 \begin{equation*}
-a \in G, \, n \in N \Longrightarrow ana^{-1} \in N
+\forall a \in G, \, \forall n \in N \Longrightarrow ana^{-1} \in N
 \end{equation*}
 
 
 \end{theorem}
 
 \begin{proof}
-Hint: 定理 \ref{thm_coset_iff_1} 说明了这个条件是必要的. 我们来证明它是充分的: 假如这个条件成立, 那么, $aNa^{-1} \subseteq N$. 而且 $a^{-1} \in G$, 我们有 $a^{-1}Na \subseteq N$ $\Longrightarrow$ $ a (a^{-1}Na ) a^{-1} \subseteq a N a^{-1} $ $\Longrightarrow$ $ N \subseteq a N a^{-1} $. 所以, 我们有 $aNa^{-1} = N$.
+定理 \ref{thm_coset_iff_1} 说明了这个条件是必要的. 我们来证明它是充分的: 假如这个条件成立, 那么, $aNa^{-1} \subseteq N$. 而且 $a^{-1} \in G$, 我们有 $a^{-1}Na \subseteq N$ $\Longrightarrow$ $ a (a^{-1}Na ) a^{-1} \subseteq a N a^{-1} $ $\Longrightarrow$ $ N \subseteq a N a^{-1} $. 所以, 我们有 $aNa^{-1} = N$.
 \end{proof}
 
 \begin{memo}
-证明一个子群是不是 不变子群, 定理 \ref{thm_coset_iff_2} 的条件一般比较方便.
+证明一个子群是不是 不变子群, 用定理 \ref{thm_coset_iff_2} 中的条件一般比较方便.
 \end{memo}
 
 \begin{memo}
-不变子群之所以重要, 是因为这个子群的陪集(coset), 对于\textbf{某种与原来的群有密切关系的代数运算}来说, 也作成一个群.
+不变子群(normal subgroup) 之所以重要, 是因为这个子群的陪集(coset), 对于\textbf{某种与原来的群有密切关系的代数运算}来说, 也作成一个群.
 
-考虑之前例子 \ref{example_integer_additive_group} 讨论过的整数加群 $\overline{G}$, 一个固定整数 $n$ 的所有倍数作成一个子群 $\overline{N}$. 整数加群 $\overline{G}$ 是交换群, 所以, 它的子群 $\overline{N}$ 是一个不变子群. 而 $\overline{N}$ 的陪集 也就是 模 $n$ 的剩余类, 对于代数运算
+考虑之前例子 \ref{example_integer_additive_group} 讨论过的整数加群 $ \mathbb{ Z} $ (additive group of $\mathbb{Z}$), 记为 $\overline{G}$. 那么, 一个固定整数 $n$ 的所有倍数作成一个子群 $\overline{N}$. 整数加群 $\overline{G}$ 是交换群(Abelian group), 所以, 它的子群 $\overline{N}$ 是一个不变子群(normal subgroup). 而 $\overline{N}$ 的陪集(coset) 也就是 模 $n$ 的剩余类(residue class), 对于代数运算
 \begin{align*}
 + : [a] + [b] \mapsto [a+b]
 \end{align*}
-作成一个群: 剩余类加群 (见 例子 \ref{example_additive_group_Z_nZ}).
+作成一个群: \textbf{剩余类加群 (additive group of integers modulo $n$, $\mathbb{Z}/n \mathbb{Z}$)} (见 例子 \ref{example_additive_group_Z_nZ}).
 
-接下来我们根据类似的思路, 在任意的一个不变子群的基础上构造出一个群: 不变子群的陪集, 称为 商群.
+接下来我们根据类似的思路, 在任意的一个不变子群的基础上构造出一个群: 不变子群(normal subgroup)的陪集(coset), 称为 \textbf{商群(quotient group)}.
 \end{memo}
 
-给定一个群 $G$ 和 一个不变子群 $N$. 把 $N$ 的所有陪集作成一个集合:
-$$ S = \{ aN, bN, cN, \ldots \}$$
+给定一个群 $G$ 和 一个不变子群(normal subgroup) $N$. 把 $N$ 的所有陪集(coset) 作成一个集合:
+\begin{align*}
+\overline{G} = \{ aN, bN, cN, \ldots \}
+\end{align*}
 
 考虑以下法则:
-$$ (xN) (yN) = (xy) N $$
-是一个S的乘法.
+\begin{align}
+(xN) (yN) = (xy) N \label{eq_quotient_group_multiplication}
+\end{align}
+是一个 $\overline{G}$ 的乘法.
 
 \begin{theorem}
-一个不变子群的陪集对于上面规定的乘法来说作成一个群.
+一个不变子群(normal subgroup)的陪集(cosets)对于上面规定的乘法来说作成一个群.
+
+具体而言, 给定一个群 $G$ 和它的一个不变子群 $N$, $N$的所有陪集做成一个集合 $\overline{G} = \{ aN, bN, cN, \ldots \}$. 那么存在 $\overline{G}$ 的一个代数运算 (\ref{eq_quotient_group_multiplication}) 使得 $\overline{G}$ 作成一个群.
 
 \end{theorem}
 
 \begin{proof}
-我们证明群定义的I, II, IV, V:
+我们证明群定义 \ref{def_group_2} 的I, II, IV, V:
 \begin{itemize}
-\item{I: 显然;}
-\item{II: $ (x N y N) z N = [ (xy) N ] z N = (xyz) N  = x N [(yz) N] = x N ( y N z N)$;}
+\item{I: 乘法是闭的, 显然;}
+\item{II: 结合律成立: $ (x N y N) z N = [ (xy) N ] z N = (xyz) N  = x N [(yz) N] = x N ( y N z N)$;}
 \item{IV: 这个群的单位元是 $eN =N$: $e N x N = (ex)N = x N$;}
 \item{V: $aN$的逆元是$a^{-1}N$: $a N a^{-1} N = (a a^{-1}) N = e N$.}
 \end{itemize}
@@ -882,41 +1183,45 @@ $$ (xN) (yN) = (xy) N $$
 \end{proof}
 
 \begin{definition}
-一个群 $G$ 的一个不变子群 $N$ 的陪集所作成的群叫做一个\textbf{商群(Quotient group/Factor group)}. 这个群用符号 $G/N$ 表示.
+一个群 $G$ 的一个不变子群 $N$ 的陪集所作成的群叫做一个\textbf{商群(quotient group/factor group)}. 这个群用符号 $G/N$ 表示.
 \end{definition}
 
 \begin{memo}
-因为 $N$ 的指数就是 $N$ 的陪集的个数, 因此, 我们有: 商群 $G/N$ 的元的个数(也就是商群 $G/N$ 的阶) 就是 $N$ 的指数. 当 $G$ 是有限群的时候, 由定理 \ref{theorem_counting_formula} 可得出:
+因为 $N$ 的指数(the index of $N$ in $G$)就是 $N$ 的陪集的个数(number of cosets), 因此, 我们有: 商群 $G/N$ 的元的个数(也就是商群 $G/N$ 的阶(order of $G/N$)) 就是 $N$ 的指数(index of $N$ in $G$, or the number of cosets). 当 $G$ 是有限群的时候, 由定理 \ref{theorem_counting_formula} 可得出:
 \begin{equation*}
 \frac{G\mbox{的阶}}{N\mbox{的阶}} = G/N \mbox{的阶} = N \mbox{的陪集 的个数} = N \mbox{的指数} 
-\end{equation*} 
+\end{equation*}
+或者说是,
+\begin{align*}
+\frac{\mbox{order of $G$}}{\mbox{order of $N$}} = \mbox{order of $G/N$} = \mbox{number of cosets of $N$} = \mbox{index of $N$ in $G$} 
+\end{align*} 
 \end{memo}
 
 \section{同态与不变子群(Homomorphism and Normal Subgroup)}
 
-在不变子群, 商群 和 同态映射之间 存在几个极端重要的关系.
+在不变子群(normal subgroup), 商群(quotient group) 和 同态映射(group homomorphism)之间 存在几个极端重要的关系.
 
 \begin{theorem}\label{thm_group_quotient_group}
-一个群 $G$ 和它的每一个商群 $G/N$ 同态(满射).
+一个群 $G$ 和它的每一个商群(quotient group) $G/N$ 同态(满射)(surjective homomorphism, or epimorphism).
 \end{theorem}
 
 \begin{proof}
 考虑以下 $G$ 到 $G/N$ 的一个满射法则:
-$$ \phi: a \longrightarrow aN, \quad \forall a \in G $$
+$$ \phi: G \longrightarrow G / N , \quad \phi(a) = aN, \quad \forall a \in G $$
 
 显然, 它是个满射: $\forall aN \in G/N$, 存在 $a \in G$ 使得 $\phi(a) = aN$.
 
 同时, 它也是一个同态映射: 对于任意两个元$\forall a \in G$, $\forall b \in G$, 
-$$ ab \longrightarrow ab N = (aN) (bN) .$$
+$$ \phi(ab) \longrightarrow ab N = (aN) (bN) = \phi(a) \phi(b) .$$
 
 \end{proof}
 
 \begin{memo}
-由群 $G$ 的一个子群可以推测整个群 $G$ 的性质. 假如 $G$ 有一个不变子群 $N$, 那么我们有两个子群可以利用: $N$ 和 $G/N$. 定理\ref{thm_group_quotient_group} 告诉我们, $G$ 和 $G/N$ 同态, 我们自然更加容易推测 $G$ 的性质.
+由群 $G$ 的一个子群可以推测整个群 $G$ 的性质. 假如 $G$ 有一个不变子群 $N$, 那么我们有两个子群可以利用: $N$ 和 $G/N$. 定理\ref{thm_group_quotient_group} 告诉我们, $G$ 和 $G/N$ 同态(满射), 我们自然更加容易推测 $G$ 的性质.
 \end{memo}
 
 \begin{memo}
-不变子群的重要性在于, 在某种意义上, 定理 \ref{thm_group_quotient_group} 的逆定理也是对的.
+不变子群(normal subgroup)的重要性在于, 在某种意义上, 定理 \ref{thm_group_quotient_group} 的逆定理也是对的.
 \end{memo}
 
 \begin{definition}
@@ -927,78 +1232,102 @@ ker(\phi) = \{ a \in G \, | \, \phi(a) = \overline{e} \in \overline{G} \}
 \end{equation}
 \end{definition}
 
-\begin{theorem}\label{thm_group_quotient_group_inv}
-假定 $G$ 和 $\overline{G}$ 是两个群, 并且 $G$ 与 $\overline{G}$ 同态(满射), 那么这个同态满射的核 $N$ 是 $G$ 的一个不变子群, 并且
-$$ G/N \cong \overline{G} . $$
+\begin{theorem}[First Isomorphism Theorem]
+\label{thm_group_quotient_group_inv}
+假定 $G$ 和 $G'$ 是两个群, 而且有 $\phi: G \longrightarrow G'$ 这样一个同态(满射) (epimorphism). 这个同态满射的核 $N:= ker(\phi)$ 是 $G$ 的一个不变子群(normal subgroup). 我们有 $G$ 的商群 $\overline{G} := G/N$ 和 $G'$ 同构
+$$ G/N = \overline{G} \cong G' . $$
+
+具体而言, 假定 正则映射(canonical map)
+\begin{align*}
+\pi: G \longrightarrow \overline{G}
+\end{align*}
+那么, 存在一个同构映射
+\begin{align*}
+\varphi : G/N = \overline{G} \overset{\cong}{\longrightarrow} G'
+\end{align*}
+使得 $\phi = \varphi \cdot \pi$ .
+
+\begin{equation}
+\begin{tikzcd}[column sep=small]
+G \arrow[rr, "\phi"] \arrow[rd, "\pi"] & & G'  \\ 
+ & \overline{G}  \arrow[ru, dotted, "\cong", "\varphi"'] &
+\end{tikzcd}
+\end{equation}
+
 \end{theorem}
 
 
-
 \begin{proof}
-我们用$\phi$ 表示给定的同态满射. 由定理 \ref{thm_kernal_normal_subgroup}, 我们这个同态满射的核 $N := ker(\phi)$ 是 $G$ 的一个不变子群.
+我们用$\phi$ 表示给定的同态满射(epimorphism). 由定理 \ref{thm_kernal_normal_subgroup}, 我们这个同态满射的核 $N := ker(\phi)$ 是 $G$ 的一个不变子群.
 
-规定一个法则:
-$$ \psi: \quad aN \longrightarrow \overline{a} = \phi (a), \quad \mbox{对于 } \forall a \in G .$$
-我们要说明: 这个法则是一个 $G/N$ 到 $\overline{G}$ 的同构映射. 因为:
+考虑:
+$$ \varphi: G/N = \overline{G} \longrightarrow G',   \quad \varphi(aN) = a' = \phi (a), \quad  \forall a \in G .$$
+
+我们要说明: 映射 $\varphi$ 是一个 $G/N=\overline{G}$ 到 $G'$ 的同构映射. 因为:
 \begin{enumerate}
-\item{$\psi$ 存在: $aN = bN \Rightarrow b^{-1}a \in N \Rightarrow \phi(b^{-1}a) = \overline{e} \in \overline{G} \Rightarrow \overline{b^{-1}}\, \overline{a} = \overline{e} \Rightarrow \overline{b}^{-1} \, \overline{a} = \overline{e} \Rightarrow \overline{a} = \overline{b} .$}
-\item{$\psi$ 是 $G/N$ 到 $\overline{G}$ 的满射: 给定任意一个元 $\overline{a} \in \overline{G}$, 在 $G$ 里至少有一个元 $a$ 满足 $\phi(a) = \overline{a}$, 也就是说至少有一个元 $aN \in G/N$ 使得 $\psi(aN ) = \overline{a}$.}
-\item{$\psi$是 $G/N$ 到 $\overline{G}$ 的单射: $aN \neq b N \Rightarrow b^{-1} a \not \in N \Rightarrow \phi(b^{-1}a) \neq \overline{e} \in \overline{G} \Rightarrow \overline{b^{-1}}\, \overline{a} \neq \overline{e} \Rightarrow \overline{b}^{-1} \, \overline{a} \neq \overline{e} \Rightarrow \overline{a} \neq \overline{b} .$}
-\item{$\psi$是同态映射: $aN bN = ab N \longrightarrow \overline{ab} = \overline{a} \overline{b}.$ 其中, 最后一个等号成立是由于$\phi$是同态映射. }
+\item{$\varphi$ 存在 (well-defined): $aN = bN \Rightarrow b^{-1} a \in N \Rightarrow \phi( b^{-1}a ) = e' \in G' \Rightarrow (b^{-1})'\, a' = e' \Rightarrow {b'}^{-1} \, a' = e' \Rightarrow a' = b' .$}
+\item{$\varphi$ 是 $G/N = \overline{G}$ 到 $G'$ 的满 射 (surjective): 给定任意一个元 $a' \in G'$, 在 $G$ 里至少有一个元 $a$ 满足 $\phi(a) = a'$, 也就是说至少有一个元 $ \pi(a) = aN \in G/N$ 使得 $\varphi(aN ) = a'$.}
+\item{$\varphi$是 $G/N = \overline{G}$ 到 $G'$ 的单射 (injective): $aN \neq b N \Rightarrow b^{-1} a \not \in N \Rightarrow \phi(b^{-1}a) \neq e' \in G' \Rightarrow (b^{-1})'\, a' \neq e' \Rightarrow {b'}^{-1} \, a' \neq e' \Rightarrow a' \neq b'.$}
+\item{$\varphi$ 是 同态映射: $aN bN = ab N \implies \varphi( aN ) \varphi ( bN) = a' b' = \phi(a) \phi(b) = \phi(ab) = (ab)' = \varphi(abN) \implies  \varphi( aN ) \varphi ( bN) =  \varphi(abN) $. }
 \end{enumerate}
 
+因此, $\varphi: \overline{G} \longrightarrow G'$ 是一个同构映射.
 \end{proof}
 
+
+
 \begin{memo}
-定理\ref{thm_group_quotient_group} 告诉我们一个群 $G$ 和它的商群 $G/N$ 同态. 定理\ref{thm_group_quotient_group_inv} 告诉我们, $G$ (对于任意一个群 $\overline{G}$ 与 $G$ 同态, 那么 $\overline{G}$ 与 $G$ 的商群 $G/N$ 同构) 只能和它的商群 $G/N$ 同态. 某种意义上而言, 定理\ref{thm_group_quotient_group_inv} 是 定理\ref{thm_group_quotient_group} 的逆定理.
+定理\ref{thm_group_quotient_group} 告诉我们一个群 $G$ 和它的商群 $G/N$ 同态. 定理\ref{thm_group_quotient_group_inv} 告诉我们, $G$ (对于任意一个群 $G'$ 与 $G$ 同态, 那么 $G'$ 与 $G$ 的商群 $G/N$ 同构) 只能和它的商群 $G/N$ 同态. 某种意义上而言, 定理\ref{thm_group_quotient_group_inv} 是 定理\ref{thm_group_quotient_group} 的逆定理.
 \end{memo}
 
 \begin{memo}
-当群 $G$ 和群 $\overline{G}$ 同态的时候, $\overline{G}$ 的性质并不和 $G$的完全一样. 但是, 定理\ref{thm_group_quotient_group_inv} 告诉我们, 一定能找到 $G$ 的一个不变子群 $N$, 使得$\overline{G}$ 的性质和商群 $G/N$ 的完全一样 (同构). 
+当群 $G$ 和群 $G'$ 同态的时候, $G'$ 的性质并不和 $G$ 的完全一样. 但是, 定理\ref{thm_group_quotient_group_inv} 告诉我们, 一定能找到 $G$ 的一个不变子群 $N$, 使得$G'$ 的性质和商群 $G/N$ 的完全一样 (同构). 
 \end{memo}
 
 在一个同态满射之下,一个群的若干性质是不变的, 若干性质是会变的.
 
 
 \begin{theorem}\label{theorem_subgroup_image_homomorphism_invariance}
-假定 $G$ 和 $\overline{G}$ 是两个群, 并且 $G$ 和 $\overline{G}$ 同态(满射). 那么在这个同态满射之下:
+假定 $G$ 和 $\overline{G}$ 是两个群, 并且 $G$ 和 $\overline{G}$ 同态满射 (epimorphism). 那么在这个同态满射之下:
 \begin{enumerate}
-\item{$G$ 的一个子群 $H$ 的象 $\overline{H}$ 是 $\overline{G}$ 的一个子群;}
-\item{$G$ 的一个不变子群 $N$ 的象 $\overline{N}$ 是$\overline{G}$ 的一个不变子群.}
+\item{$G$ 的一个子群 (subgroup) $H$ 的象 $\overline{H}$ 是 $\overline{G}$ 的一个子群;}
+\item{$G$ 的一个不变子群 (normal subgroup) $N$ 的象 $\overline{N}$ 是$\overline{G}$ 的一个不变子群.}
 \end{enumerate}
 
 \end{theorem}
 
 \begin{theorem}\label{theorem_subgroup_preimage_homomorphism_invariance}
-假定 $G$ 和 $\overline{G}$ 是两个群, 并且 $G$ 和 $\overline{G}$ 同态(满射). 那么在这个同态满射之下:
+假定 $G$ 和 $\overline{G}$ 是两个群, 并且 $G$ 和 $\overline{G}$ 同态满射 (epimorphism). 那么在这个同态满射之下:
 \begin{enumerate}
-\item{$\overline{G}$ 的一个子群 $\overline{H}$ 的逆象 $H$ 是 $G$ 的一个子群;}
-\item{$\overline{G}$ 的一个不变子群 $\overline{N}$ 的逆象 $N$ 是 $G$ 的一个不变子群.}
+\item{$\overline{G}$ 的一个子群 (subgroup) $\overline{H}$ 的逆象 $H$ 是 $G$ 的一个子群;}
+\item{$\overline{G}$ 的一个不变子群 (normal subgroup) $\overline{N}$ 的逆象 $N$ 是 $G$ 的一个不变子群.}
 \end{enumerate}
 
 \end{theorem}
 
 \begin{memo}
 
-也就是说, 一个群的一个子集是否一个\textbf{子群}以及是否一个\textbf{不变子群}这两个性质, 在一个\textbf{同态满射}之下是不变的.
+也就是说, 一个群的一个子集是否一个\textbf{子群 (subgroup)}以及是否一个\textbf{不变子群 (normal subgroup)}这两个性质, 在一个\textbf{同态满射 (epimorphism)} 之下是不变的.
 \end{memo}
+
 
 
 \chapter{环与域(Rings and Fields)}
 
 \section{加群与环的定义(Additive Group and Ring)}
 
-环(Ring)的定义需要用到加群的概念.
+环(ring)的定义需要用到加群(additive group)的概念.
 
 \begin{definition}
-一个交换群(Abelian group)叫做一个\textbf{加群(Additive group)}, 假如我们把这个群的代数运算叫做\textbf{加法}, 并且用$+$来表示.
+一个交换群(Abelian group)叫做一个\textbf{加群(additive group)}. 我们可以把这个群的代数运算叫做\textbf{加法}, 并且用$+$来表示.
 \end{definition}
 
+
 \begin{memo}
-加群的一些特有记法:
+加群具有 一些 特有的记法(notation):
 \begin{enumerate}
-\item{加法结合律: $$ \sum_{i=1} ^n a_i = a_1 + \ldots + a_n . $$}
-\item{单位元: 称为\textbf{零元}. 有以下计算规则:
+\item{加法结合律(associative law): $$ \sum_{i=1} ^n a_i = a_1 + \ldots + a_n . $$}
+\item{单位元(additive identity): 称为\textbf{零元(zero)}. 有以下计算规则:
 $$ 0 + a = a + 0 = a .$$
 }
 \item{$n$ 个元 $a$的和 ($n$为正整数)表示为:
@@ -1013,7 +1342,7 @@ $$ 0 + a = a + 0 = a .$$
 \begin{equation}
 (-n)a = - (na), \quad 0 a = \mathbf{0}
 \end{equation}
-这里第一个零是整数, 第二个零是加群的\textbf{零元}.
+这里第一个零是整数(integer), 第二个零是加群的\textbf{零元(zero identity)}.
 
 进一步, 对于任意整数$m$, $n$, 和加群的任意元$a$, $b$ 来说, 都有
 \begin{eqnarray}
@@ -1724,7 +2053,7 @@ i
 \begin{proof}
 \begin{enumerate}
 \item{$F$ 的特征是 $F$非零元 的(加法运算)的阶, 并且是一个素数. $F$ 作为加群的阶是 $4$, 因此 $F$ 的非零元的阶只能是 $1$, $2$, $4$ (因为 $3$ 不能整除 $F$ 的阶, 由定理 \ref{theorem_finite_group_rank_divisable}, $3$ 不是 $F$ 的元的阶). 而只有 $2$ 是素数, 所以 $F$ 的特征只能是 $2$.}
-\item{乘群 $F^*$ 的阶是 $3$, 根据 备注 \ref{memo_prime_cyclic_group}, 它是一个循环群 $(a)$, 而 $F^*$ 的元可写作 $F^* = \{1, a, a^2 \}$.
+\item{乘群 $F^*$ 的阶是 $3$, 根据 备注 \ref{exercise_prime_cyclic_group}, 它是一个循环群 $(a)$, 而 $F^*$ 的元可写作 $F^* = \{1, a, a^2 \}$.
 
 这样, $F = \{0, 1, a, a^2 \}$. $F$ 是一个加群, 它与Klein 四元群 同构:
 
