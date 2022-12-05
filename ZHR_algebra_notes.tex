@@ -50,7 +50,7 @@
 \newtheorem{lemma}{引理}[section]
 \newtheorem{condition}{条件}[section]
 \newtheorem{exercise}{练习}[section]
-\newtheorem{assumption}{假设条件}[section]
+\newtheorem{assumption}{假设}[section]
 \newtheorem*{soln}{解答}
 
 
@@ -184,7 +184,7 @@ Then,
 \end{memo}
 
 
-\begin{definition}
+\begin{definition}\label{def_order_of_element_in_group}
 对于一个群G的一个元a, 能够使得等式
 \begin{equation}
 a^m = e
@@ -1221,7 +1221,7 @@ $$ \phi(ab) \longrightarrow ab N = (aN) (bN) = \phi(a) \phi(b) .$$
 \end{memo}
 
 \begin{memo}
-不变子群(normal subgroup)的重要性在于, 在某种意义上, 定理 \ref{thm_group_quotient_group} 的逆定理也是对的.
+不变子群(normal subgroup)的重要性在于, 在某种意义上, 定理 \ref{thm_group_quotient_group} 的逆定理也是对的. 为此, 我们需要使用映射的核 (kernel) 的定义.
 \end{memo}
 
 \begin{definition}
@@ -1318,7 +1318,7 @@ $$ \varphi: G/N = \overline{G} \longrightarrow G',   \quad \varphi(aN) = a' = \p
 
 环(ring)的定义需要用到加群(additive group)的概念.
 
-\begin{definition}
+\begin{definition}\label{def_additive_group}
 一个交换群(Abelian group)叫做一个\textbf{加群(additive group)}. 我们可以把这个群的代数运算叫做\textbf{加法}, 并且用$+$来表示.
 \end{definition}
 
@@ -1327,7 +1327,7 @@ $$ \varphi: G/N = \overline{G} \longrightarrow G',   \quad \varphi(aN) = a' = \p
 加群具有 一些 特有的记法(notation):
 \begin{enumerate}
 \item{加法结合律(associative law): $$ \sum_{i=1} ^n a_i = a_1 + \ldots + a_n . $$}
-\item{单位元(additive identity): 称为\textbf{零元(zero)}. 有以下计算规则:
+\item{单位元(additive identity): 称为\textbf{零元(zero identity, or zero)}. 有以下计算规则:
 $$ 0 + a = a + 0 = a .$$
 }
 \item{$n$ 个元 $a$的和 ($n$为正整数)表示为:
@@ -1342,9 +1342,9 @@ $$ 0 + a = a + 0 = a .$$
 \begin{equation}
 (-n)a = - (na), \quad 0 a = \mathbf{0}
 \end{equation}
-这里第一个零是整数(integer), 第二个零是加群的\textbf{零元(zero identity)}.
+这里第一个零是整数(integer), 第二个零是加群的\textbf{零元(zero identity, or zero)}.
 
-进一步, 对于任意整数$m$, $n$, 和加群的任意元$a$, $b$ 来说, 都有
+进一步而言, 对于任意整数$m$, $n$, 和加群的任意元$a$, $b$ 来说, 都有
 \begin{eqnarray}
 & & ma + na = (m+n) a \\
 & & m \cdot n a = m n \cdot a \\
@@ -1367,18 +1367,19 @@ $$ 0 + a = a + 0 = a .$$
 \end{enumerate}
 \end{memo}
 
+下面我们给出环 (ring) 的定义.\footnote{截止至目前为止(2022年), 关于是否在环的定义里面包括乘法的单位元仍在争论当中. 为了以示区分, 对于不包括乘法单位元的环的定义有时候也被称作rng, 而把包括乘法单位元的环的定义成为ring.}
 
 \begin{definition}\label{def_ring}
-一个集合 $R$ 叫做一个\textbf{环(Ring)}\footnote{截止至2022年, 关于是否在环的定义里面包括乘法的单位元仍在争论当中. 以示区分, 对于不包括乘法单位元的环的定义有时候也被称作rng, 而把包括乘法单位元的环的定义成为ring.}, 假如
+一个集合 $R$ 叫做一个\textbf{环(ring)}, 如果满足以下条件:
 \begin{enumerate}
-\item{$R$ 是一个加群, 也就是说, $R$ 对于一个叫做加法的代数运算来说作成一个交换群(Abelian group);}
+\item{$R$ 是一个加群(additive group): $R$ 对于一个叫做加法的代数运算来说作成一个交换群(Abelian group);}
 \item{$R$ 对于另一个叫做乘法的代数运算来说是闭的;}
-\item{这个乘法适合结合律: 对于任意三个元 $a, \, b, \, c \in R$,
+\item{这个乘法适合结合律(associative law of composition): 对于任意三个元 $a, \, b, \, c \in R$,
 \begin{equation}
 a(bc) = (ab) c
 \end{equation}
 }
-\item{两个分配律都成立: 对于任意三个元 $a, \, b, \, c \in R$,
+\item{两个分配律(distributive laws)都成立: 对于任意三个元 $a, \, b, \, c \in R$,
 \begin{align*}
 a(b+c) & = ab + ac \\
 (b+c)a &= ba + ca
@@ -1388,19 +1389,40 @@ a(b+c) & = ab + ac \\
 \end{definition}
 
 \begin{memo}
-全体整数作成的集合对于普通的加法和乘法来说做成一个环.
+全体整数作成的集合对于普通的加法和乘法来说做成一个环 (ring of integers).
+\end{memo}
+
+\begin{memo}
+一个环 $R$ 满足一般的计算规则: 给定 $a,\, b, \, c,\, 0 \in R$, 以及 $m,n \in \mathbb{Z}$,
+
+\begin{enumerate}
+\item{$0+a = a+0 = a$.}
+\item{$-a + a = a -a =0$.}
+\item{$-(-a) =a $.}
+\item{ $a + c = b \iff c = b - a $. }
+\item{$ -(a+b) = -a - b $; $-(a-b)= -a + b$.}
+\item{$ma+na = (m+n) a$;  $m \cdot n a = mn \cdot a$;  $n(a+b) = na + nb$.}
+\item{$(a-b) c = ac - bc$; $c(a-b) = ca - cb$.}
+\item{$0 a = a 0 = a$.}
+\item{$(-a)b = a(-b) = - a b$.}
+\item{$(-a)(-b)= ab$.}
+\item{$a(b_1 + b_2 + \ldots + b_n) =  ab_1 + ab_2 + \ldots + ab_n$; $(b_1+ b_2 + \ldots + b_n) a = b_1 a + b_2 a + \ldots + b_n a$.}
+\item{$(a_1 + \ldots + a_m) (b_1 + \ldots + b_n) = a_1 b_1 + \ldots + a_1 b_n + \ldots + a_m b_1 + \ldots + a_m b_n $.}
+\item{$(n a) b = a(n b) = a(ab)$.}
+\item{$a^m a^n = a^{m+n}$; $(a^m)^n = a^mn$.}
+\end{enumerate}
 \end{memo}
 
 \section{交换律, 单位元, 零因子, 整环(Integral Domain)}
 
-存在一些普通计算法在一个一般的环里不成立, 它们要在有附加条件的环里才能成立. 以下我们讨论环的三种重要附加条件.
+在一般的环里面, 有一些普通的计算法则不成立. 它们要在有附加条件的环里才能成立. 下面, 我们讨论环的三种重要附加条件.
 
 \begin{condition}
-\textbf{交换律}: 环的定义 没有要求乘法适合交换律(commutative), 所以在一个环里$ab$ 不一定等于 $ba$.
+\textbf{交换律(commutative law)}: 环的定义 没有要求乘法适合交换律(commutative law), 所以在一个环里$ab$ 不一定等于 $ba$.
 \end{condition}
 
 \begin{definition}
-一个环 $R$ 叫做一个 \textbf{交换环(Commutative ring)}, 假如对于任意两个元 $a,\, b \in R$, 我们有:
+一个环 $R$ 叫做一个 \textbf{交换环(commutative ring)}, 假如对于任意两个元 $\forall a,\, b \in R$, 我们有:
 \begin{equation}
 a b = b a .
 \end{equation}
@@ -1414,7 +1436,7 @@ a^n b^n = (ab)^n .
 \end{memo}
 
 \begin{condition}
-\textbf{单位元}: 环的定义没有要求一个环要有一个对于乘法来说的单位元.
+\textbf{单位元 (multiplicative identity)}: 环的定义没有要求一个环要有一个对于乘法来说的单位元 (multiplicative identity).
 \end{condition}
 
 \begin{definition}
@@ -1425,17 +1447,17 @@ e a = a e = a .
 \end{definition}
 
 \begin{memo}
-一般来说, 一个环未必有一个单位元. 例如:
+一般来说, 一个环未必有一个单位元(multiplicative identity). 例如:
 \begin{equation}
 R = \{ \mbox{所有偶数} \} .
 \end{equation}
 
-$R$ 对于普通加法和乘法来说作成一个环, 但是它没有单位元.
+$R$ 对于普通加法和乘法来说作成一个环, 但是它没有单位元 (multiplicative identity).
 
 \end{memo}
 
 \begin{memo}
-一个环如果有单位元, 它只能有一个. 我们习惯把这个唯一的单位元表示为 $1$. 当然, 单位元的$1$ 一般不是普通整数$1$. 
+一个环如果有单位元(multiplicative identity), 它只能有一个. 我们习惯把这个唯一的单位元表示为 $1$. 当然, 单位元的$1$ 一般不是普通整数意义上的$1$. 
 \end{memo}
 
 \begin{memo}
@@ -1447,11 +1469,16 @@ a^0 = 1
 \end{memo}
 
 \begin{definition}
-一个有单位元 $1$ 的环的一个元 $b$ 叫做元 $a$ 的一个 \textbf{(乘法)逆元}, 假如
+一个有单位元 (multiplicative identity) $1$ 的环的一个元 $b$ 叫做元 $a$ 的一个 \textbf{(乘法)逆元(multiplicative inverse)}, 假如
 \begin{equation}
 b a = a b = 1
 \end{equation} 
+
+如果一个元 $a$ 有逆元 (multiplicative inverse), 那么 这个元$a$ 称为 环的 \textbf{单位 (unit)}.
+
 \end{definition}
+
+由于历史的原因, 可逆的元被称为单位. 这个名称非常容易让人混淆. 因此, 在以下内容里面 我们尽量使用 (乘法)可逆元 (muliplicative invertible (element)) 的称呼 来替代 单位(unit) .
 
 \begin{memo}
 一个元 $a$ 最多只能有一个逆元, 我们一般表示为 $a^{-1}$, 并且规定:
@@ -1460,19 +1487,21 @@ a^{-n} = \big( a^{-1} \big)^n .
 \end{equation}
 
 
-当然, 一个元 $a$ 未必有逆元. 例如, 整数环是一个有单位元的环, 但是除了 $\pm 1$ 以外, 其他的整数都没有逆元: 如果 $a=2$, 那么$a$ 的逆元 $b$ 需要 $a b = 1$, 也就是说, 需要非整数 $b = \frac{1}{2}$. 
+当然, 一个元 $a$ 未必有逆元. 例如, 整数环(ring of integers) $\mathbb{Z}$ 是一个有单位元 (multiplicative identity) 的环, 但是除了 $\pm 1$ 以外, 其他的整数都没有逆元 (multiplicative inverse): 如果 $a=2$, 那么$a$ 的逆元 $b$ 需要 $a b = 1$, 也就是说, 需要非整数 $b = \dfrac{1}{2}$. 很明显, $b = \dfrac{1}{2} \not \in \mathbb{Z}$.
 \end{memo}
 
 \begin{condition}
-\textbf{零因子}: 一个环的两个元 $a = 0$ 或者 $b = 0$, 那么 $ab = 0$. 反之则不一定成立. 也就是说:
+\textbf{零因子(zero divisor)}: 一个环的两个元 $a = 0$ 或者 $b = 0$, 那么 $ab = 0$. 反之则不一定成立. 也就是说:
 \begin{equation}
-ab = 0 \Rightarrow a=0 \mbox{ 或者 } b=0 \label{eq_zero_divisor_condition}
+ab = 0 \Rightarrow a=0 \mbox{ 或者 }\, b=0 \label{eq_zero_divisor_condition}
 \end{equation}
+这一条件 \ref{eq_zero_divisor_condition} 一般而言 在一个环里并不一定成立.
 
-这一条件 \ref{eq_zero_divisor_condition} 在一个一般环里并不一定成立.
+
+
 \end{condition}
 
-\begin{definition}
+\begin{definition}\label{def_ring_residue_class_mod_n}
 给定一个集合:
 \begin{equation}
 R = \{ \mbox{所有模 $n$ 的剩余类} \}.
@@ -1488,7 +1517,7 @@ R = \{ \mbox{所有模 $n$ 的剩余类} \}.
 [a][b] = [ab] .
 \end{equation}
 
-我们得出$R$做成一个环, 称为 \textbf{模 $n$ 的剩余类环}.
+我们得出$R$做成一个环, 称为 \textbf{模 $n$ 的剩余类环 (ring of residue classes modulo $n$, or ring of integers modulo $n$)}.
 
 \end{definition}
 
@@ -1498,7 +1527,7 @@ R = \{ \mbox{所有模 $n$ 的剩余类} \}.
 [a] \neq [0], \, [b] \neq [0], \mbox{ 但是 } \, [ab] = [n] = [0].
 \end{equation}
 
-而$[0]$ 是 $R$ 的零元. 也就是说, 零因子条件在\textbf{模 $n$ 的剩余类环} 不成立.
+而$[0]$ 是 $R$ 的零元. 也就是说, 零因子条件在\textbf{模 $n$ 的剩余类环(ring of integers modulo $n$)} 不成立.
 
 
 \end{memo}
@@ -1507,7 +1536,7 @@ R = \{ \mbox{所有模 $n$ 的剩余类} \}.
 \begin{definition}
 在一个环里, 如果有
 \begin{equation}
-a \neq 0,\, b \neq 0 \, \mbox{  但是  }  ab = 0
+a \neq 0,\, b \neq 0 \, \mbox{  但是  }  /, ab = 0
 \end{equation}
 
 我们说, $a$ 是这个环的一个\textbf{左零因子(left zero divisor)}, $b$ 是这个环的一个\textbf{右零因子(right zero divisor)}.
@@ -1518,25 +1547,48 @@ a \neq 0,\, b \neq 0 \, \mbox{  但是  }  ab = 0
 \begin{memo}
 一个环若是交换环(commutative), 那么它的一个左零因子也是一个右零因子. 但是在非交换环中就未必.
 
-一个环当然也可以没有零因子. 在而且只在一个没有零因子的环里 条件 \ref{eq_zero_divisor_condition} 才会成立. 
+一个环当然也可以没有零因子, 例如考虑 整数环 (ring of integers $\mathbb{Z}$). 在而且只在 (if and only if) 一个没有零因子的环里 条件 \ref{eq_zero_divisor_condition} 才会成立. 
 \end{memo}
 
 
-\begin{example}
-在一个数域 $F$ 上的一切 $n \times n $ 矩阵, 对于矩阵的加法和乘法来说, 做成一个有单位元的环. 当 $n \geq 2$ 的时候, 这个环是非交换环, 并且\textbf{有零因子}.
+\begin{example}\label{example_matrix_ring_non_commutative}
+在一个域 (field) $F$ 上的一切 $n \times n $ 矩阵, 对于矩阵的加法和乘法来说, 做成一个有单位元的环. 当 $n \geq 2$ 的时候, 这个环是非交换环, 并且\textbf{有零因子}. 具体而言, 可以考虑:
+\begin{align*}
+\left(
+\begin{array}{cc}
+0 & 1 \\
+0 & 0
+\end{array}
+\right)
+\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 0
+\end{array}
+\right) =
+\left(
+\begin{array}{cc}
+0 & 0 \\
+0 & 0
+\end{array}
+\right)
+\end{align*}
+
 \end{example}
 
-零因子的存在不存在和消去律的成立不成立相关.
+\begin{memo}
+零因子 和 消去律 相互关联.
+\end{memo}
 
 \begin{theorem}
-在一个没有零因子的环里, 两个消去律都成立:
+在一个没有零因子 (\emph{no} zero divisor) 的环里, 两个消去律 (cancellation laws) 都成立:
 
 \begin{align*}
 & a \neq 0, \, ab = ac \Rightarrow b = c \\
 & a \neq 0, ba = ca \Rightarrow b = c .
 \end{align*}
 
-反之, 在一个环里如果有一个消去律成立, 那么这个环没有零因子.
+反之, 在一个环里如果有一个消去律 (cancellation law) 成立, 那么这个环没有零因子 (\emph{no} zero divisor).
 \end{theorem}
 
 \begin{proof}
@@ -1545,57 +1597,61 @@ a \neq 0,\, b \neq 0 \, \mbox{  但是  }  ab = 0
 ab = ac \Rightarrow a(b- c) = 0
 \end{equation}
 
-上述规定有:
+因此有:
 \begin{equation}
- a \neq 0, \, ab = ac \Rightarrow b-c = 0 \Rightarrow b = c .
+ a \neq 0, \, ab = ac \Rightarrow a \neq 0, \, a(b-c) = 0 \implies b-c = 0 \Rightarrow b = c .
 \end{equation}
 
 同理可证 $a \neq 0, ba = ca \Rightarrow b = c$.
 
-反过来, 假定环 $R$ 的第一个消去律: $a \neq 0, \, ab = ac \Rightarrow b = c $ 成立.
+反过来, 假定环 $R$ 的第一个消去律成立: $a \neq 0, \, ab = ac \Rightarrow b = c $.
 
-那么有 $ab = 0 \Rightarrow ab = a0$. 由第一个消去律, 我们得出 $b = c = 0$.
+那么有 $ab = 0 \Rightarrow ab = a0$. 由第一个消去律, 我们得出 $a \neq 0, \, ab = a0= 0 \implies b = 0$. 也就是说, $R$没有零因子. 
 
-第二消去律成立的时候, 同理可得.
+同理可得, 在第二消去律成立的时候, $R$没有零因子.
 
 \end{proof}
 
-\begin{lemma}
+\begin{corollary}
 在一个环里, 如果有一个消去律成立, 那么另一个消去律也成立.
-\end{lemma}
+\end{corollary}
 
 满足以上这三种附加条件的环特别重要.
 
 
-\begin{definition}
-一个环 $R$ 叫做一个 \textbf{整环 (Integral domain)}, 假如对于 $R$ 的任意元 $a, b \in R$,
+\begin{definition}\label{def_integral_domain}
+一个环 $R$ 叫做一个 \textbf{整环 (integral domain)}, 假如对于 $R$ 的任意元 $a, b \in R$,
 \begin{enumerate}
-\item{乘法适合交换律:
+\item{乘法适合交换律 (commutative law in multiplication):
 \begin{equation}
 a b = b a
 \end{equation}
 }
-\item{$R$ 有乘法单位元 $1$:
+\item{$R$ 有乘法单位元 $1$ (has multiplicative identity $1$):
 \begin{equation}
 1 a = a 1 = a
 \end{equation}
 }
-\item{$R$ 没有零因子:
+\item{$R$ 没有零因子 (has \emph{no} zero divisor):
 \begin{equation}
-ab = 0 \Rightarrow a = 0, \mbox{  或者  } b = 0
+ab = 0 \Rightarrow a = 0, \mbox{  或者  } \, b = 0
 \end{equation}
 }
 \end{enumerate}
 \end{definition}
 
 
-
-\begin{memo}
-整数环 是一个整环. 
+\begin{memo}\label{memo_ring_integers_is_integral_domain}
+整数环 (ring of integers $\mathbb{Z}$) 是一个整环 (integral domain). 
 \end{memo}
 
-\begin{memo}
-假定一个环对于加法来说做成一个循环群, 那么 $R$ 是交换环: 假设元 $a$ 生成循环群, 那么任意两个元 $b, c \in R$ 有
+
+\begin{exercise}
+假定一个环对于加法来说做成一个循环群 (cyclic group), 那么 $R$ 是交换环 (commutative ring).
+\end{exercise}
+
+\begin{soln}
+ 假设元 $a$ 生成循环群, 那么任意两个元 $b, c \in R$ 有
 \begin{equation}
 b = ma, \quad \, c = n a, \quad m, \, n \mbox{ 是整数}
 \end{equation}  
@@ -1605,18 +1661,97 @@ b = ma, \quad \, c = n a, \quad m, \, n \mbox{ 是整数}
 bc = (ma ) (na) = (mn) a a = c b
 \end{equation}
 
-\end{memo}
+因此, 交换律在$R$ 中成立. 所以, $R$ 是交换环 (commutative ring).
+
+\end{soln}
 
 
-\begin{memo}
-对于有单位元的环来说, 加法适合交换律可以由环定义里的其他条件得出: 考虑
+\begin{exercise}
+对于有单位元(multiplicative identity)的环来说, 加法交换律可以由环定义 \ref{def_ring} 里的其他条件得出.
+\end{exercise}
+
+\begin{soln}
+考虑
 \begin{align*}
  & (a+b) (1+1) = a+b+a+b = a+a+b+b  \\
  \Rightarrow & -a + (a+b+a+b) - b = -a + (a+a+b+b ) -b \\
  \Rightarrow & b+a = a + b   .
 \end{align*}
 
-\end{memo}
+\end{soln}
+
+
+\begin{exercise}
+由所有实数 $a + b \sqrt{2}$ ($a$, $b$ 是整数)组成的集合 对于普通加法和乘法来说是一个整环 (integral domain).
+\end{exercise}
+
+
+\begin{soln}
+首先我们验证 环的定义 \ref{def_ring} 里面的条件:
+\begin{enumerate}
+\item{$R$ 是一个加群(Abelian group): $a,b,c,d \in \mathbb{Z}$ 为整数, 那么 
+\begin{itemize}
+\item{$R$ 对于加法是闭的, 而且加法适合交换律:
+\begin{align*}
+& (a+b \sqrt{2} ) + (c+ d \sqrt{2}) \\
+=& (a + c) + (b + d ) \sqrt{2} \\
+=& (c + a) + (d + b ) \sqrt{2}, \quad \mbox{(根据整数普通加法的交换律)} \\
+=& (c+ d \sqrt{2}) + (a+b \sqrt{2} ) .
+\end{align*}
+}
+\item{对于任意元 $a+b \sqrt{2}  \in R$, 有加法单元 $0 + 0 \sqrt{2} = 0 \in R$}
+\item{对于任意元 $a+b \sqrt{2}  \in R$, 有逆元 $-a - b \sqrt{2} \in R$ 使得
+\begin{align*}
+(a + b \sqrt{2}) + (-a - b \sqrt{2} ) = 0 \in R .
+\end{align*}
+}
+\end{itemize}
+}
+\item{$R$ 对于乘法而言是闭的(closed in multiplication): $a,b,c,d \in \mathbb{Z}$ 为整数, 
+\begin{align*}
+(a + b \sqrt{2}) (c + d \sqrt{2}) = (ac + 2bd) + (ad + bc) \sqrt{2} \in R.
+\end{align*}
+其中 $(ac + 2bd),\, (ad + bc) \in \mathbb{Z}$ 为整数.
+}
+\item{$R$ 的乘法适合结合律(associative law of composition): $a_1, a_2, b_1, b_2, c_1, c_2 \in \mathbb{Z}$, 根据整数普通乘法的交换律, 我们可以验证
+\begin{align*}
+&(a_1 + a_2 \sqrt{2}) \big[ (b_1 + b_2 \sqrt{2})  (c_1 + c_2 \sqrt{2})  \big] \\
+=& \big[ (a_1 + a_2 \sqrt{2}) (b_1 + b_2 \sqrt{2}) \big]  (c_1 + c_2 \sqrt{2})  
+\end{align*}
+}
+\end{enumerate}
+
+接下来, 我们验证 整环 定义 \ref{def_integral_domain} 里面的条件:
+\begin{enumerate}
+\item{乘法适合交换律 (commutative law in multiplication): 根据整数普通乘法的交换律, 我们可以验证
+\begin{align*}
+& (a + b \sqrt{2}) (c + d \sqrt{2}) \\
+=& (ac + 2bd) + (ad + bc) \sqrt{2} \\
+=& (ca + 2db) + (cb + da) \sqrt{2} \\
+=& (c + d \sqrt{2}) (a + b \sqrt{2})
+\end{align*}
+}
+\item{$R$ 有乘法单位元 $1$ (has multiplicative identity $1$):
+\begin{align*}
+1 + 0 \sqrt{2} = 1 \in R
+\end{align*}
+}
+\item{$R$ 没有零因子 (has \emph{no} zero divisor):
+\begin{align*}
+& a + b \sqrt{2} \neq 0, \,  c + d \sqrt{2} \neq 0 \\
+\implies & (a \neq 0 \mbox{ OR } b \neq 0) \mbox{ AND } (c \neq 0 \mbox{ OR } d \neq 0) \\
+\implies & (ac + 2bd) + (ad + bc) \sqrt{2} \neq 0 
+\end{align*}
+}
+\end{enumerate}
+
+所以, $R$ 是整环 (integral domain).
+
+\end{soln}
+
+
+
+
 
 \section{除环和域(Division Ring and Field)}
 
@@ -1628,58 +1763,64 @@ $R$ 只包括一个元 $a$, 加法和乘法是:
 a + a = a, \quad, \, a a = a
 \end{equation}
 
-$R$是一个环, 而且这个环里的唯一的元 $a$ 有一个逆元, 就是 $a$ 本身. 有时候我们用 $0$ 表示 $a$, 这样的一个环 叫做 \textbf{零环(Zero ring)}.
+$R$是一个环, 而且这个环里的唯一的元 $a$ 有一个逆元, 就是 $a$ 本身. 有时候我们用 $0$ 表示 $a$, 这样的一个环 叫做 \textbf{零环(zero ring)}.
 
 \end{example}
 
-
-对于至少有两个元的环, 至少有一个不等于零的元 $a$, 有 $0 a = 0 \neq a$. 因此, $0$ 不是 $R$ 的单位元. 而此时, $0$ 没有逆元: 因为对于任何元 $b \in R$, 都有 $b0 =  0 \neq \mbox{ 单位元 }$.
-
-我们进一步问, 除了零元以外, 其他的元会不会有一个逆元? 
+\begin{itemize}
+\item{对于至少有两个元的环, 至少有一个不等于零的元 $a$, 有 $0 a = 0 \neq a$. 因此, $0$ 不是 $R$ 的单位元(multiplicative identity). 而此时, $0$ 没有逆元: 因为对于任何元 $b \in R$, 都有: 
+\begin{align*}
+b0 =  0 \neq \mbox{单位元}.
+\end{align*}
+}
+\item{我们进一步问, 除了零元以外, 其他的元会不会有一个乘法逆元(multiplicative inverse)?} 
+\end{itemize}
 
 \begin{example}
-$R = \{ \mbox{全体有理数} \} $ 对于普通加法和乘法来说是一个还. 这个环的任意一个非零元的元 $a \neq 0$ 有逆元 $\frac{1}{a}$.
+$R = \{ \mbox{全体有理数} \} $ 对于普通加法和乘法来说是一个环. 这个环的任意一个非零元的元 $a \neq 0$ 都有逆元 $\dfrac{1}{a} \in R $.
 \end{example}
 
-\begin{definition}
-一个环 $R$ 叫做一个\textbf{除环(Division ring)}, 假如:
+\begin{definition}\label{def_division_ring}
+一个环 $R$ 叫做一个\textbf{除环(division ring)}, 假如:
 \begin{enumerate}
 \item{$R$ 至少包含一个不等于零的元;}
-\item{$R$ 有一个单位元;}
-\item{$R$ 的每一个不等于零的元都有一个逆元.}
+\item{$R$ 有一个单位元(multiplicative identity);}
+\item{$R$ 的每一个不等于零的元都有一个逆元(multiplicative inverse).}
 \end{enumerate}
 \end{definition}
 
-\begin{definition}
-一个(乘法)交换除环 叫做一个\textbf{域(Field)}.
+\begin{definition}\label{def_field}
+一个(乘法)交换除环 (commutative division ring) 叫做一个\textbf{域(field)}.
 \end{definition}
 
 \begin{memo}\label{memo_division_ring_properties}
-除环的几个重要性质:
+除环 (division ring) 的几个重要性质:
 
 \begin{enumerate}
-\item{一个除环没有零因子, 因为:
+\item{一个除环没有零因子(no zero divisor), 因为:
 \begin{equation}
-a \neq 0, \, ab = 0 \Rightarrow a^{-1} ab = b = a0 = 0
+a \neq 0, \, ab = 0 \implies a^{-1} ab = b = a^{-1} 0 = 0
 \end{equation}
 所以, 我们得出:
 \begin{equation}
 ab = 0 \Rightarrow a = 0, \mbox{  或者  } b = 0
 \end{equation}
 }
-\item{一个除环的不等于零元的元对于乘法来说作成一个群 $R^*$, 这个群叫做除环 $R$ 的\textbf{乘群}.}
+\item{一个除环的不等于零元的元对于乘法来说作成一个群 $R^*$, 这个群叫做除环 $R$ 的\textbf{乘群 (multiplicative group of division ring, or unit group: every element in the unit group is multiplicative invertible (is unit) )}.}
 \item{在一个除环 $R$ 里, 方程
 \begin{equation}
 ax = b \quad \mbox{和} \quad ya = b, \quad (a, b \in R,\, a \neq 0 )
 \end{equation}
-各有一个唯一的解: $a^{-1}b$ 和 $b a^{-1}$. 一般而言, 在一个除环里, 这两个解不一定相等； 而在一个域里, 我们能有这两个解相等, 也即 $a^{-1}b = b a^{-1}$.
+各有一个唯一的解: $a^{-1}b$ 和 $b a^{-1}$.
+
+一般而言, 在一个除环里, 这两个解不一定相等； 而在一个域里, 因为交换律(multiplicative commutative law) 的成立, 我们有这两个解相等: $a^{-1}b = b a^{-1}$.
 }
 
 \end{enumerate}
 \end{memo}
 
-\begin{example}
-这是一个非交换除环:
+\begin{example}\label{example_ring_quaternions}
+这是一个非交换除环 (non-commutative division ring):
 \begin{equation}
 R = \{ \mbox{所有复数对} (\alpha, \beta) \} .
 \end{equation}
@@ -1689,15 +1830,15 @@ R = \{ \mbox{所有复数对} (\alpha, \beta) \} .
 \item{$(\alpha_1, \beta_1 ) = (\alpha_2, \beta_2 )$, 当且只当 $ \alpha_1 = \alpha_2$ 和 $\beta_1 = \beta_2 $.}
 \item{$R$ 的加法:
 \begin{equation}
-(\alpha_1, \beta_1) + (\alpha_2, \beta_2) = (\alpha_1 + \alpha_2, \beta_1 + \beta_2)
+(\alpha_1, \beta_1) + (\alpha_2, \beta_2) = (\alpha_1 + \alpha_2,\, \beta_1 + \beta_2)
 \end{equation}
 }
 \item{$R$ 的乘法:
 \begin{equation}
-(\alpha_1, \beta_1) (\alpha_2, \beta_2) = ( \alpha_1 \alpha_2 - \beta_1 \overline{\beta_2}, \alpha_1 \beta_2 + \beta_1 \overline{\alpha_2} )
+(\alpha_1, \beta_1) (\alpha_2, \beta_2) = ( \alpha_1 \alpha_2 - \beta_1 \overline{\beta_2},\, \alpha_1 \beta_2 + \beta_1 \overline{\alpha_2} )
 \end{equation}
 
-这里 $\overline{\alpha}$ 是 $\alpha$ 的共轭数:
+这里 $\overline{\alpha}$ 是 $\alpha$ 的共轭数 (complex conjugate):
 \begin{equation}
 \alpha = a + b i , \quad \overline{\alpha} = a - b i
 \end{equation}
@@ -1706,29 +1847,29 @@ R = \{ \mbox{所有复数对} (\alpha, \beta) \} .
 
 那么 $R$ 作成一个环. 
 
-$R$ 有一个单位元 $(1, 0)$: 对于任意元 $(\alpha, \beta)$
+$R$ 有一个单位元(multiplicative identity) $(1, 0)$: 对于任意元 $(\alpha, \beta)$
 \begin{align*}
 & (\alpha, \beta) (1, 0) \\
-= & ( \alpha \cdot 1 - \beta \cdot \overline{0}, \alpha \cdot 0 + \beta \cdot \overline{1} ) = (\alpha, \beta) \\
+= & ( \alpha \cdot 1 - \beta \cdot \overline{0},\, \alpha \cdot 0 + \beta \cdot \overline{1} ) = (\alpha, \beta) \\
 = & (1, 0)  (\alpha, \beta) \\
-= & ( 1 \cdot \alpha - 0 \cdot \overline{\beta}, 1 \cdot \beta + 0 \cdot \overline{\alpha} )
+= & ( 1 \cdot \alpha - 0 \cdot \overline{\beta},\, 1 \cdot \beta + 0 \cdot \overline{\alpha} )
 \end{align*}
 
-$R$ 不是交换环: 例如:
+$R$ 不是交换环: 例如,
 \begin{align*}
 (i, 0) (0, 1) = (0, i) \neq (0, -i) = (0, 1) (i, 0)
 \end{align*}
 
-这个环叫做 \textbf{四元数除环(Ring of Quaternions (in Cayley–Dickson construction))}. \footnote{Cayley–Dickson construction 见 \url{https://en.wikipedia.org/wiki/Cayley\%E2\%80\%93Dickson\_construction}. 其中, 对于复数对 $(a, b) \in \mathbb{C}^2$ 的乘法运算如下:
+这个环叫做 \textbf{四元数除环(Ring of quaternions (in Cayley–Dickson construction))}. \footnote{Cayley–Dickson construction 见 \url{https://en.wikipedia.org/wiki/Cayley\%E2\%80\%93Dickson\_construction}. 其中, 对于复数对 $(a, b) \in \mathbb{C}^2$ 的乘法运算如下:
 \begin{equation}
 (a,b)(c,d) = (ac - bd^*, b^* + da)
 \end{equation}
 
-对于 $a= x + y i$, 我们有 $a^* = x - yi$.
+对于 $a= x + y i$, 我们有 $a$ 的共轭数 (complex conjugate) 表示为 $a^* = x - yi$.
 }
 \end{example}
 
-我们总结一下我们目前已经讨论过的各种环的关系, 见图 \ref{figure_rings_relations}.
+总结一下我们目前已经讨论过的各种环的关系, 见图 \ref{figure_rings_relations}.
 
 \begin{figure}
 \begin{tikzpicture}
@@ -1736,46 +1877,46 @@ $R$ 不是交换环: 例如:
 \node[draw,
     minimum width=3.5cm,
     minimum height=1cm
-] (block1) { 环 };
+] (block1) { \shortstack{  环 \\ ring } };
 
 
 \node[draw,
 	below=of block1,
     minimum width=3.5cm,
     minimum height=1cm
-] (block3) { \shortstack{有单位元环\\
-(未必所有非零元都有逆元)} };
+] (block3) { \shortstack{有单位元环 \\ has mutliplicative identity\\
+(未必所有非零元都有逆元 \\ not all non-zero elements \\  multiplicative invertible) } };
 
 \node[draw,
 	left=of block3,
     minimum width=3.5cm,
     minimum height=1cm
-] (block2) { (乘法)交换环 };
+] (block2) { \shortstack{(乘法)交换环 \\ multiplicative \\ commutative ring } };
 
 \node[draw,
 	right=of block3,
     minimum width=3.5cm,
     minimum height=1cm
-] (block4) { 无零因子环 };
+] (block4) { \shortstack{ 无零因子环 \\ ring with \\ no zero divisor } };
 
 
 \node[draw,
 	below left=of block3,
     minimum width=3.5cm,
     minimum height=1cm
-] (block5) { 整环 };
+] (block5) { \shortstack{ 整环 \\ integral domain} };
 
 \node[draw,
 	below right=of block3,
     minimum width=3.5cm,
     minimum height=1cm
-] (block6) { \shortstack{除环\\(要求每一个非零元都有逆元)} };
+] (block6) { \shortstack{除环 \\ division ring\\(要求每一个非零元都有逆元 \\ every non-zero elements \\ multiplicative invertible)} };
 
 \node[draw,
 	below right =of block5,
     minimum width=3.5cm,
     minimum height=1cm
-] (block7) { 域 };
+] (block7) {\shortstack{  域 \\ field} };
 
 % Arrows
 \draw[-latex] (block1) edge (block2)
@@ -1795,24 +1936,30 @@ $R$ 不是交换环: 例如:
 \caption{环的隶属关系}\label{figure_rings_relations}
 \end{figure}
 
-\begin{memo}
-一个至少有两个元而且没有零因子的有限环 $R$ 是一个除环:
+以下我们用的最多的是整环(Integral domain) 和 域(Field).
 
+
+\begin{exercise}
+证明: 一个至少有两个元而且没有零因子的有限环 $R$ 是一个除环.
+\end{exercise}
+
+\begin{proof}
+令 $R^* = \{ R \, \mbox{ 的一切非零元} \}$. 因为 $R$至少有两个元, 那么 $R^*$ 非空. 
 \begin{itemize}
-\item{令 $R^* = \{ R \, \mbox{ 的一切非零元} \}$, 因为 $R$至少有两个元, 那么 $R^*$ 非空. }
 \item{$R$ 没有零因子, 所以 $R^*$ 对于乘法来说是闭的.}
 \item{$R$ 的元 适合乘法结合律, 因此 乘法结合律也同样适合 $R^*$ 的元.}
 \item{$R$ 没有零因子, 所以消去律对 $R^*$ 的元成立.}
 \item{$R^*$ 只有有限个元, 所以根据定义 \ref{def_finite_group}, $R^*$ 做成一个乘群.}
-\item{$1$ 是 $R^*$ 的单位元. 对于不属于 $R^*$ 但是属于 $R$ 的零元而言, 我们有 $ 1 \cdot 0 = 0 \cdot 1 = 0$. 因此, $1$ 也是 $R$ 的单位元.}
+\item{$1$ 是 $R^*$ 的单位元(multiplicative identity). 对于不属于 $R^*$ 但是属于 $R$ 的零元而言, 我们有 $ 1 \cdot 0 = 0 \cdot 1 = 0$. 因此, $1$ 也是 $R$ 的单位元.}
 \item{而且 $R^*$ 的元在乘群 $R^*$ 中的逆元 也是它在 $R$ 中的逆元. }
-\item{由上所得, $R$ 是一个除环.}
 \end{itemize}
-\end{memo}
 
-以下我们用的最多的是整环(Integral domain) 和 域(Field).
+因此, $R$ 是一个除环.
 
-\section{无零因子环的特征(Characteristic)}
+\end{proof}
+
+
+\section{无零因子环的特征(Characteristic of a Ring)}
 
 
 有一种普通运算规则在环 (ring) 甚至是域 (field) 里面也不一定能适用:
@@ -1823,35 +1970,47 @@ a \neq 0 \Rightarrow  m a  = & \overbrace{a + a + ... + a} \neq 0
 \end{array}
 \end{equation}
 
-\begin{example}\label{example_mod_prime_number_field}
-考虑一个模 $p$ ($p$ 是素数) 的剩余类环 $F$. $F$ 是一个域.
-我们需要证明 $F$ 的非零元所作成一个乘群 $F^*$.
+\begin{example}\label{example_residue_ring_mod_prime_number_field}
+考虑一个模 $p$ ($p$ 为素数) 的剩余类环 $F$ (ring of residue classes modulo $n$, or ring of integers modulo $n$), 见定义 \ref{def_ring_residue_class_mod_n}. 证明 $F$ 是一个域.
 
 \end{example}
 
 \begin{proof}
+模 $p$ ($p$ 为素数) 的剩余类环 $F$ 适合 加法和乘法的交换律:
+\begin{align*}
+& [a] + [b] = [a+b] = [b+a]= [b] + [a] \\
+& [a][b] = [ab] = [ba] = [b][a] .
+\end{align*}
+
+我们只需要 证明 $F$ 的非零元 作成一个乘群 $F^*$ (这样的话, 可以对应于除环 (division ring) 的定义 \ref{def_division_ring}, $F$ 中至少有一个不等于零的元, 有一个乘法单位元 (multiplicative identity), 而且 每一个$F$ 中的非零元都有乘法逆元):
+
 $F^*$ 是一个有限集合, 根据定义 \ref{def_finite_group}, 它作成乘群的条件是: I. 对于乘法运算是闭的; II. 乘法适合结合律; III'. 消去律成立.
 \begin{itemize}
 \item[I.]{乘法运算是闭的: 由于 $p$ 是素数, 我们有
 \begin{equation}
-p \nmid a, \, b \nmid b \Rightarrow p \nmid ab
+p \nmid a, \, p \nmid b \Rightarrow p \nmid ab
 \end{equation}
 
-这里,
+这里,$p \nmid a $ 表示 $p$ 不能整除 $a$, 也就是说
 \begin{equation}
 p \nmid a \iff a \neq p n, \quad n = 0, 1, 2, \ldots
 \end{equation}
 
-也就是说
+因此, 我们得出
 \begin{equation}
-[a] \neq 0, \, [b] \neq 0 \Rightarrow [a][b] = [ab] \neq 0 .
+[a] \neq 0, \, [b] \neq 0 \Rightarrow [a][b] = [ab] \neq 0 ;
 \end{equation}
-也就是说,
+
+也可以表示为:
 \begin{equation}
-[a] \in F^*, \, [b] \in F^* \Rightarrow [a] [b] \in F^*
+[a] \in F^*, \, [b] \in F^* \Rightarrow [a] [b] \in F^* .
 \end{equation}
 }
-\item[II.]{剩余类的乘法满足结合律.}
+\item[II.]{剩余类的乘法满足结合律.
+\begin{align*}
+\Big( [a][b] \Big) [c] = [abc] = [a] \Big( [b] [c] \Big)
+\end{align*}
+}
 \item[III'.]{消去律成立: 给定
 \begin{equation}
 p \mid ax - a x' , \, p \nmid a \Rightarrow p \mid x - x' 
@@ -1877,14 +2036,14 @@ p \mid ax - a x' , \, p \nmid a \Rightarrow p \mid x - x'
 [a] \neq 0, \, \mbox{ 但是 } \, p [a] = [pa] = 0 .
 \end{equation}
 
-由此, 我们看出条件 \ref{eq_power_non_zero} 在 这一剩余类环 $F$ 里面不成立.
+由此, 我们看出条件 \ref{eq_power_non_zero} 在 这一剩余类环 $F$ (也是一个域) 里面不成立.
 
 \end{memo}
 
 \begin{memo}
 条件 \ref{eq_power_non_zero} 不一定能成立的原因分析:
 
-假定 $R$ 是一个环, 那么 $R$ 的元对于加法来说作成一个加群. 根据 这个加群里的元的阶的定义:
+假定 $R$ 是一个环, 那么 $R$ 的元对于加法来说作成一个加群. 根据 这个加群里的元的阶 (order of the element) 的定义 \ref{def_order_of_element_in_group}:
 \begin{itemize}
 \item{如果一个元 $a$ 的阶 是无穷大, 那么, 对于任意 $m$, 都有 $m a \neq 0$. 那么, 条件 \ref{eq_power_non_zero} 成立.;}
 \item{如果一个元 $a$ 的阶 是有限的, 那么, 条件 \ref{eq_power_non_zero} 不成立.}
@@ -1895,13 +2054,12 @@ p \mid ax - a x' , \, p \nmid a \Rightarrow p \mid x - x'
 \begin{example}
 \label{example_finite_infinite_rank}
 假定两个循环群 $G_1 = (b)$, $G_2 = (c)$, $b$ 的阶无限, $c$ 的阶为 $n$. $G_1$ 和 $G_2$ 都是交换群, 代数运算是加法, 运算符号表示为 $+$. 我们有:
-\begin{equation}
-G_1 = \{ hb , \, \forall h \mbox{ 是整数 } \}, \quad \mbox{而且有} \, hb = 0 \iff h = 0
-\end{equation}
+\begin{align*}
+& G_1 = \{ hb \, | \, \mbox{ 任意整数 } \, h \}, \\
+& G_2 = \{ kc  \, | \, \mbox{ 任意整数 } \, k  \}.
+\end{align*}
 
-\begin{equation}
-G_2 = \{ kc , \, \forall k \mbox{ 是整数 }  \}, \quad \mbox{而且有} \, kc = 0 \iff  n \mid k 
-\end{equation}
+$G_1$ 中有 $hb = 0 \iff h = 0$, 而在 $G_2$ 中有 $kc = 0 \iff  n \mid k $.
 
 我们作一个集合
 \begin{equation}
@@ -1920,7 +2078,16 @@ $R$ 对于这个加法作成一个加群.
 (h_1 b, k_1 c ) (h_2 b, k_2 c) = (0, 0).
 \end{equation}
 
-显然, $R$ 对于这个乘法来说是闭的, 这个乘法适合结合律 $a(bc) = (ab) c $, 而且分配律成立: $a(b+c)=ab + bc$, $(b+c)a=ba + ca$. 因此, 由环的定义 \ref{def_ring}, $R$ 做成一个环.
+显然, $R$ 对于这个乘法来说是闭的. 这个乘法适合结合律 
+\begin{align*}
+a(bc) = (ab) c = (0, 0)
+\end{align*}
+
+而且分配律成立: 
+\begin{align*}
+a(b+c)=ab + bc = (0,0), \quad (b+c)a=ba + ca = (0,0).
+\end{align*}
+因此, 由环的定义 \ref{def_ring}, $R$ 做成一个环.
 
 这个环的非零元 $(b, 0)$ 对于加法的阶 是无穷大的, 但是非零元 $(0, c)$ 对于加法的阶是 $n$.
 
@@ -1930,18 +2097,18 @@ $R$ 对于这个加法作成一个加群.
 \begin{memo}
 在一个一般的环里, 条件 \ref{eq_power_non_zero} 可能对于某一个元来说成立, 对于另一个元来说则不成立.
 
-在一个没有零因子的环里, 情况则不一样.
+在一个没有零因子的环里, 情况就不一样了.
 \end{memo}
 
 \begin{theorem}
-在一个没有零因子的环里 $R$ 里所有的非零元对于加法来说的阶都是一样的.
+在一个没有零因子 (\emph{no} zero divisor) 的环里 $R$ 里所有的非零元对于加法来说的阶都是一样的.
 \end{theorem}
 
 \begin{proof}
-有两种情况:
+考虑以下两种情况:
 \begin{enumerate}
 \item{$R$ 的每一个非零元的阶都是无限大: 这个定理是对的.}
-\item{$R$ 的某一个非零元 $a$ 的阶 是有限整数 $n$, 而 $b$ 是 $R$ 的另一个非零元. 
+\item{$R$ 的某一个非零元 $a$ 的阶 是有限整数 $n$, 而 $b$ 是 $R$ 的另一个非零元, 假定$b$ 的阶 是 $m$. 
 
 由环的定义, 我们可以得出:
 \begin{equation}
@@ -1960,12 +2127,12 @@ n & & n & & n \\
 (na)b = a(nb) = 0
 \end{equation}
 
-由于 $R$ 无零因子, 可得 $nb=0$. 也就是说,
+由于 $R$ 无零因子, 因为 $a \neq 0$, 因此可得 $nb=0$. 也就是说,
 \begin{equation}
 b \mbox{ 的阶} \leq n = a \mbox{ 的阶}
 \end{equation}
 
-同理, 假定 非零元$b$ 的阶是 $m$, 对于非零元$a$ 而言, 我们有:
+同理, 非零元$b$ 的阶是 $m$, 对于非零元$a$ 而言, 我们有:
 \begin{equation}
 (mb)a = b(ma) = 0 \Rightarrow ma = 0
 \end{equation}
@@ -1985,11 +2152,11 @@ a \mbox{ 的阶} = b \mbox{ 的阶}
 
 
 \begin{definition}
-一个无零因子环 $R$ 的非零元的(对加法而言)相同的阶叫做环 $R$ 的 \textbf{特征(Characteristic of a ring)}.
+一个无零因子环 $R$ 的非零元的(对加法而言)相同的阶 (order of element) 叫做环 $R$ 的 \textbf{特征(Characteristic of a ring)}.
 \end{definition}
 
 \begin{memo}
-如果一个没有零因子的环 $R$ 的特征是无限大, 那么这个 $R$ 里 计算规则 \ref{eq_power_non_zero} 成立. 如果 $R$ 的特征是有限整数, 那这个计算规则 \ref{eq_power_non_zero} 则不成立.
+如果一个无零因子 (\emph{no} zero divisor) 的环 $R$ 的特征是无限大, 那么计算规则 \ref{eq_power_non_zero} 在这个 $R$ 里成立. 如果 $R$ 的特征是有限整数, 那计算规则 \ref{eq_power_non_zero} 则在这个 $R$ 里不成立.
 \end{memo}
 
 \begin{theorem}
@@ -2050,10 +2217,10 @@ i
 \end{enumerate}
 \end{exercise}
 
-\begin{proof}
+\begin{soln}
 \begin{enumerate}
 \item{$F$ 的特征是 $F$非零元 的(加法运算)的阶, 并且是一个素数. $F$ 作为加群的阶是 $4$, 因此 $F$ 的非零元的阶只能是 $1$, $2$, $4$ (因为 $3$ 不能整除 $F$ 的阶, 由定理 \ref{theorem_finite_group_rank_divisable}, $3$ 不是 $F$ 的元的阶). 而只有 $2$ 是素数, 所以 $F$ 的特征只能是 $2$.}
-\item{乘群 $F^*$ 的阶是 $3$, 根据 备注 \ref{exercise_prime_cyclic_group}, 它是一个循环群 $(a)$, 而 $F^*$ 的元可写作 $F^* = \{1, a, a^2 \}$.
+\item{乘群 $F^*$ 的阶是 $3$, 根据  \ref{exercise_prime_cyclic_group}, 它是一个循环群 $(a)$, 而 $F^*$ 的元可写作 $F^* = \{1, a, a^2 \}$.
 
 这样, $F = \{0, 1, a, a^2 \}$. $F$ 是一个加群, 它与Klein 四元群 同构:
 
@@ -2067,7 +2234,7 @@ a + 1 = a^2, \quad a^2 + 1 = a = (a^2)^2.
 因此, $F$ 的不等于 $0$ 或者 $1$ 的元 $a$ 和 $a^2$ 都适合方程 $x^2 = x+ 1 $. 
 }
 \end{enumerate}
-\end{proof}
+\end{soln}
 
 
 \begin{exercise}
@@ -2088,7 +2255,7 @@ n \mid a - b \Rightarrow  a - b = n g \Rightarrow a = b + n g , \quad g = 0, 1, 
 
 
 \begin{exercise}\label{memo_euler_toient_function}
-所有同 $n$ 互素的模 $n$ 的剩余类对于剩余类的乘法来说作成一个群. (同 $n$ 互素的剩余类的个数用 $\phi$ 函数 $ \phi (n) $来表示, 叫做 Euler's totient function). \footnote{Euler's totient function 见 \url{https://en.wikipedia.org/wiki/Euler\%27s\_totient\_function}}
+所有 和 $n$ 互素的模 $n$ 的剩余类对于剩余类的乘法来说作成一个群. (和 $n$ 互素的剩余类的个数用 $\phi$ 函数 $ \phi (n) $来表示, 叫做 Euler's totient function). \footnote{Euler's totient function 见 \url{https://en.wikipedia.org/wiki/Euler\%27s\_totient\_function}}
 \end{exercise}
 
 \begin{proof}
@@ -2096,13 +2263,13 @@ n \mid a - b \Rightarrow  a - b = n g \Rightarrow a = b + n g , \quad g = 0, 1, 
 \begin{equation}
 G = \{ \mbox{所有和 $n$ 互素的模 $n$ 的剩余类} \} .
 \end{equation}
+我们使用群的定义 \ref{def_group_2}:
 
 \begin{enumerate}
 \item{如果整数 $a$ 和 $b$ 都和 $n$ 互素, 那么 $ab$ 也和 $n$ 互素. 因此有, 如果 $[a] \in G$, $[b] \in G$, 那么 $[a][b] \in G$. 也就是说, $G$ 对于剩余类的乘法是闭的.}
 \item{剩余类的乘法适合结合律.}
-\item{由于 $(1, n ) = 1$, 我们有 $[a] \in G$, 而 $G$ 有单位元 $[1]$.
-
-假设有 $[a] \in G$, 那么我们有 $(a, n) = 1$. 
+\item{由于 $(1, n ) = 1$, 我们有 $[1] \in G$, 也就是说 $G$ 有单位元 $[1]$.}
+\item{给定任意的 $[a] \in G$, 那么我们有 $(a, n) = 1$. 
 
 根据 $(a,b)$ 的性质: 存在整数 $x$ 和 $y$, 使得 $(a, b) = ax + by$. \footnote{\label{footnote_bezout_identity} Bézout's identity: Let $a$ and $b$ be integers or polynomials with greatest common divisor $d= gcd(a,b)$. Then there exist integers or polynomials $x$ and $y$ such that $ax + by = d = gcd(a,b)$. Moreover, the integers or polynomials of the form $az + bt$ are exactly the multiples of $d$. It is proved based on extended Euclidean algorithm. See \url{https://en.wikipedia.org/wiki/B\%C3\%A9zout\%27s\_identity}.}
 
@@ -2116,44 +2283,50 @@ as + nt = (a, n) = 1 .
 [a] [s] + [n][t] = [1] ,
 \end{equation}
 
-因为 $[n]=0$, 所以我们有 $[a][s] = 1$. 同时由于 $as + nt = 1 $, 根据 最大公因数的定义: $s$ 和 $n$ 是整数, 而且有另外的整数 $a$ 和 $t$, 使得 $as + nt = 1$. 那么我们有 $(s, n) = as + nt = 1$. 所以有 $[s] \in G$. 而 $[s]$ 是 $[a]$ 的逆, 因此我们得出: $G$ 的任何元 $[a]$ 在 $G$ 中有逆.
+因为 $[n]=0$, 所以我们有 $[a][s] = 1$. 
+
+同时由于 $as + nt = 1 $, 根据 最大公因数 $(s,n)$ 的定义: 给定另外的整数 $a$ 和 $t$, $as + nt$ 是 $(s,n)$ 的倍数. 也就是说 $as + nt = 1$ 是 $(s,n)$ 的倍数. 所以, 我们有 $(s, n) = 1$. 
+
+也就是说, $[s] \in G$. 而 $[s]$ 是 $[a]$ 的逆, 因此, 我们得出: $G$ 的任何元 $[a]$ 在 $G$ 中有逆.
 }
 \end{enumerate}
 
 综上所述, $G$ 作成一个群.
 \end{proof}
 
-\begin{exercise}
+\begin{exercise}[Fermat's little theorem.\footnote{See \url{https://en.wikipedia.org/wiki/Fermat\%27s\_little\_theorem }.}]
 如果 $(a,n)=1$, 那么
 
 \begin{equation}
-a^{\phi(n)} \equiv 1 (n) .
+a^{\phi(n)} \equiv 1 (n) ,
 \end{equation}
 
-这是 Fermat's little theorem. \footnote{见 \url{https://en.wikipedia.org/wiki/Fermat\%27s\_little\_theorem }.}
+其中 Euler's totient function $ \phi (n) $ 表示的是 和 $n$ 互素的剩余类的个数.
+
 \end{exercise}
 
 \begin{proof}
-根据上面备注 \ref{memo_euler_toient_function}, 我们知道其中的群的阶是 $\phi(n)$, 而 $[a] \in G$. 因此, 我们有
+根据上面的 练习 \ref{memo_euler_toient_function}, 我们知道其中的群的阶是 $\phi(n)$. 
+
+考虑 $[a] \in G$, 因此我们有
 \begin{equation}
 [a]^{\phi(n)} = [a ^{\phi(n)}] = [1] \quad \Rightarrow \quad a^{\phi(n)} \equiv 1(n) .
 \end{equation}
 
-
-
 \end{proof}
+
 
 
 \section{子环, 环的同态(Subring and Ring Homomorphism)}
 
 \begin{definition}
-一个环 $R$ 的一个子集 $S$ 叫做 $R$ 的一个 \textbf{子环}, 如果: $S$ 本身对于 $R$ 的代数运算来说作成一个环.
+一个环 $R$ 的一个子集 $S$ 叫做 $R$ 的一个 \textbf{子环 (subring)}, 如果: $S$ 本身对于 $R$ 的代数运算来说作成一个环.
 
-一个除环 $R$ 的一个子集 $S$ 叫做 $R$ 的一个 \textbf{子除环}, 如果: $S$ 本身对于 $R$ 的代数运算来说作成一个除环.
+一个除环 (division ring) $R$ 的一个子集 $S$ 叫做 $R$ 的一个 \textbf{子除环 (subring of division ring)}, 如果: $S$ 本身对于 $R$ 的代数运算来说作成一个除环.
 
-一个整环 $R$ 的一个子集 $S$ 叫做 $R$ 的一个 \textbf{子整环}, 如果: $S$ 本身对于 $R$ 的代数运算来说作成一个整环.
+一个整环 (integral domain) $R$ 的一个子集 $S$ 叫做 $R$ 的一个 \textbf{子整环(subring of integral domain)}, 如果: $S$ 本身对于 $R$ 的代数运算来说作成一个整环.
 
-一个域 $R$ 的一个子集 $S$ 叫做 $R$ 的一个 \textbf{子域}, 如果: $S$ 本身对于 $R$ 的代数运算来说作成一个域.
+一个域 (field) $R$ 的一个子集 $S$ 叫做 $R$ 的一个 \textbf{子域 (subfield)}, 如果: $S$ 本身对于 $R$ 的代数运算来说作成一个域.
 \end{definition}
 
 \begin{memo}
@@ -2177,22 +2350,22 @@ a, \, b \in S \Longrightarrow a-b \in S, \, ab \in S
 \end{memo}
 
 \begin{example}
-$R$ 是一个环. $R$ 和 $\{ 0\}$ 是 $R$ 的子环.
+$R$ 是一个环. 那么存在 $R$ 和 $\{ 0\}$ 是 $R$ 的子环.
 \end{example}
 
 \begin{definition}\label{def_ring_center}
 一个环 $R$ 的可以和每一个元 交换的元做成一个子环. 这个子环叫做 $R$ 的 \textbf{中心(center)}.
 \begin{equation}
-Z(R) = \{ x \in R | xy = yx, \, \forall y \in R \}
+Z(R) = \{ x \in R | xa = ax, \, \forall a \in R \}
 \end{equation}
 \end{definition}
 
 \begin{memo}
-一个环的中心是一个 交换子环.
+一个环的中心 (center of a ring) 是一个 交换子环 (commutative subring).
 \end{memo}
 
 \begin{memo}
-一个除环的中心是一个 域.
+一个除环的中心 (center of division ring) 是一个 交换除环, 也就是一个域 (field).
 \end{memo}
 
 以下我们假定:
@@ -2204,7 +2377,7 @@ Z(R) = \{ x \in R | xy = yx, \, \forall y \in R \}
 由同态满射保持结合律, 交换律, 第一和第二分配律, 以及群的同态定理 \ref{thm_group_homomorphism}, 我们得出以下定理:
 
 \begin{theorem}
-如果存在一个环 $R$ 到 假设条件 \ref{assumption_ring_set}中的 $\overline{R}$ 的满射, 使得 $R$ 和 $\overline{R}$ 对于加法和乘法来说都是同态, 那么 $\overline{R}$ 也是一个环.
+如果存在一个环 $R$ 到 假设 \ref{assumption_ring_set}中的 $\overline{R}$ 的满射, 使得 $R$ 和 $\overline{R}$ 对于加法和乘法来说都是同态, 那么 $\overline{R}$ 也是一个环.
 \end{theorem}
 
 \begin{memo}
@@ -2215,29 +2388,29 @@ Z(R) = \{ x \in R | xy = yx, \, \forall y \in R \}
 假定 $R$ 和 $\overline{R}$ 是两个环, 并且 $R$ 和 $\overline{R}$ 同态. 那么, 
 \begin{itemize}
 \item{$R$ 的零元的象是 $\overline{R}$ 的零元;}
-\item{$R$ 的元 $a$ 的负元的象是 $a$ 的象的负元;}
+\item{$R$ 的元 $a$ 的负元 (additive inverse) 的象是 $a$ 的象的负元 (additive inverse);}
 \item{如果 $R$ 是交换环, 那么 $\overline{R}$ 也是交换环;}
-\item{如果 $R$ 有单位元 $1$, 那么 $\overline{R}$ 有单位元 $\overline{1}$, 而且 $\overline{1}$ 是 $1$ 的象.  }
+\item{如果 $R$ 有单位元 (multiplicative identity) $1$, 那么 $\overline{R}$ 有单位元 (multiplicative identity) $\overline{1}$, 而且 $\overline{1}$ 是 $1$ 的象.  }
 \end{itemize}
 
 \end{theorem}
 
 \begin{memo}
-环的同态满射不一定能保持一个环有没有零因子这一性质.
+环的同态满射不一定能保持一个环有没有零因子 (zero divisor) 这一性质. 见下面的例子 \ref{example_ring_epi_not_preserving_z_divisor_1} 和 \ref{example_ring_epi_not_preserving_z_divisor_2}.
 \end{memo}
 
-\begin{example}
-$R$ 是整数环, $\overline{R}$ 是模 $n$ 的剩余类环, 那么有
+\begin{example}\label{example_ring_epi_not_preserving_z_divisor_1}
+$R$ 是整数环 (ring of integers), $\overline{R}$ 是模 $n$ 的剩余类环 (ring of residue classes modulo $n$/ring of integers modulo $n$), 那么有
 \begin{equation}
 \phi: a \rightarrow [a]
 \end{equation}
-是 $R$ 到 $\overline{R}$ 的一个同态满射. 我们知道, $R$ 是没有零因子的, 而如果 $n$ 不是素数的时候, $\overline{R}$ 有零因子.
+是 $R$ 到 $\overline{R}$ 的一个同态满射 (epimorphism). 我们知道, $R$ 是没有零因子的, 而如果 $n$ 不是素数的时候, $\overline{R}$ 有零因子.
 
 由此, 我们可以看出, $R$没有零因子的时候, 和 $R$ 同态的 $\overline{R}$ 可以有.
-
 \end{example}
 
-\begin{example}
+
+\begin{example}\label{example_ring_epi_not_preserving_z_divisor_2}
 假定
 \begin{equation}
 R = \{  \mbox{所有整数对} (a,b) \}
@@ -2256,11 +2429,11 @@ R = \{  \mbox{所有整数对} (a,b) \}
 我们得出, $R$ 有零因子.
 
 
-我们用 $\overline{R}$ 表示整数环, 那么我们有
+我们用 $\overline{R}$ 表示整数环 (ring of integers), 那么我们有
 \begin{equation}
 \phi: (a,b) \longrightarrow a
 \end{equation}
-这样一个 $R$ 到 $\overline{R}$ 的同态满射. 
+这样一个 $R$ 到 $\overline{R}$ 的同态满射 (epimorphism). 
 
 注意到 整数环 $\overline{R}$ 没有零因子. 因此, 我们得出, 当 $R$ 有零因子的时候, 与 $R$ 同态的 $\overline{R}$ 可以没有零因子.
 
@@ -2278,82 +2451,106 @@ R = \{  \mbox{所有整数对} (a,b) \}
 \end{itemize}
 \end{theorem}
 
-有时候我们需要作一个环, 使得它包含一个给定的环.
+有时候我们需要作一个环, 使得它包含一个给定的环. 在这种情况下, 下面的定理 \ref{theorem_ring_iso_construction} 很重要.
 
-\begin{lemma}
-假定在集合 $A$ 和 $\overline{A}$ 之间存在一个一一映射 $\phi$, 并且 $A$ 有加法和乘法. 那么 我们可以在 $\overline{A}$ 中规定加法和乘法, 使得 $A$ 和 $\overline{A}$ 对于加法和乘法来说都同构.
+\begin{lemma}\label{lemma_ring_iso_construction}
+假定在集合 $A$ 和 $\overline{A}$ 之间存在一个一一映射 (bijection) $\phi$, 并且 $A$ 有加法和乘法. 那么 我们可以在 $\overline{A}$ 中规定加法和乘法, 使得 $A$ 和 $\overline{A}$ 对于加法和乘法来说都同构 (isomorphic).
 \end{lemma}
 
 \begin{proof}
-在给定一一映射之下, $x \in A$ 对应 $\overline{x} \in \overline{A}$. 我们规定
+在给定的一一映射 (bijection) $\phi$ 之下, $x \in A$ 对应 $\overline{x} \in \overline{A}$. 我们规定
 \begin{align*}
-a + b = c & \Longrightarrow \overline{a} + \overline{b} = \overline{c} \\
-ab = d & \Longrightarrow \overline{a} \overline{b} = \overline{d} 
+a + b = c & \overset{\phi}{\Longrightarrow} \overline{a} + \overline{b} = \overline{c} \\
+ab = d & \overset{\phi}{\Longrightarrow} \overline{a} \overline{b} = \overline{d} 
 \end{align*}
 
 通过这样, 我们就规定了 $\overline{A}$ 的加法和乘法: 因为 $\overline{a}$ 和 $\overline{b}$ 有唯一的 $a$ 和 $b$, 在 $A$ 里 有唯一的 $c$ 和 $d$, 由一一映射有唯一的 $\overline{c}$ 和 $\overline{d}$. 
 
-由此可得, $\phi$ 是对于加法和乘法的从 $A$ 到 $\overline{A}$ 的同构映射.
+由此可得, $\phi$ 是对于加法和乘法的从 $A$ 到 $\overline{A}$ 的同构映射 (isomorphism).
 
 \end{proof}
 
-\begin{theorem}\label{theorem_ring_iso_construction}
-假设 $S$ 是 环 $R$ 的一个子环, $S$ 在 $R$ 里的补集 和另一个环 $\overline{S}$ 没有共同元, 并且 $S \cong \overline{S}$. 那么存在一个和 $R$ 同构的环 $\overline{R}$, 而且 $\overline{S}$ 是 $\overline{R}$ 的子环.
+\begin{theorem}[ring cut and paste theorem]\label{theorem_ring_iso_construction}
+假设 $S$ 是 环 $R$ 的一个子环, $S$ 在 $R$ 里的补集 $S^c \subset R$ 和另一个环 $\overline{S}$ 没有共同元, 并且 $S \cong \overline{S}$. 那么存在一个和 $R$ 同构的环 $\overline{R}$, 而且 $\overline{S}$ 是 $\overline{R}$ 的子环.
 \end{theorem}
 
 \begin{proof}
 假定
 \begin{align*}
 S & = \{a_S, b_S, \ldots \} \\
-\overline{S} & = \{ \overline{a_S}, \overline{b_S}, \ldots \}
+\overline{S} & = \{ \overline{a}_S, \overline{b}_S, \ldots \}
 \end{align*}
 
 而且 $S$ 和 $\overline{S}$ 的同构映射是:
-$$ \phi : x_S \longrightarrow \overline{x_S} $$
+$$ \phi : x_S \overset{\cong}{\longrightarrow} \overline{x}_S $$
 
-$R$ 的不属于 $S$ 的元 用 $a$, $b$, $\ldots$ 来表示. 这样我们有
-\begin{equation}
-R = \{ \overline{a}, \overline{b}, \ldots | a, b, \ldots \}
-\end{equation}
+$R$ 的不属于 $S$ 的元 用 $a$, $b$, $\ldots$ 来表示. 那么, $S$ 在 $R$ 里的 补集是:
+\begin{align*}
+S^c = \{ a, b, \ldots \} \subset R.
+\end{align*}
+
+这样我们根据 $R$ 构造 $\overline{R}$:
+\begin{align*}
+R & = S \cup S^c, \quad S \cap S^c = \emptyset \\
+\overline{R} & = \overline{S} \cup S^c, \quad \overline{S} \cap S^c = \emptyset .
+\end{align*}
 
 规定一个法则:
 \begin{equation}
-\psi : x_S \longrightarrow \overline{x_S}, \quad x \longrightarrow x 
+\psi : \left\{ 
+\begin{array}{ll}
+x_S \longrightarrow \overline{x}_S, & x_S \in S, \, \overline{x}_S \in \overline{S} \\
+x \longrightarrow x , & x \in S^c 
+\end{array}
+\right. 
 \end{equation}
 
-那么 $\psi$ 是一个从 $R$ 到 $\overline{R}$ 的满射. 
+那么 $\psi$ 是一个从 $R$ 到 $\overline{R}$ 的满射 (surjective). 
 
-对于 $R$ 的任意两个元, 如果 它们都属于 $S$, 或者都属于 $S$ 的补集, 那么它们在 $\psi$ 中的象显然不相同.
+下面我们证明 $\psi$ 是一个单射 (injective): 
+\begin{itemize}
+\item{对于 $R$ 的任意两个元, 如果 它们都属于 $S$, 或者都属于 $S$ 的补集, 那么它们在 $\psi$ 中的象显然不相同.}
+\item{如果这两个元一个属于 $S$, 另一个属于 $S$ 的补集, 那么 在$S$的元在 $\psi$ 之下的象属于 $\overline{S}$, 而在 $S$ 的补集的元在 $\psi$ 之下的象属于 $S$ 的补集. 根据定理的假定: $S$ 在 $R$ 里的补集和 $\overline{S}$ 没有共同元, 这两个象也不相同.}
+\item{因此, $\psi$ 是一个单射.}
+\end{itemize}
 
-如果这两个元一个属于 $S$, 另一个属于 $S$ 的补集, 那么 在$S$的元在 $\psi$ 之下的象属于 $\overline{S}$, 而在 $S$ 的补集的元在 $\psi$ 之下的象属于 $S$ 的补集. 根据定理的假定: $S$ 在 $R$ 里的补集和 $\overline{S}$ 没有共同元, 这两个象也不相同.
+因此, 我们得出 $\psi$ 是 $R$ 和 $\overline{R}$ 之间的一一映射 (bijective). 
 
-因此, 我们得出 $\psi$ 是 $R$ 和 $\overline{R}$ 之间的一一映射. 因此, 由引理得出, 我们可以通过规定 $\overline{R}$ 的加法和乘法, 使得
+由引理 \ref{lemma_ring_iso_construction} 得出, 我们可以通过规定 $\overline{R}$ 的加法和乘法, 使得
+\begin{align*}
+R \cong \overline{R} .
+\end{align*}
+
+
+由 $\overline{R}$ 的构成方法, 我们知道 $\overline{S} \subseteq \overline{R}$. 而且, 我们知道 $\overline{S}$ 原有的加法和乘法做成一个环. 下面我们需要说明的是 $\overline{S}$ 是 $\overline{R}$ 的子环: 
+
+
+$\overline{S}$ 是 $\overline{R}$ 子环的意思 是 $\overline{S}$ 对于 $\overline{R}$ 的代数运算来说作成一个环. 把 $\overline{R}$ 的加法用 $\mp$ 来表示, $\overline{S}$ 和 $S$ 的加法用 $+$ 来表示. 假定 任意两个元 $\overline{x}_S, \,  \overline{y}_S \in \overline{S}$. 根据 $\psi$, 它们在 $S$ 中的对应元 是 $x_S$ 和 $y_S$, 而且在 $S$ 中有:
 \begin{equation}
-R \cong \overline{R} \nonumber
-\end{equation}
-
-由 $\overline{R}$ 的构成方法, 我们知道 $\overline{S} \subseteq \overline{R}$. 而且, 我们知道 $\overline{S}$ 原有的加法和乘法做成一个环. 下面我们需要说明的是 $\overline{S}$ 是 $\overline{R}$ 的子环: $\overline{S}$ 是 $\overline{R}$ 子环的意思 是 $\overline{S}$ 对于 $\overline{R}$ 的代数运算来说作成一个环. 把 $\overline{R}$ 的加法用 $\mp$ 来表示, $\overline{S}$ 和 $S$ 的加法用 $+$ 来表示. 假定 $\overline{x_S}$, $\overline{y_S}$ 是 $\overline{S}$ 的两个任意元, 并且有
-\begin{equation}
-x_S + y_S = z_S 
+x_S + y_S = z_S  .
 \end{equation}
 
 由 $\overline{R}$ 的加法来看, 我们有:
 \begin{equation}
-\overline{x_S} \mp \overline{y_S} = \overline{z_S}
+\overline{x}_S \mp \overline{y}_S = \overline{z}_S
 \end{equation}
 
 由 $S$ 和 $\overline{S}$ 同构来说, 我们有:
 \begin{equation}
-\overline{x_S} + \overline{y_S} = \overline{z_S}
+\overline{x}_S + \overline{y}_S = \overline{z}_S
 \end{equation}
 
-由此, 我们可以看出, $\overline{R}$ 的加法 和 $\overline{S}$ 原来的加法在作用到 $\overline{S}$ 上面没有分别. 同理我们可得, $\overline{R}$ 的乘法 和 $\overline{S}$ 原来的乘法在作用到 $\overline{S}$ 上面也没有分别. 因而, 我们得出, $\overline{S}$ 是 $\overline{R}$ 的子环.
+由此可以看出, $\overline{R}$ 上的加法 $\pm$ 和 $\overline{S}$ 上的加法 $+$ 在作用到 $\overline{S}$ 上面没有任何区别.
+
+同理, 我们可得到 $\overline{R}$ 的乘法 和 $\overline{S}$ 原来的乘法在作用到 $\overline{S}$ 上面也没有任何区别.
+
+所以, 我们可以得出 $\overline{S}$ 是 $\overline{R}$ 的子环.
 \end{proof}
 
-\begin{memo}
-一个环的中心是一个交换子环.
-\end{memo}
 
+\begin{exercise}
+证明: 一个环的中心是一个交换子环.
+\end{exercise}
 
 \begin{proof}
 这个由环的中心可以看出:
@@ -2364,35 +2561,44 @@ Z(R) = \{ x \in R | xy = yx, \, \forall y \in R \}
 \end{proof}
 
 
-\begin{memo}
-一个除环的中心是一个域.
-\end{memo}
+\begin{exercise}
+证明: 一个除环 (division ring) (见定义 \ref{def_division_ring}) 的中心是一个域.
+\end{exercise}
 
 \begin{proof}
-一个除环 $D$ 的中心 $Z$ 是一个交换子环. 而且 单位元 $1 y = y 1$, $\forall y \in R$, 所以 单位元 $1 \in Z$.
+一个除环 $D$ 的中心 $Z$ 是一个交换子环 (commutative). 
 
-要证明 $Z$ 是一个域, 我们需要证明对于任何非零元 $z \in Z$, 存在其对应的逆元 $z^{-1} \in Z$: 因为 $z \in Z$, 那么有
-\begin{equation}
+根据除环定义 \ref{def_division_ring}, 除环$D$ 有乘法单位元(multiplicative identity) $ 1 \in D$. 我们知道 $1 y = y 1$, $\forall y \in R$, 所以 $1 \in Z$.
+
+根据除环定义 \ref{def_division_ring}, 对于任何非零元 $z \in Z \subset D$, 存在其对应的 乘法逆元 (multiplicative inverse) $z^{-1} \in D$. 因为 $z \in Z$, 我们有
+\begin{align*}
 az = za, \quad \forall a \in D
-\end{equation}
-
-由此,
-
-\begin{equation}
+\end{align*}
+因此可得:
+\begin{align*}
 z^{-1} az z^{-1} = z^{-1} za z^{-1}  \Rightarrow z^{-1} a = a  z^{-1} , \quad \forall a \in D
-\end{equation}
+\end{align*}
+
 因此, 有 $z^{-1} \in Z$.
 
 \end{proof}
 
-\begin{memo}
-有理数域 $Q$ 是所有复数 $a + bi$ ($a$ 和 $b$ 是有理数) 作成的域 $Q(i)$ 的唯一的真子域.
-\end{memo}
+
+\begin{exercise}
+证明: 有理数域 (field of rational numbers) $Q$ 是所有复数 $a + bi$ ($a$ 和 $b$ 是有理数 (rational numbers)) 作成的域 (field) $Q(i)$ 的唯一的真子域 (proper subfield).
+\begin{align*}
+Q(i) = \{ a + bi \, |\,  a, \, b \in Q \} .
+\end{align*}
+
+这里的复数形式 $a + bi$ 可以称为 Gaussian rational number, $Q(i)$ 称为 Gaussian rational field.
+
+\end{exercise}
 
 \begin{proof}
-首先, $Q(i)$是一个域, 而 $Q$ 是 $Q(i)$ 的一个真子域. 我们需要证明其唯一性:
+首先, $Q(i)$是一个域, 而 $Q$ 是 $Q(i)$ 的一个真子域 (proper subfield). 我们需要证明其唯一性:
 
-假设 $F$ 是 $Q(i)$ 的任一子域, 那么 $F$ 包含非零元 $a \neq 0$, 而且包含其逆元 $a^{-1}$, 使得 $a^{-1} a = 1$. 因此, $F$ 包含一切整数和一切有理数. 所以:
+假设 $F$ 是 $Q(i)$ 的任一子域, 那么 $F$ 至少包含一个非零元 $a \neq 0$, 而且包含其逆元 $a^{-1}$, 使得 $a^{-1} a = 1$. $Q(i)$ 的加法应用到 $F$上, 那么有 $1+1=2$, $2^{-1} 2 = 1$,
+$\ldots$. 由此可以得出, $F$ 包含一切整数和一切有理数. 所以,
 \begin{equation}
 Q \subset F \subset Q(i)
 \end{equation}
@@ -2412,20 +2618,20 @@ a + bi - a  = bi \in F, \quad b^{-1} b i = i \in F
 
 \end{proof}
 
-\begin{memo}
-$Q(i)$ 只有两个自同构映射.
-\end{memo}
+\begin{exercise}
+证明: $Q(i)$ 只有两个自同构映射 (automorphism).
+\end{exercise}
 
 \begin{proof}
 假设 $\phi$ 是 $Q(i)$ 的一个自同构. 那么必然有
 \begin{equation}
 \phi(0) = 0, \quad \phi(1) = 1, \quad \phi(\frac{p}{q}) = \frac{p}{q}
 \end{equation}
-其中, $\frac{p}{q}$ 为有理数.
+其中, $\dfrac{p}{q}$ 为有理数.
 
 考虑 $i$ 的象 $\phi(i)$:
 \begin{equation}
--1 = \phi(-1) = \phi(i^2) = [\phi(i)]^2 \Longrightarrow \phi(i) = \mp i .
+-1 = \phi(-1) = \phi(i^2) = [\phi(i)]^2 \Longrightarrow \phi(i) = \pm i .
 \end{equation}
 
 因此, $Q(i)$ 的自同构只能是:
@@ -2439,11 +2645,11 @@ $Q(i)$ 只有两个自同构映射.
 \end{proof}
 
 
-\begin{memo}
-$J_3$ 表示模 $3$ 的剩余类所作成的集合. 找出加群 $J_3$ 的所有自同构映射; 再找出域 $J_3$ 的所有自同构映射.
-\end{memo}
+\begin{exercise}
+$J_3$ 表示模 $3$ 的剩余类所作成的集合. 找出加群 (additive group) $J_3$ 的所有自同构映射 (automorphism); 再找出域 (field) $J_3$ 的所有自同构映射 (automorphism).
+\end{exercise}
 
-\begin{proof}
+\begin{soln}
 假设 $\phi$ 是加群 $J_3 = \{[0], [1], [2] \}$ 的一个自同构. 那么, 一定有 $\phi([0]) = [0]$. 因此加群 $J_3$ 的自同构只能是:
 \begin{align*}
 & \phi_1 : [0] \rightarrow [0], \, [1] \rightarrow [1], \, [2] \rightarrow [2] \\
@@ -2460,15 +2666,15 @@ $J_3$ 表示模 $3$ 的剩余类所作成的集合. 找出加群 $J_3$ 的所有
 因而, 必然有 $\phi([2]) = [2]$. 显然, 域 $J_3$ 只有 $\phi$ 一个自同构.
 
 
-\end{proof}
+\end{soln}
 
 
-\begin{memo}
+\begin{exercise}
 $R$ 是四元数除环. $R$ 的子集 $S = \{ (a, 0) | \forall a \in \mathbb{R} \}$. $S$ 和 实数域 $\overline{S}$ 同构. 考虑 $\overline{R}$ 是 把 $R$ 中 $S$ 换成 $\overline{S}$ 后所得的集合. 那么 $R \cong \overline{R}$. 
 
 分别用 $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$ 表示 $\overline{R}$ 中的元 $(i, 0)$, $(0, 1)$, $(0, i)$. 那么 $\overline{R}$ 的元可以写成
 \begin{equation}
-a + bi + cj + dk,\quad  \forall a, b, c, d \in \mathbb{R}
+a + b\mathbf{i} + c\mathbf{j} + d\mathbf{k}, \quad  \forall a, b, c, d \in \mathbb{R}
 \end{equation}
 也就是, 对于四元数除环的任意元 $(a+bi, c+di)$, 可以写成:
 \begin{align*}
@@ -2476,107 +2682,155 @@ a + bi + cj + dk,\quad  \forall a, b, c, d \in \mathbb{R}
 & = a + b \mathbf{i} + c \mathbf{j}+ d \mathbf{k}
 \end{align*}
 
+验证以下等式成立:
 
-并且有:
 \begin{align*}
 & \mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = -1 \\
 & \mathbf{i} \mathbf{j}  = - \mathbf{j} \mathbf{i}  = \mathbf{k},\, \mathbf{j}  \mathbf{k}  = -\mathbf{k}  \mathbf{j}  = \mathbf{i} ,\, \mathbf{k} \mathbf{i}  = - \mathbf{i}  \mathbf{k}  = \mathbf{j} 
 \end{align*}
 
-\end{memo}
+\end{exercise}
+
+\begin{soln}
+
+从例子 \ref{example_ring_quaternions} 可得, 四元数除环 $R$ 的乘法有:
+\begin{align*}
+(\alpha_1, \beta_1) (\alpha_2, \beta_2) = ( \alpha_1 \alpha_2 - \beta_1 \overline{\beta_2},\, \alpha_1 \beta_2 + \beta_1 \overline{\alpha_2} )
+\end{align*}
+
+因为 $R \cong \overline{R}$, 我们可以用 $R$ 中的乘法 对应 $\overline{R}$ 中的乘法. 也就是说,
+\begin{align*}
+& \mathbf{i}^2 = \mathbf{i} \mathbf{i} ,\quad \mathbf{i} \in \overline{R} \longrightarrow (i,0) \in R \\
+= & (i, 0) (i, 0) = (i \cdot i - 0 \cdot \overline{0}, i \cdot 0, \, 0 \cdot \overline{i}) = (i \cdot i, 0 )  = (-1, 0), \quad (i,0) \in R \\
+= & -1 , \quad -1 \in \overline{R} .
+\end{align*}
+
+也就是说, 我们验证了 $\mathbf{i}^2 = -1$. 同理, 可以验证别的等式.
+\end{soln}
+
 
 \section{多项式环(Polynomial Ring)}
 
-假定 $R_0$ 是一个环. $R$ 是 $R_0$ 的子环. 假设 $x \in R_0$. 那么, 对于 $a_i \in R$, $i =0, 1, \ldots, n$, 我们有 $R_0$ 上的元, 可以写成以下形式:
+
+假定 $R_0$ 是一个环. $R$ 是 $R_0$ 的子环 $R \subseteq R_0$.  并且我们假定 $R_0$ 有乘法单位元 (multiplicative identity) $1 \in R_0$, 而且 $1 \in R$.\footnote{在一些教材里面, 例如, Algebra by Artin, polynomial ring 基于 commutative ring with multiplicative identity. 这一做法的便利之处 在于 确保了 多项式环 $R[\alpha]$的成立, 见 下面的定理 \ref{theorem_2_6_exstence_polynomial_ring}.} 
+
+假设 $R_0$ 中的一个元 $\alpha \in R_0$. 那么, 对于 $a_i \in R$, $i =0, 1, \ldots, n$, 我们有 $R_0$ 上的元, 可以写成以下形式:
  
 \begin{equation}
-a_0 x^0 + a_1 x + a_2 x^2 + \ldots + a_n x^n = a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n \in R_0 \nonumber
+a_0 \alpha^0 + a_1 \alpha^1 + a_2 \alpha^2 + \ldots + a_n \alpha^n = a_0 + a_1 \alpha + a_2 \alpha^2 + \ldots + a_n \alpha^n \in R_0 \nonumber
 \end{equation} 
 
 
 \begin{definition}
 一个形式为
 \begin{equation}
-a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n \in R_0 \quad (a_i \in R, \, n \geq 0, \, n \in \mathbb{Z} )
+a_0 + a_1 \alpha + a_2 \alpha^2 + \ldots + a_n \alpha^n \in R_0 \quad (a_i \in R, \, n \geq 0, \, n \in \mathbb{Z} )
 \end{equation} 
-的 $R_0$ 的元叫做 $R$ 上的 $x \in R_0$ 的一个 \textbf{多项式}. $a_i \in R$ 叫做多项式的 \textbf{系数}.
+的 $R_0$ 的元叫做 $R$ 上的 $\alpha \in R_0$ 的一个 \textbf{多项式 (polynomial)}. $a_i \in R$ 叫做多项式的 \textbf{系数 (coefficient)}.
 
-我们把所有这样的 $R$ 上的 $x\in R_0$ 的多项式作成一个集合, 表示为 $R[x]$.
+我们把所有这样的 $R$ 上的 $\alpha\in R_0$ 的多项式作成一个集合, 表示为 $R[\alpha] \subseteq R_0$.
 
 \end{definition}
 
 \begin{memo}
-$R[x]$ 的加法和乘法如下:
+多项式里面的\textbf{项 (单项式) (monomial)} $\alpha^i$ 相互独立. 对于 $m < n$, 我们有
 \begin{align*}
-(a_0 + \ldots + a_n x^n) + (b_0 + \ldots + b_n x^n) = (a_0 + b_0) + \ldots (a_n + b_n) x^n \\
-(a_0 + \ldots + a_m x^m)  (b_0 + \ldots + b_n x^n) = c_0 + \ldots c_{m+n} x^{m+n} 
+& a_0 + a_1 \alpha + a_2 \alpha^2 + \ldots + a_m \alpha^m \\
+=& a_0 + a_1 \alpha + a_2 \alpha^2 + \ldots + a_m \alpha^m + 0 \, \alpha^{m+1} + \ldots + 0 \, \alpha^n .  
+\end{align*}
+
+那么, 给定两个多项式 
+\begin{align*}
+& f(\alpha) = a_0 + a_1 \alpha + a_2 \alpha^2 + \ldots + a_n \alpha^n \\
+& g(\alpha) = b_0 + b_1 \alpha + b_2 \alpha^2 + \ldots + b_m \alpha^m ,
+\end{align*}
+我们有:
+\begin{align*}
+f(\alpha) = g(\alpha) \iff a_i = b_i, \quad i = 0, 1, 2, \ldots
+\end{align*}
+
+\end{memo}
+
+
+\begin{memo}
+$R[\alpha]$ 的加法和乘法如下:
+\begin{align*}
+(a_0 + \ldots + a_n \alpha^n) + (b_0 + \ldots + b_n \alpha^n) = (a_0 + b_0) + \ldots (a_n + b_n) \alpha^n \\
+(a_0 + \ldots + a_m \alpha^m)  (b_0 + \ldots + b_n \alpha^n) = c_0 + \ldots c_{m+n} \alpha^{m+n} 
 \end{align*}
 这里
 \begin{equation}
 c_k = a_0 b_k + a_1 b_{k-1} + \ldots + a_k b_0 = \sum_{i+j = k} a_i b_j
 \end{equation}
 
-$R[x]$ 对于加法和乘法都是闭的. 同时, 我们有
+$R[\alpha]$ 对于加法和乘法都是闭的. 同时, 我们有
 \begin{equation}
-- (a_0 + \ldots + a_n x^n)  = - a_0 - \ldots - a_n x^n \in R[x]  
+- (a_0 + \ldots + a_n \alpha^n)  = - a_0 - \ldots - a_n \alpha^n \in R[\alpha]  
 \end{equation}
 
-所以 $R[x]$ 是一个环, 而且是 $R_0$ 中 包含 $R$ 和 $x \in R_0$ 的最小子环.
+所以 $R[\alpha]$ 是一个环, 而且 \textbf{$R_0$ 中 包含 $R$ 和 $\alpha \in R_0$ 的最小子环.}
 
 \end{memo}
 
 \begin{definition}
-$R[x]$ 叫做 $R$ 上的 $x \in R_0$ 的\textbf{多项式环}.
+$R[\alpha]$ 叫做 $R$ 上的 $\alpha \in R_0$ 的\textbf{多项式环}.
 \end{definition}
 
-对于任意的 $x$, 可能存在 不是所有 $a_i = 0$, 但是有
+对于任意的 $\alpha$, 可能存在 $1, \alpha, \alpha^2, \ldots , \alpha^n $ 线性相关. 也就是说, 存在 非零的 $a_i \neq 0$, 但是有
 \begin{equation}
-a_0 + \ldots + a_n x^n = 0 \nonumber
+a_0 + \ldots + a_n \alpha^n = 0 \nonumber
 \end{equation} 
 
-例如, 当 $x \in R$ (在多项式定义里 我们规定的是 $x \in R_0$)的时候, 有 $a_0 = x$, $a_1 =-1$, 那么
+例如, 当 $\alpha \in R \subseteq R_0 $ (在多项式定义里 我们规定的是 $\alpha \in R_0$) 的时候, 有 $a_0 = \alpha$, $a_1 =-1$, 那么
 \begin{equation}
-a_0 + a_1 x = x - x = 0 \nonumber
+a_0 + a_1 \alpha = \alpha - \alpha = 0 . \nonumber
 \end{equation} 
+
 
 \begin{definition}
-$x \in R_0$ 叫做 $R$ 上的一个 \textbf{未定元(Indeterminate)}, 假如: 在 $R$里不存在 不是所有系数都为零的情况使得\footnote{这就是说 $1$, $x$, $x^2$, $\ldots$, $x^n$ 是线性独立(linearly independent)的.}
+$x \in R_0$ 叫做 $R$ 上的一个 \textbf{未定元(indeterminate)}, 假如: 在 $R$里不存在 非零元 $ 0 \neq a_i \in R $, 使得
 \begin{equation}
-a_0 + \ldots + a_n x^n = 0, \quad \exists a_i \neq 0 ,\, i \in\{ 0, \ldots, n \} \nonumber
+a_0 + \ldots + a_n x^n = 0 . \nonumber
 \end{equation}
+
+或者说 $ \{1$, $x$, $x^2$, $\ldots$, $x^n\} $ 在 $R$ 中 线性无关 (linearly independent).
 
 \end{definition}
 
-以下我们讨论未定元的多项式.
-
-$R$ 的 一个未定元 $x \in R_0$ 的 \textbf{一元多项式}, 可以唯一的表示为
+下面我们讨论未定元的多项式. 我们接受以下的前提条件: $R$ 的 一个未定元 $x \in R_0$ 的 \textbf{一元多项式 (polynomial in $1$ indeterminate over $R$)}, 可以唯一的表示为
 \begin{equation}
-a_0 + \ldots + a_n x^n, \quad (a_i \in R) \nonumber
+a_0 + \ldots + a_n x^n, \quad (a_i \in R) . \nonumber
 \end{equation}
 
 \begin{definition}
-环 $R$ 上的一个 一元多项式
+给定 环 $R$ 上的一个 一元多项式 (polynomial in $1$ indeterminate over $R$)
 \begin{equation}
-a_0 + \ldots + a_n x^n, \quad (a_i \in R),\, a_n \neq 0 \nonumber
+f(x) = a_0 + \ldots + a_n x^n, \quad (a_i \in R),\, a_n \neq 0 ,\nonumber
 \end{equation}
 
-那么非负整数 $n$ 叫做这个多项式的 \textbf{次数(degree)}. 多项式 $0$ 没有次数.
+非负整数 $n$ 叫做这个多项式的 \textbf{次数(degree)}, 写为 $deg(f(x)) = n$. 最高项 $x^n$ 对应的系数 $a_n \neq 0$ 称为 \textbf{最高项系数 (leading coefficient)}.
+
+
+多项式的次数是对于非零多项式 (nonzero polynomial) 而言. 多项式次数为零的多项式(polynomial of degree zero) 称为 \textbf{常数多项式 (constant polynomial)}. 常数多项式 里面的一种特殊类型: \textbf{零多项式 (zero polynomial)}, 没有次数 (degree of zero polynomial is not defined).
 
 \end{definition}
 
 对于给定的 $R_0$ 而言, 未必有 $R$ 上的未定元.
 
 \begin{example}
-$R$ 是整数环, $R_0$ 是包含所有 $a+bi$ ($a$, $b$ 是整数) 的整环. 那么, 对于 $\forall x = a + bi \in R_0$, 都有:
+$R$ 是整数环, $ R_0 \supset R$ 是包含所有 $a+bi$ ($a$, $b$ 是整数) 的整环. 那么, 对于 $\forall x = a + bi \in R_0$, 都有:
 \begin{equation}
-(a^2 + b^2) + (-2a) x  + x^2 = (a^2 + b^2) + (-2 a^2 - 2 ab i) + (a^2 - b^2 + 2ab i)  =  0 \nonumber
+(a^2 + b^2) + (-2a) x  + x^2 = (a^2 + b^2) + (-2 a^2 - 2 ab i) + (a^2 - b^2 + 2ab i)  =  0 . \nonumber
 \end{equation}
+
+也就是说, 对于任意的 $x \in R_0$, 都有 $\{1, \, x, \, x^2 \}$ 线性相关. 那么, $R_0$ 中的任意元都不是$R$ 的未定元.
+
 \end{example}
 
 一个重要定理如下:
 
 \begin{theorem}\label{theorem_2_6_existence_polynomial_ring}
-给定一个 有单位元 的交换环 $R$, 一定有 $R$ 上的未定元 $x$ 的存在, 因此有 $R$ 上的多项式环 $R[x]$ 的存在.
+给定一个 有乘法单位元 (multiplicative identity) 的交换环 (commutative ring) $R$, 一定有 $R$ 上的未定元 (indeterminate) $x$ 的存在, 因此有 $R$ 上的多项式环 $R[x]$ 的存在.
 \end{theorem}
 
 \begin{proof}
@@ -2584,7 +2838,7 @@ $R$ 是整数环, $R_0$ 是包含所有 $a+bi$ ($a$, $b$ 是整数) 的整环. �
 \begin{enumerate}
 \item{用 $R$ 作一个环 $\overline{P}$: 
 \begin{equation}
-\overline{P} = \{ (a_0, a_1, a_2, \ldots) | a_i \in R, \, \lnot (\forall a_i \neq 0) \} \nonumber
+\overline{P} = \{ (a_0, a_1, a_2, \ldots) | a_i \in R, \, \lnot (\forall a_i \neq 0), \, \mbox{not all $a_i$ are zero}  \} \nonumber
 \end{equation}
 
 规定 $\overline{P}$ 中两元素相等的条件为:
@@ -2592,14 +2846,14 @@ $R$ 是整数环, $R_0$ 是包含所有 $a+bi$ ($a$, $b$ 是整数) 的整环. �
 a_i = b_i , i = 0, 1, 2, \ldots \Longrightarrow (a_0, a_1, a_2, \ldots ) = (b_0, b_1, b_2, \ldots ) \nonumber
 \end{equation}
 
-规定 $\overline{P}$ 中加法:
+规定 $\overline{P}$ 中的加法:
 \begin{equation}
 (a_0, a_1, \ldots ) + (b_0, b_1, \ldots ) = (a_0 + b_0 , a_1 + b_1, \ldots ) \nonumber
 \end{equation}
 
-$\overline{P}$ 对于这样的加法做成一个 (交换)加群, 这个加群的零元是 $(0,0,\ldots)$.
+$\overline{P}$ 对于这样的加法做成一个 (交换)加群 (additive group/Abelian group), 这个加群的零元是 $(0,0,\ldots)$.
 
-规定 $\overline{P}$ 中乘法:
+规定 $\overline{P}$ 中的乘法:
 \begin{equation}
 (a_0, a_1, a_2, \ldots ) (b_0, b_1, b_2, \ldots ) = (c_0, c_1, c_2, \ldots) \nonumber
 \end{equation}
@@ -2608,11 +2862,11 @@ $\overline{P}$ 对于这样的加法做成一个 (交换)加群, 这个加群的
 c_k = \sum_{i+j = k} a_i b_j ,\quad \quad (k=0,1,2, \ldots) \nonumber
 \end{equation}
 
-显然, 这个也是 $\overline{P}$ 的代数运算, 而且这个乘法适合交换律.
+显然, 这个也是 $\overline{P}$ 的代数运算, 而且这个乘法适合交换律 (commutative law).
 
-我们下面验证 $\overline{P}$ 适合结合律 和 分配律:
+我们下面验证 $\overline{P}$ 适合结合律 (associative law) 和 分配律 (distributive law):
 \begin{itemize}
-\item{结合律: 
+\item{结合律 (associative law): 
 \begin{align*}
 & \big[(a_0, a_1, a_2, \ldots)(b_0, b_1, b_2, \ldots)\big](c_0, c_1, c_2, \ldots) \\
 = & (a_0, a_1, a_2, \ldots)\big[(b_0, b_1, b_2, \ldots)(c_0, c_1, c_2, \ldots)\big] \\
@@ -2620,11 +2874,11 @@ c_k = \sum_{i+j = k} a_i b_j ,\quad \quad (k=0,1,2, \ldots) \nonumber
 \end{align*}
 其中
 \begin{align*}
-e_n = \sum_{m+k = n} \sum_{i+j=m} a_i b_j c_k
+e_n = \sum_{m+k = n} \sum_{i+j=m} a_i b_j c_k = \sum_{i+j+k=n} a_i b_j c_k .
 \end{align*}
 
 }
-\item{分配律:
+\item{分配律 (distributive law):
 \begin{align*}
 & (a_0, a_1, a_2, \ldots)\big[ (b_0, b_1, b_2, \ldots) + (c_0, c_1, c_2, \ldots) \big]\\
 = &  (a_0, a_1, a_2, \ldots)  (b_0, b_1, b_2, \ldots) + (a_0, a_1, a_2, \ldots)  (c_0, c_1, c_2, \ldots) \\
@@ -2637,7 +2891,7 @@ d_k = \sum_{i+j=k} a_i (b_j + c_j)
 }
 \end{itemize}
 
-因此, 我们得出 $\overline{P}$ 作成一个交换环.
+因此, 根据环的定义 \ref{def_ring} 以及 $\overline{P}$ 的元素都适用于加法 和 乘法 的交换律 (commutative law), 我们得出 $\overline{P}$ 作成一个交换环 (commutative ring).
 
 $\overline{P}$ 有:
 \begin{equation}
@@ -2649,7 +2903,7 @@ $\overline{P}$ 有:
 (1,0,0,\ldots) (b_0, b_1, \ldots) = (b_0, b_1, \ldots ) \nonumber
 \end{equation}
 
-所以, $\overline{P}$ 的单位元是 $(1, 0, 0, \ldots)$.
+所以, $\overline{P}$ 的乘法单位元 (multiplicative identity) 是 $(1, 0, 0, \ldots)$.
 
 }
 \item{用 $\overline{P}$ 构造一个包含 $R$ 的环 $P$.
@@ -2670,11 +2924,15 @@ $\overline{P}$ 有:
 
 那么, $\overline{R}$ 是 $\overline{P}$ 的一个子环, 而且
 \begin{align*}
-\phi : (a,0,0, \ldots) \in \overline{R} \longleftrightarrow a \in R 
+\phi : \overline{R} \longleftrightarrow  R , \quad \phi(a,0,0, \ldots) = a  
 \end{align*}
-是 $\overline{R}$ 和 $R$ 之间的一个同构映射.
+是 $\overline{R}$ 和 $R$ 之间的一个同构映射(isomorphism), 也就是有 $R \cong \overline{R}$.
 
-因为 $R$ 和 $\overline{P}$ 没有共同元, 根据定理 \ref{theorem_ring_iso_construction}, 可以用 $R$ 代替 $\overline{R} \subset \overline{P} $, 从而的出一个包含 $R$ 的环 $P$. 而且, $P \cong \overline{P}$. 因而, $P$ 是有单位元的交换环, 它的单位元也是 $R$ 的单位元 $1$.
+用 $\overline{R}^c$ 表示 $\overline{R}$ 在 $\overline{P}$ 上的补集. 
+因为 $R$ 和 $\overline{P}$ 没有共同元, 根据定理 \ref{theorem_ring_iso_construction}, 可以用 $R$ 代替 $\overline{R} \subset \overline{P} $, 从而构造一个包含 $R$ 的环 $P = R \cup \overline{R}^c$, $R \cap \overline{R}^c = \emptyset$. 而且, $P \cong \overline{P}$. 
+
+
+由于 $\overline{P}$ 是有乘法单位元的交换环, 根据 $P \cong \overline{P}$, $P$ 也是有乘法单位元的交换环, 而且 $P$ 的乘法单位元也是 $R$ 的乘法单位元 $1$.
 }
 \item{证明 $P$ 包含 $R$ 上的未定元:
 
@@ -2684,7 +2942,7 @@ x = (0, 1, 0, 0, \ldots ) \nonumber
 \end{equation}
 而且
 \begin{equation}
-x^k = (  \overbrace{0, \, \ldots, \, 0}^{k}, 1, \, 0, \, \ldots ) \label{eq_xk_undeterminate_ring}
+x^k = (  \overbrace{0, \, \ldots, \, 0}^{k}, 1, \, 0, \, \ldots ) . \label{eq_xk_undeterminate_ring}
 \end{equation}
 
 首先考察这个等式 \ref{eq_xk_undeterminate_ring} 是否成立:
@@ -2693,12 +2951,12 @@ x^k = (  \overbrace{0, \, \ldots, \, 0}^{k}, 1, \, 0, \, \ldots ) \label{eq_xk_u
 \item{假定 $k-1$ 的时候 等式 \ref{eq_xk_undeterminate_ring} 也成立, 那么:
 \begin{align*}
 x^k & = (0, 1, 0, \ldots) (  \overbrace{0, \, \ldots, \, 0}^{k-1},  1, \, 0, \, \ldots )  \\
- & = \Big( \sum_{i+j = 0} a_i b_j, \, \sum_{i+j=1} a_i b_j ,\ldots \Big) \\
- & = (\overbrace{0, 0, \ldots, 0}^{k} , 1, 0, \ldots )
+ & = \Big( \sum_{i+j = 0} a_i b_j, \, \sum_{i+j=1} a_i b_j ,\, \sum_{i+j=2} a_i b_j ,\ldots \Big) \\
+ & = (\overbrace{0, 0, \ldots, 0}^{k} , 1, 0, \ldots ) .
 \end{align*}
-因为 只有 $a_1 =1 $ 和  $b_{k-1} =1 $, 而其他 $a_i =0$, $b_j = 0$, 所以只有
+上述最后的一个等号是因为 只有 $a_1 =1 $ 和  $b_{k-1} =1 $, 而其他 $a_i =0$, $b_j = 0$, 所以乘法的运算结果只有一个非零元:
 \begin{align*}
-\sum_{i+j = k} a_i b_j = 0
+\sum_{i+j = k} a_i b_j = a_1 b_{k-1} = 1 \times 1 = 1 \neq 0 .
 \end{align*}
 }
 \end{itemize}
@@ -2710,13 +2968,16 @@ a_0 + a_1 x + \ldots + x_n x^n = 0 \quad (a_i \in R) \nonumber
 
 那么在与 $P$ 同构的 $\overline{P}$ 里, 有
 \begin{align*}
-& (a_0, 0, \ldots ) + (a_1, 0, \ldots ) x + \ldots (a_n, 0, \ldots ) x^n = (0, 0, \ldots) \\
-\Longrightarrow & (a_0, a_1, \ldots , a_n, 0, \ldots) = (0,0, \ldots )
+& (a_0, 0, \ldots ) + (a_1, 0, \ldots ) x + \ldots (a_n, 0, \ldots ) x^n \\
+& = (a_0, 0, \ldots ) + (a_1, 0, \ldots ) (0, 1, 0 ,\ldots) + (a_2, 0, \ldots ) (0, 0, 1, 0, \ldots) + \ldots  
+\\
+& = (0, 0, \ldots) \\
+\Longrightarrow & (a_0, a_1, a_2, \ldots , a_n, 0, \ldots) = (0,0, \ldots )
 \end{align*}
 
 因而,
 \begin{align*}
-a_0 = a_1 = \ldots = a_n = 0
+a_0 = a_1 = a_2 = \ldots = a_n = 0 .
 \end{align*}
 也就是说, $x$ 是 $R$ 上的未定元.
 }
@@ -2724,7 +2985,7 @@ a_0 = a_1 = \ldots = a_n = 0
 
 \end{proof}
 
-从一元多项式 推广到 多元多项式: 从 $R_0$ 中选出 $n$ 个元 $x_1$, $x_2$, $\ldots$, $x_n$, 我们作 $R$ 在 $x_1$ 上的多项式环 $R[x_1]$, 然后作  $R[x_1]$ 上的 $x_2$ 的多项式环 $R[x_1][x_2]$. 如此类推, 我们得出 多项式环 $R[x_1][x_2]\ldots[x_n]$. 具体而言, 我们有以下定义:
+从一元多项式 (polynomial in $1$ indeterminate over $R$) 推广到 多元多项式 (polynomial in $n$ indeterminates over $R$): 从 $R_0$ 中选出 $n$ 个元 $x_1$, $x_2$, $\ldots$, $x_n$, 我们作 $R$ 在 $x_1$ 上的多项式环 $R[x_1]$, 然后作  $R[x_1]$ 上的 $x_2$ 的多项式环 $R[x_1][x_2]$. 如此类推, 我们得出 多项式环 $R[x_1][x_2]\ldots[x_n]$. 具体而言, 我们有以下定义:
 
 \begin{definition}
 一个可以写成 \ref{eq_n_polynomial} 的形式的元叫做 $R$ 上的 $x_1$, $x_2$, $\ldots$, $x_n$ 的一个 \textbf{多项式}. $a_{i_1 \, i_2 \, \ldots \, i_n} $ 叫做多项式的 \textbf{系数}.
@@ -2732,10 +2993,10 @@ a_0 = a_1 = \ldots = a_n = 0
 这一多项式环的元可以写作:
 \begin{align}
  y = & \sum_{i_1 \, i_2 \, \ldots \, i_n} a_{i_1 \, i_2 \, \ldots \, i_n} x_1 ^{i_1} x_2 ^{i_2} \ldots x_n ^{i_n}  \in R[x_1][x_2]\ldots[x_n] ; \label{eq_n_polynomial} \\
-& a_{i_1 \, i_2 \, \ldots \, i_n} \in R, \quad \lnot ( \forall a_{i_1 \, i_2 \, \ldots \, i_n} = 0 ) \nonumber
+& a_{i_1 \, i_2 \, \ldots \, i_n} \in R, \quad \lnot ( \forall a_{i_1 \, i_2 \, \ldots \, i_n} = 0 ), \, \mbox{not all $a_{i_1 \, i_2 \, \ldots \, i_n} $ are zero} . \nonumber
 \end{align}
 
-环 $R[x_1][x_2]\ldots[x_n]$ 叫做 $R$ 上的 $x_1$, $x_2$, $\ldots$ 的多项式环, 可以用符号 $R[x_1, x_2, \ldots, x_n]$ 表示.
+环 $R[x_1][x_2]\ldots[x_n]$ 叫做 \textbf{ $R$ 上的 $x_1$, $x_2$, $\ldots$ 的多项式环}, 可以用符号 $\mathbf{R[x_1, x_2, \ldots, x_n]}$ 表示.
 \end{definition}
 
 $R[x_1, x_2, \ldots, x_n]$ 的加法和乘法如下:
@@ -2766,16 +3027,19 @@ i_n + j_n = k_n
 类似的, 我们有
 
 \begin{definition}
-$R_0$ 的 $n$ 个元 $x_1$, $x_2$, $\ldots$, $x_n$ 叫做 $R$ 上的 \textbf{无关未定元}, 如果: 除非所有系数都为零, 否则不存在一个 $R$ 上的 $x_1$, $x_2$, $\ldots$, $x_n$ 的多项式为零.
+$R_0$ 的 $n$ 个元 $x_1$, $x_2$, $\ldots$, $x_n$ 叫做 $R$ 上的 \textbf{无关未定元 (indeterminate)}, 如果: 除非所有系数都为零, 否则不存在一个 $R$ 上的 $x_1$, $x_2$, $\ldots$, $x_n$ 的多项式为零.
 \end{definition}
 
 \begin{theorem}
-给定一个有单位元的交换环 $R$ 和一个正整数 $n$, 一定存在 $R$ 上的 无关未定元 $x_1$, $x_2$, $\ldots$, $x_n$, 因此也就存在有 $R$ 上的多项式环 $R[x_1, x_2, \ldots, x_n]$.
+给定一个有单位元的交换环 (commutative ring with multiplicative identity) $R$ 和一个正整数 $n$, 一定存在 $R$ 上的 无关未定元 (indeterminate) $x_1$, $x_2$, $\ldots$, $x_n$, 因此也就存在有 $R$ 上的多项式环 $R[x_1, x_2, \ldots, x_n]$.
 \end{theorem}
 
 \begin{proof}
-用归纳法: $x_1$ 是 $R$ 的无关未定元. 假设 $x_1$, $x_2$, $\ldots$, $x_{n-1}$ 是 $R$ 上的无关未定元. 那么有
+用归纳法: 
 
+\begin{enumerate}
+\item{根据定理 \ref{theorem_2_6_existence_polynomial_ring},  $x_1$ 是 $R$ 的无关未定元.}
+\item{假设 $x_1$, $x_2$, $\ldots$, $x_{n-1}$ 是 $R$ 上的无关未定元. 那么有
 \begin{align}
 & \sum_{i_1 \, i_2 \, \ldots \, i_n} a_{i_1 \, i_2 \, \ldots \, i_n} x_1 ^{i_1} x_2 ^{i_2} \ldots x_n ^{i_n} = 0 \label{eq_n_undeterminate_zeros}\\
 \Rightarrow & \sum_{i_1 \, i_2 \, \ldots \, i_n} \big( a_{i_1 \, i_2 \, \ldots \, i_n} x_1 ^{i_1} x_2 ^{i_2} \ldots  x_{n-1} ^{i_{n-1} } \big) x_n ^{i_n} = 0 \nonumber \\
@@ -2791,15 +3055,16 @@ $R_0$ 的 $n$ 个元 $x_1$, $x_2$, $\ldots$, $x_n$ 叫做 $R$ 上的 \textbf{无
 a_{i_1 \, i_2 \, \ldots \, i_{n} } = 0
 \end{equation}
 从而, 我们得出 $x_1$, $x_2$, $\ldots$, $x_{n-1}$, $x_n$ 是 $R$ 上的无关未定元.
-
+}
+\end{enumerate}
 \end{proof}
 
-$n$ 个无关未定元的多项式 简称为 \textbf{$n$元多项式}.
+$n$ 个无关未定元的多项式 简称为 \textbf{$n$元多项式 (polynomial in $n$ indeterminates (over $R$))}.
 
-\begin{theorem}\label{theoream_poly_ring_substitution}
-假定 $R[x_1, x_2, \ldots, x_{n} ]$ 和 $R[a_1, a_2, \ldots, a_{n} ]$ 都是有单位元的交换环 $R$ 上的多项式环, $x_1$, $x_2$, $\ldots$, $x_n$ 是 $R$ 上的无关未定元, $a_1$, $a_2$, $\ldots$, $a_n$ 是 $R$ 上的任意元. 那么
+\begin{theorem}[Substitution Principle]\label{theoream_poly_ring_substitution}
+假定 $R[x_1, x_2, \ldots, x_{n} ]$ 和 $R[a_1, a_2, \ldots, a_{n} ]$ 都是有单位元的交换环 (commutative ring with multiplicative identity) $R$ 上的多项式环, $x_1$, $x_2$, $\ldots$, $x_n$ 是 $R$ 上的无关未定元 (indeterminates), $a_1$, $a_2$, $\ldots$, $a_n$ 是 $R$ 上的任意元. 那么:
 \begin{align*}
-R[x_1, x_2, \ldots, x_{n} ] \mbox{ 与 }  R[a_1, a_2, \ldots, a_{n} ] \mbox{ 同态 (存在同态满射) } 
+R[x_1, x_2, \ldots, x_{n} ] \mbox{ 与 } \, R[a_1, a_2, \ldots, a_{n} ] \mbox{ 同态 (存在同态满射(epimorphism)) } 
 \end{align*}
 \end{theorem}
 
@@ -2808,26 +3073,27 @@ R[x_1, x_2, \ldots, x_{n} ] \mbox{ 与 }  R[a_1, a_2, \ldots, a_{n} ] \mbox{ 同
 \begin{align*}
 \phi: f(x_1, \ldots , x_n) \mapsto f(a_1, \ldots , a_n)
 \end{align*}
-这是一个 $R[x_1, x_2, \ldots, x_{n} ]$ 到 $R[a_1, a_2, \ldots, a_{n} ]$ 的满射:因为 $x_1$, $x_2$, $\ldots$, $x_n$ 是 $R$ 上的无关未定元, 因此任何元 $y \in R[x_1, x_2, \ldots, x_{n} ] $ 只能有唯一表达的对应多项式 $f(x_1, \ldots, x_n)$. 按照我们规定的 $\phi$, $y$ 只有一个象 $f(a_1, \ldots, a_n)$. 因此, $\phi$ 这个映射是存在的. 另一方面, 显然, 这个映射是一个满射($\phi$ 包括了所有在多项式环 $R[a_1, a_2, \ldots, a_{n} ]$ 的元 $f(a_1, \ldots, a_n)$).
+这是一个 $R[x_1, x_2, \ldots, x_{n} ]$ 到 $R[a_1, a_2, \ldots, a_{n} ]$ 的满射 (epimorphism): 因为 $x_1$, $x_2$, $\ldots$, $x_n$ 是 $R$ 上的无关未定元, 因此任何元 $y \in R[x_1, x_2, \ldots, x_{n} ] $ 只能有唯一对应的多项式 $f(x_1, \ldots, x_n)$. 按照我们规定的 $\phi$, $y$ 只有一个象 $f(a_1, \ldots, a_n)$. 因此, $\phi$ 这个映射是存在的. 另一方面, 显然, 这个映射是一个满射($\phi$ 包括了所有在多项式环 $R[a_1, a_2, \ldots, a_{n} ]$ 的元 $f(a_1, \ldots, a_n)$).
 
 考虑到 $R[x_1, x_2, \ldots, x_{n} ]$ 和 $R[a_1, a_2, \ldots, a_{n} ]$ 中 两个多项式的加法和乘法都适用同一规律, 因此这个映射 $\phi$ 是同态映射.
 
 \end{proof}
 
 \begin{memo}
-定理 \ref{theoream_poly_ring_substitution} 说明了 多项式环 $R[x_1, x_2, \ldots, x_{n} ]$ 中若干个元通过加法和乘法得出的关系, 那么用一个包含 $R$ 的 有单位元的交换环 $R_0$ 中任意 $n$ 个元素 $a_1$, $a_2$, $\ldots$, $a_n$ 去代替未定元 $x_1$, $x_2$, $\ldots$, $x_n$ , 这些关系仍然存在. 这也就是说明了 (在多项式环$R[x_1, x_2, \ldots, x_{n} ]$中的)多项式存在 代入的可能. 
+定理 \ref{theoream_poly_ring_substitution} 说明了 多项式环 $R[x_1, x_2, \ldots, x_{n} ]$ 中若干个元通过加法和乘法得出的关系, 那么用一个包含 $R$ 的 有单位元的交换环 $R_0$ 中任意 $n$ 个元素 $a_1$, $a_2$, $\ldots$, $a_n$ 去代替未定元 $x_1$, $x_2$, $\ldots$, $x_n$ , 这些关系仍然存在. 这也就是说明了 (在多项式环$R[x_1, x_2, \ldots, x_{n} ]$中的)多项式存在 代入 (substitution) 的可能. 
 \end{memo}
 
-\begin{exercise}
-假定 $R$ 是 一个整环, 那么 $R$ 上的 一元多项式环 $R[x]$ 也是一个整环.
+\begin{exercise}\label{exercise_R_id_to_Rx_id}
+假定 $R$ 是 一个整环 (integral domain), 那么 $R$ 上的 一元多项式环 $R[x]$ 也是一个整环 (integral domain).
 \end{exercise}
 
 \begin{proof}
-整环 $R$ 是一个有单位元的交换环. 因而, $R$ 上的 一元多项式环 $R[x]$ 也是一个有单位元的交换环. 要证明 $R[x]$ 是整环, 只要证明 $R[x]$ 没有零因子:
+根据定义 \ref{def_integral_domain}, 整环 $R$ 是一个有乘法单位元 (multiplicative identity) 的交换环 (commutative ring). 因而, $R$ 上的 一元多项式环 $R[x]$ 也是一个有单位元的交换环. 要证明 $R[x]$ 是整环, 只要证明 $R[x]$ 没有零因子 (has \emph{no} zero divisor):
+
 假设 $f(x) , g(x) \in R[x]$. $f(x) \neq 0$, $g(x) \neq 0$. 那么 $f(x)$ 和 $g(x)$ 可以写成以下形式:
 \begin{align*}
-f(x) = a_0 + a_1 x + \ldots a_m x^m \quad (a_i \in R) \\
-g(x) = b_0 + b_1 x + \ldots b_n x^n \quad (b_i \in R)
+f(x) &= a_0 + a_1 x + \ldots a_m x^m \quad (a_i \in R) \\
+g(x) &= b_0 + b_1 x + \ldots b_n x^n \quad (b_i \in R)
 \end{align*}
 
 至少有 $a_m \neq 0$, $b_n \neq 0$.  考虑
@@ -2910,7 +3176,7 @@ a_0 + a_1 x_1 x_2 ^0 \ldots x_n ^0 + \cdots + a_k x_1 ^k x_2 ^0 \ldots x_n ^0 = 
 R[x_1, x_2, \ldots, x_n] \cong R[y_1, y_2, \ldots, y_n]
 \end{equation}
 }
-\item{$R$ 上的一元多项式环 $R[x]$ 和它的一个真子环同构.}
+\item{$R$ 上的一元多项式环 $R[x]$ 和它的一个真子环 (proper subring) 同构 (isomorphism).}
 \end{enumerate}
 \end{exercise}
 
@@ -2931,60 +3197,70 @@ R[x_1, x_2, \ldots, x_n] \cong R[y_1, y_2, \ldots, y_n]
 R[x^2] \cong R[x] .
 \end{align*}
 
-但是 $x \not \in R[x^2]$, 因而 $R[x^2] \subset R[x]$. 所以, $R[x^2]$ 是 $R[x]$ 的一个真子集.
+但是 $x \not \in R[x^2]$, 因而 $R[x^2] \subset R[x]$. 所以, $R[x^2]$ 是 $R[x]$ 的一个真子集 (proper subset).
 
 }
 \end{enumerate}
 \end{proof}
 
+
 \section{理想(Ideal Subring)}
 
-我们讨论一种重要的子环, 叫 理想子环. 这种子环在环论里的地位 类似于 不变子群在群论的地位.
+我们讨论一种重要的子环, 叫 理想子环 (ideal subring, or ideal in short). 这种子环在环论里的地位 类似于 不变子群 (normal subgroup) 在群论的地位.
 
 \begin{definition}\label{def_ideal}
-环 $R$ 的一个非空子集 $I$ 叫做一个\textbf{理想子环}, 简称 \textbf{理想}, 假如:
+环 $R$ 的一个非空子集 $I$ 叫做一个\textbf{理想子环 (ideal subring)}, 简称 \textbf{理想 (ideal)}, 假如:
 \begin{enumerate}
 \item{$a, b \in I \Longrightarrow a - b \in I$;}
 \item{$a \in I, r \in R \Longrightarrow ra, \, ar \in I$.\label{def_ideal_condition_2}}
 \end{enumerate}
 \end{definition}
 
-一个理想一定是一个子环. 考虑 定义 \ref{def_ideal} 中的条件 \ref{def_ideal_condition_2} 不仅要求 $I$ 的两个元的乘积在 $I$ 里面, 而且还进一步要求, $I$ 的任意元 和 $R$ 的任意元 的乘积都必须要在 $I$ 里. 因此, 理想适合的条件比一般子环要强一点.
+一个理想 (ideal) 一定是一个子环 (subring). 考虑 定义 \ref{def_ideal} 中的条件 \ref{def_ideal_condition_2} 不仅要求 $I$ 的两个元的乘积在 $I$ 里面, 而且还进一步要求, $I$ 的任意元 和 $R$ 的任意元 的乘积都必须要在 $I$ 里. 因此, 理想适合的条件比一般子环要强一点.
 
-我们考虑的第一个问题: 一个环 是不是一定有理想. 答案是肯定的. 因为一个环 $R$ 至少有两个理想:
+我们考虑的第一个问题: 一个环 是不是一定有理想? 答案是肯定的. 因为一个环 $R$ 至少有两个理想:
 \begin{enumerate}
-\item{只有 $R$ 的零元的集合, 这个理想叫做 $R$ 的 \textbf{零理想}.}
-\item{$R$ 自己, 这个理想叫做 $R$ 的 \textbf{单位理想}.}
+\item{只有 $R$ 的零元的集合 $\{ 0 \}$, 这个理想叫做 $R$ 的 \textbf{零理想 (zero ideal)}.}
+\item{$R$ 自己, 这个理想叫做 $R$ 的 \textbf{单位理想 (unit ideal)}.}
 \end{enumerate}
 
 \begin{memo}
-除环 除了零理想 和 单位理想 之外 没有别的理想.
+除环 (division ring) 除了零理想 (zero ideal) 和 单位理想 (unit ideal) 之外 没有别的理想.
 \end{memo}
 
-\begin{theorem}
-一个除环 $R$ 只有两个理想, 那就是 零理想 和 单位理想 .
+\begin{theorem}\label{theorem_2_7_1_division_ring_two_ideals}
+一个除环 (division ring) $R$ 只有两个理想, 那就是 零理想 (zero ideal) 和 单位理想 (unit ideal).
 \end{theorem}
 
 \begin{proof}
-假设 $I$ 是 $R$ 的一个理想(子环), 并且 $I$ 不是零理想. 那么 存在非零元 $a \in I$. 因为 $R$ 是除环, 所以 $a$ 有 逆元 $a^{-1} \in R $. 那么由理想的定义 \ref{def_ideal} 中的条件 \ref{def_ideal_condition_2}, 我们得出  $a^{-1} a = 1 \in I $. 因而, $R$ 的任意元  $b= b \cdot 1 \in I$. 也就是说, $I=R$.
+假设 $I$ 是 $R$ 的一个理想(子环), 并且 $I$ 不是零理想. 那么 存在非零元 $a \in I$. 因为 $R$ 是除环, 根据除环的定义 \ref{def_division_ring}, $a$ 有 乘法逆元 (multiplicative inverse) $a^{-1} \in R $. 那么由理想的定义 \ref{def_ideal} 中的条件 \ref{def_ideal_condition_2}, 我们得出  $a^{-1} a = 1 \in I $. 因而, $R$ 的任意元  $b= b \cdot 1 \in I$. 也就是说, $I=R$.
 \end{proof}
 
 \begin{memo}
-理想这个概念 对于 除环 或者 域(交换除环) 没有多大意义. 
+由上述定理 \ref{theorem_2_7_1_division_ring_two_ideals}, 理想这个概念 对于 除环 或者 域(交换除环) 没有多大意义. 
 \end{memo}
 
-一般来说, 一个环会有零理想和 单位理想之外的其他理想.
+\begin{memo}\label{memo_simple_ring_not_division_ring}
+定理的 \ref{theorem_2_7_1_division_ring_two_ideals} 的逆定理不成立. 考虑 在一个有理数域 $F$ 上的 $2 \times 2$ 的 矩阵环 (matrix ring) $M_{2} (F)$. 根据 例子 \ref{example_matrix_ring_non_commutative}, $M_{2} (F)$ 是一个有乘法单位元 (multiplicative identity) 的 非交换环 (non-commutative ring). 在后面的例子 \ref{exercise_simple_ring_not_division_ring}, 我们发现:
+\begin{itemize}
+\item{$M_{2} (F)$ 不是除环.}
+\item{$M_{2} (F)$ 只有零理想 (zero ideal) 和 单位理想 (unit ideal).}
+\end{itemize}
+\end{memo}
+
+
+一般来说, 一个环会有零理想 (zero ideal) 和 单位理想 (unit ideal) 之外的其他理想.
 
 \begin{example}\label{example_principle_ideal_generated_by_n}
-考虑整数环 $R$. (整数环是一个整环) 那么一个固定整数 $n \neq 0 $ 的所有倍数 $rn$, $r \in R$ 做成一个理想.
+考虑整数环 (ring of integers) $R$. (根据 \ref{memo_ring_integers_is_integral_domain}, 整数环是一个整环 (integral domain)) 那么一个固定整数 $n \neq 0 $ 的所有倍数 $rn$, $r \in R$ 做成一个理想 (ideal).
 \end{example}
 
 \begin{example}
-考虑一个环 $R$ 上的 一元多项式环 $R[x]$. 那么, 所有没有常数的多项式
+考虑一个环 $R$ 上的 一元多项式环 (ring of polynomials in $1$ indeterminate over $R$) $R[x]$. 那么, 所有没有常数的多项式
 \begin{align*}
 a_1 x + a_2 x^2 + \ldots + a_n x^n, \quad n \geq 1
 \end{align*}
-作成 $R[x]$ 的一个理想.
+作成 $R[x]$ 的一个理想 (ideal).
 \end{example}
 
 给定一个环 $R$, 我们可以有以下方法作出一些 $R$ 的理想: 取任意元 $a \in R$. 利用 $a$ 作一个集合:
@@ -2994,11 +3270,11 @@ I = \big\{ (x_1 a y_1 + \ldots + x_m a y_m)  + sa + at + n a | \forall x_i, y_i,
 这个集合 $I$ 是 $R$ 的一个理想:
 \begin{itemize}
 \item{两个这样形式的元 相减 还是得出这样形式的元;}
-\item{用 $R$ 的一个元 $r$ 左乘 $I$ 中的任意一个元 可得:
+\item{用 $R$ 的一个元 $r$ 左乘 $I$ 中的任意一个元 可得出这样形式的元:
 \begin{align*}
 & (r x_1 a y_1 + \ldots + r x_m a y_m)  +  r sa + rat + n r a  \\
 =& [(r x_1) a y_1 + \ldots + (r x_m) a y_m + rat ] +  (r s + n r ) a \\
-=&   [(r x_1) a y_1 + \ldots + (r x_m) a y_m + rat ] +  (r s + n r ) a  + 0 a
+=&   [(r x_1) a y_1 + \ldots + (r x_m) a y_m + rat ] +  (r s + n r ) a  + a \, 0 + 0 a 
 \end{align*}
 同理, 从 $r$ 右乘 $I$ 的元也会得到这样形式的元.
 }
@@ -3014,12 +3290,12 @@ I = \big\{ (x_1 a y_1 + \ldots + x_m a y_m)  + sa + at + n a | \forall x_i, y_i,
 \begin{memo}\label{memo_ideal_formats}
 一个主理想 $(a)$ 的元的形式可以作进一步简化:
 \begin{enumerate}
-\item{$R$是交换环: $(a)$ 的元可以写成:
+\item{$R$是交换环 (commutative ring): $(a)$ 的元可以写成:
 \begin{align*}
 ra + na , \quad  r \in R, \, n \in \mathbb{Z}
 \end{align*}
 }
-\item{$R$ 有单位元: $(a)$ 的元可以写成:
+\item{$R$ 有单位元 (has multiplicative identity): $(a)$ 的元可以写成:
 \begin{align*}
 \sum x_i a y_i, \quad  x_i, \, y_i \in R
 \end{align*}
@@ -3028,28 +3304,29 @@ ra + na , \quad  r \in R, \, n \in \mathbb{Z}
 sa = sa 1, \, at = 1 at, \, na = (n1) a 1
 \end{align*}
 }
-\item{\label{item_ideal_format_3}$R$是有单位元的交换环: $(a)$ 的元可以写成:
+\item{\label{item_ideal_format_3}$R$是有单位元的交换环 (commutative ring with multiplicative identity \footnote{One example: Recall Theorem \ref{theorem_2_6_existence_polynomial_ring}, the prerequisite of polynomial ring $R[x]$ over $R$ with indeterminate $x$ is that $R$ is commutative ring with multiplicative identity.} ): $(a)$ 的元可以写成:
 \begin{align*}
 ra , \quad  r \in R
 \end{align*}
-例 \ref{example_principle_ideal_generated_by_n} 说明的就是由 $n$ 生成的主理想 $(n)$.
+例 \ref{example_principle_ideal_generated_by_n} 说明的就是由 $n$ 生成的主理想 (principle ideal) $(n)$.
 }
 \end{enumerate}
 \end{memo}
 
-主理想的概念容易推广.
+主理想 (principle ideal) 的概念容易推广.
 
 \begin{definition}
 给定 环 $R$ 的 $m$ 个元 $a_1, a_2, \ldots, a_m \in R$. 集合
 \begin{equation}
-I = \{ s_1 + s_2 + \cdot + s_m | s_i \in (a_i) ,\, i = 1, 2, \ldots, m \} \label{eq_m_elements_ideal}
+I = \{ s_1 + s_2 + \cdots + s_m \, | \, s_i \in (a_i) ,\, i = 1, 2, \ldots, m \} \label{eq_m_elements_ideal}
 \end{equation}
-称为 \textbf{由 $a_1, a_2, \ldots, a_m$ 生成的理想}, 表示为符号 $(a_1, a_2, \ldots, a_m)$.
+称为 \textbf{由 $a_1, a_2, \ldots, a_m$ 生成的理想 (ideal generated by $a_1, a_2, \ldots, a_m$)}, 表示为符号 $(a_1, a_2, \ldots, a_m)$.
 \end{definition}
 
 \begin{memo}
 (\ref{eq_m_elements_ideal}) 定义的集合是 $R$ 的一个理想:
-任意的两个元 $a, a' \in I$,
+\begin{itemize}
+\item{任意的两个元 $a, a' \in I$,
 \begin{align*}
 a &= s_1 + s_2 + \ldots + s_m \quad (s_i \in (a_i)) \\
 a' &= s_1 ' + s_2 ' + \ldots + s_m ' \quad (s_i ' \in (a_i) )
@@ -3059,13 +3336,15 @@ a' &= s_1 ' + s_2 ' + \ldots + s_m ' \quad (s_i ' \in (a_i) )
 \begin{align*}
 a-a' = (s_1 - s_1 ') + (s_2 - s_2 ') + \ldots + (s_m - s_m ') \in I
 \end{align*}
-
+}
+\item{
 对于 $R$ 的一个任意元 $r$ 来说, $rs_i, s_i r \in (a_i)$, 所以有
 \begin{align*}
 ra &= r s_1 + r s_2 + \ldots + r s_m \in I \\
-ar &= s_1 r + s_2 r + \ldots + s_m r \in I
+ar &= s_1 r + s_2 r + \ldots + s_m r \in I .
 \end{align*}
-
+}
+\end{itemize}
 \end{memo}
 
 \begin{memo}
@@ -3075,7 +3354,7 @@ $I$ 显然是包含 $a_1, a_2, \ldots, a_m$ 的最小理想.
 \begin{example}\label{example_R_polynomial_not_principle_ideal}
 假定 $R[x]$ 是整数环 $R$ 上的 一元多项式环. 考虑 $R[x]$ 的理想 $(2, x)$.
 
-因为 $R[x]$ 是有单位元的交换环, (由 \ref{memo_ideal_formats} 中的 \ref{item_ideal_format_3}), $(2, x)$ 可以写成
+因为 $R$ 是整数环 (ring of integers), 根据 \ref{memo_ring_integers_is_integral_domain}, $R$ 是整环 (integral domain), 根据 练习 \ref{exercise_R_id_to_Rx_id}, 那么  $R[x]$ 也是整环, 因而是有单位元的交换环. 因此, 由 \ref{memo_ideal_formats} 中的 \ref{item_ideal_format_3}, $(2, x)$ 可以写成
 \begin{equation}
 (2, x) = \{ 2 p_1 (x) + x p_2 (x) , \quad p_1 (x), \, p_2 (x) \in R[x] \}
 \end{equation}
@@ -3094,10 +3373,10 @@ $(2, x)$ 不是一个主理想.
 \begin{proof}
 用反证法. 假定 $(2, x)$ 是一个主理想, 可以写成 $(2, x) = (p(x))$. 那么 $2 \in (p(x))$, $x \in (p(x))$, 所以有
 \begin{equation}
-2 = q(x) p(x), \quad x = h(x) p(x) \nonumber
+2 = q(x) p(x), \quad x = h(x) p(x).  \nonumber
 \end{equation} 
 
-由于 $2 = q(x) p(x)$, 我们可以得出 $p(x)$ 和 $q(x)$ 一定是常数, 假设 $p(x)$ 的常数为 $a$:
+由于 $2 = q(x) p(x)$, 我们可以得出 $p(x)$ 和 $q(x)$ 一定是常数, 假设 $p(x)$ 的常数为 $a$, 也就是
 \begin{equation}
 2 = q(x) p(x) \Longrightarrow p(x) = a   \nonumber
 \end{equation} 
@@ -3114,9 +3393,9 @@ h(x) = c_0 + c_1 x + \ldots c_k x^k \nonumber
 那么,
 \begin{align*}
 & x = a h(x) = a c_0 + a c_1 x + \ldots c_k x^k  \\
-\Longrightarrow & a c_1 = 1 \\
-\Longrightarrow & a = \pm 1 \\
-\Longrightarrow & p(x) = a = \pm 1 \in (2, x)
+\Longrightarrow & a c_1 = 1, \quad   \mbox{ implicitly by linearly independence of } 1, \, x, \, x^2 , \ldots \\
+\Longrightarrow & a = \pm 1  \quad \mbox{ by } a, c_1  \in R, \mbox{ the ring of integers};  \\
+\Longrightarrow & p(x) = a = \pm 1 \in (2, x) .
 \end{align*}
 
 但是 $\pm 1$ 都不能写成 $2 a_0 + a_1 x + \ldots + a_n x^n$ 这样的形式, 也就是说 $\pm 1 \not \in (2, x)$. 我们得出矛盾, 从而证明了 $(2, x)$ 不是一个主理想.
@@ -3144,14 +3423,14 @@ r( 4 r_1) = (4 r_1) r = 4 (r_1 r) \in I
 \end{proof}
 
 \begin{exercise}
-假设 $R$ 是整数环. 证明 $(3, 7) = (1)$.
+假设 $R$ 是整数环 (ring of integers). 证明 $(3, 7) = (1)$.
 \end{exercise}
 
 
 \begin{proof}
 $(3,7)$ 是 $R$ 的理想, 所以有 $3 \cdot 2 = 6 \in (3,7)$, 而且 $7 - 6 = 1 \in (3, 7)$. 因此 $(1) \subseteq (3,7)$.
 
-另一方面, $(1) = R$, 所以有 $(3, 7) \in (1)$.
+另一方面, $(1) = R$, 所以有 $(3, 7) \subseteq (1)$.
 
 因此, 我们得出
 \begin{equation}
@@ -3166,7 +3445,7 @@ $(3,7)$ 是 $R$ 的理想, 所以有 $3 \cdot 2 = 6 \in (3,7)$, 而且 $7 - 6 = 
 \end{exercise}
 
 \begin{proof}
-如果 $R$ 是有理数域, 那么 $\frac{1}{2} \in R[x]$. 因此, $(2, x)$ 包含有 $2 p_1(x) = 2 \cdot \frac{1}{2} = 1 \in (2, x)$. 因此, $(2,x) = (1) = R$.
+如果 $R$ 是有理数域, 那么 $\dfrac{1}{2} \in  R \subseteq R[x]$. 因此, $(2, x)$ 包含有 $2 p_1(x) = 2 \cdot \dfrac{1}{2} = 1 \in (2, x)$. 因此, $(2,x) = (1) = R$.
 \end{proof}
 
 \begin{memo}
@@ -3190,7 +3469,7 @@ $G_1$, $G_2$, $G_3$, $G_4$ 都是 $R$ 的理想, 也是 $R$ 的所有理想.
 \end{proof}
 
 \begin{exercise}
-一个环 $R$ 的一个非空集合 $S$ 称为 $R$ 的一个 左理想, 如果:
+一个环 $R$ 的一个非空集合 $S$ 称为 $R$ 的一个 左理想 (left ideal), 如果:
 \begin{enumerate}
 \item{$a, b\in S \Longrightarrow a-b \in S$;}
 \item{$a \in S, r \in R \Longrightarrow r a \in S$.}
@@ -3235,15 +3514,15 @@ a l_{21} + b l_{22} & 0
 \end{align*}
 所以 $S$ 是 $F_{22}$ 的一个左理想.
 
-$S$不是 $F_{22}$ 的理想: 如果我们考虑
+$S$不是 $F_{22}$ 的理想: 考虑
 \begin{align*}
-\left( 
+a = \left( 
 \begin{array}{cc}
 1 & 0 \\
 0 & 0
 \end{array}
 \right) \in S, \quad 
-\left( 
+r = \left( 
 \begin{array}{cc}
 1 & 1 \\
 0 & 0
@@ -3253,7 +3532,7 @@ $S$不是 $F_{22}$ 的理想: 如果我们考虑
 
 那么,
 \begin{align*}
-\left( 
+a r = \left( 
 \begin{array}{cc}
 1 & 0 \\
 0 & 0
@@ -3274,25 +3553,25 @@ $S$不是 $F_{22}$ 的理想: 如果我们考虑
 \right) 
 \not \in S
 \end{align*}
-所以, $S$ 不是 $F_{22}$ 的一个理想.
+所以, $S$ 不满足 $a \in S,  r \in F_{22} \Longrightarrow ar \in S$, 因此不是 $F_{22}$ 的一个理想.
 
 \end{proof}
 
 
 \section{剩余类环, 同态与理想(Quotient Ring/Residue Class Ring, Ring Homomorphism, and Ideal)}
 
-理想在环论中的地位 类似于 不变子群在群论中的地位.
+理想 (ideal) 在环论中的地位 类似于 不变子群 (normal subgroup) 在群论中的地位.
 
 \begin{definition}\label{def_residue_class_ideal}
-给定一个环 $R$ 和 $R$ 中 的一个理想 $I$. 如果只考虑加法, 那么 $R$ 做成一个加群, $I$ 做成 $R$ 的一个不变子群. 那么, $I$ 的陪集 (coset)
+给定一个环 $R$ 和 $R$ 中 的一个理想 $I$. 如果只考虑加法, 那么 $R$ 做成一个加群 (additive group), $I$ 做成 $R$ 的一个不变子群 (normal subgroup). 那么, $I$ 的陪集 (coset)
 \begin{align*}
 [a], [b], [c], \ldots
 \end{align*}
 做成一个 $R$ 的分类. 这些类叫做 \textbf{模 $I$ 的剩余类} (residue class of ideal $I$).
 
-这个分类相当于 $R$ 的元之间的一个等价关系, 表示为 ($a$ 同余 $b$ 模 $I$):
+这个分类相当于 $R$ 的元之间的一个等价关系 (equivalence relation), 表示为 ($a$ 同余 $b$ 模 $I$):
 \begin{equation}
-a \equiv b(I) \nonumber
+a \sim b \iff a \equiv b(I) \nonumber
 \end{equation}
 \end{definition}
 
@@ -3301,7 +3580,7 @@ a \equiv b(I) \nonumber
 \begin{equation}
 [a] = \{ a + u , \quad u \in I \} . \nonumber
 \end{equation}
-两个元 $a$ 和 $b$ 同余的条件是:
+而且, 两个元 $a$ 和 $b$ 同余的条件是:
 \begin{equation}
 a \equiv b (I) \iff (a-b) \in I \nonumber
 \end{equation}
@@ -3309,30 +3588,30 @@ a \equiv b (I) \iff (a-b) \in I \nonumber
 \end{memo}
 
 \begin{definition}\label{def_quotient_ring_set}
-$R$是一个环, $I$ 是它的理想. 模 $I$ 的所有剩余类做成一个集合 $\overline{R}$
+$R$是一个环, $I$ 是它的理想. 模 $I$ 的所有剩余类 (residue class of $I$) 做成一个集合 $\overline{R}$
 \begin{equation}
 \overline{R} = \{ [a], [b], [c], \ldots \} \label{eq_set_residue_class_I}
 \end{equation}
 有以下的两个代数运算法则:
 \begin{align*}
-[a] +[b] = [a+b] \\
-[a][b] = [ab]
+ [a] +[b] &= [a+b] , \\
+ [a][b] &= [ab] .
 \end{align*}
-那么, 如 \ref{eq_set_residue_class_I} 中的 模 $I$ 的所有剩余类的集合 $\overline{R}$ 叫做 环 $R$ 的 模 $I$ 的\textbf{剩余类环 (Quotient Ring/Residue Class Ring)}, 表示为 $R/I$.
+那么, 如 \ref{eq_set_residue_class_I} 中的 模 $I$ 的所有剩余类的集合 $\overline{R}$ 叫做 环 $R$ 的 模 $I$ 的\textbf{剩余类环 (quotient ring/residue class ring)}, 表示为 $R/I$.
 \end{definition}
 
 \begin{memo}
-环 $R$ 可以看成一个加群, 而 模 $I$ 可以看成一个不变子群. 因此, 模 $I$ 的剩余类环 $R/I$ 可以看作一个加群. 
+环 $R$ 可以看成一个加群 (additive group), 而 模 $I$ 可以看成一个不变子群 (normal subgroup). 因此, 模 $I$ 的剩余类环 (quotient ring) $R/I$ 可以看作一个加群 (additive group/Abelian group). 
 
-根据我们规定的 代数运算法则: $[a] +[b] = [a+b]$ 和 $[a][b] = [ab]$, 容易验证 $R/I$ 对于乘法来说是闭的, 而且适合结合律 $ [a]([b][c]) = ([a][b])[c] = [abc] $.
+根据我们规定的 代数运算法则: $[a] +[b] = [a+b]$ 和 $[a][b] = [ab]$, 容易验证 $R/I$ 对于乘法来说是闭的, 而且适合结合律 (multiplicative associative law) $ [a]([b][c]) = ([a][b])[c] = [abc] $.
 
-分配律成立: $ [a]([b]+[c]) = [a][b] + [a][c] = [ab] + [ac]$, $([b] + [c]) [a] = [b][a] + [c][a] = [ba] + [ca]$.
+分配律 (distributive law) 成立: $ [a]([b]+[c]) = [a][b] + [a][c] = [ab] + [ac]$, $([b] + [c]) [a] = [b][a] + [c][a] = [ba] + [ca]$.
 
-所以说, $R/I$ 也是一个环.
+所以说, $R/I$ 也是一个环 (ring).
 \end{memo}
 
 \begin{theorem}\label{thm_ring_quotient_ring}
-假定 $R$ 是一个环, $I$ 是它的一个理想. $R/I$ 是 模 $I$ 的剩余类环. 那么有, $R$ 与 $R/I$ 同态. 
+假定 $R$ 是一个环, $I$ 是它的一个理想. $R/I$ 是 模 $I$ 的剩余类环. 那么有, $R$ 与 $R/I$ 同态 (epimorphism/surjective homomorphism). 
 \end{theorem}
 
 \begin{proof}
@@ -3353,7 +3632,7 @@ $R$是一个环, $I$ 是它的理想. 模 $I$ 的所有剩余类做成一个集�
 \end{proof}
 
 \begin{theorem}\label{thm_ring_iso_quotient_ring}
-假定 $R$ 和 $\overline{R}$ 是两个环, 并且 $R$ 和 $\overline{R}$ 同态. 那么, 这个同态映射 $\phi$ 的核 $I$ 是 $R$ 的一个理想, 并且
+假定 $R$ 和 $\overline{R}$ 是两个环, 并且 $R$ 和 $\overline{R}$ 同态. 那么, 这个同态映射 $\phi: R \mapsto \overline{R}$ 的核 $I = ker(\phi)$ 是 $R$ 的一个理想 (ideal), 并且
 \begin{equation}
 R/I \cong \overline{R}
 \end{equation}
@@ -3361,7 +3640,7 @@ R/I \cong \overline{R}
 
 \begin{proof}
 \begin{enumerate}
-\item{先证明 $I$ 是 $R$ 的一个理想: 假定 $a \in I$, $b \in I$. 那么由于 $I$ 是 $\phi$ 的核, 我们有
+\item{先证明 $I=ker(\phi)$ 是 $R$ 的一个理想 (ideal): 假定 $a \in I$, $b \in I$. 那么由于 $I$ 是 $\phi$ 的核, 我们有
 \begin{align*}
 \phi(a) =  \overline{0}, \, \phi(b) = \overline{0} \quad (\overline{0} \mbox{ 是 $\overline{R}$ 的 零元})
 \end{align*}
@@ -3380,17 +3659,17 @@ R/I \cong \overline{R}
 \begin{equation}
 \psi : [a] \mapsto \overline{a} = \phi(a)
 \end{equation}
-那么, $\psi$ 是一个 $R/I$ 和 $\overline{R}$ 之间的同构映射:
+那么, 我们证明 $\psi$ 是一个 $R/I$ 和 $\overline{R}$ 之间的同构映射 (isomorphism):
 \begin{itemize}
 \item{映射 $\psi$ 存在: 
 \begin{align*}
 [a] = [b] \Longrightarrow a - b \in I \Longrightarrow \overline{a - b} = \overline{a} - \overline{b} = \overline{0} \Longrightarrow \overline{a} = \overline{b} 
 \end{align*}
 }
-\item{$\psi$ 是一个满射:
+\item{$\psi$ 是一个满射 (surjective):
 任意的一个 $\overline{a} = \phi(a)$, 一定有 对应的 $[a] \in R/I$.
 }
-\item{$\psi$ 是一个单射:
+\item{$\psi$ 是一个单射 (injective):
 \begin{align*}
 [a] \neq [b] \Longrightarrow a - b \not \in I \Longrightarrow \overline{a - b} = \overline{a} - \overline{b} \neq \overline{0} \Longrightarrow \overline{a} \neq \overline{b} 
 \end{align*}
@@ -3410,32 +3689,32 @@ $\psi$ 是同构, 因为:
 \end{proof}
 
 \begin{memo}
-定理 \ref{thm_ring_quotient_ring} 对应 定理 \ref{thm_group_quotient_group}. 定理 \ref{thm_ring_iso_quotient_ring} 对应 定理 \ref{thm_group_quotient_group_inv}.
+定理 \ref{thm_ring_quotient_ring} 对应 定理 \ref{thm_group_quotient_group}. 定理 \ref{thm_ring_iso_quotient_ring} 对应 定理 \ref{thm_group_quotient_group_inv} (First Isomorphism Theorem).
 
 由此, 我们可以看出 理想 和 不变子群 的平行地位.
 \end{memo}
 
 \begin{example}
-给定一个整数 $n$, 考虑 整数环 $R$ 的剩余类环. 整数的剩余类环是利用这个整数 $n$ 和 整数环 $R$ 的元之间的等价关系
+给定一个整数 $n$, 考虑 整数环 (ring of integers) $R$ 的剩余类环 (quotient ring). 整数的剩余类环是利用这个整数 $n$ 和 整数环 $R$ 的元之间的等价关系 (equivalence relation)
 \begin{align*}
-a \equiv b (n)
+a \sim b \iff a \equiv b (n)
 \end{align*}
 也就是 条件
 \begin{align*}
-n \mid a - b .
+a \sim b \iff n \mid a - b .
 \end{align*}
 
 
 同时, 这个等价关系和利用 $R$ 的主理想 $(n)$ 建立的等价关系是一样的:
 \begin{align*}
-a \equiv b ( (n) )
+a \sim b \iff a \equiv b ( (n) )
 \end{align*}
 也就是 条件 
 \begin{align*}
-a - b \in (n) 
+a \sim b \iff a - b \in (n) 
 \end{align*}
 
-所以说, 模 $n$ 的整数的剩余类环就是 $R/(n)$.
+所以说, 模 $n$ 的整数的剩余类环 (ring of integers modulo $n$) 就是 $R/(n)$.
 
 而实际上, 一般的剩余类环是整数的剩余类环的推广.
 
@@ -3444,10 +3723,10 @@ a - b \in (n)
 \begin{theorem}\label{theorem_subring_image_preimage_homomorphism_invariance}
 在环 $R$ 和 $\overline{R}$ 的一个同态映射之下,
 \begin{enumerate}
-\item{$R$ 的一个子环 $S$ 的象 $\overline{S}$ 是 $\overline{R}$ 的一个子环; }
-\item{$R$ 的一个理想 $I$ 的象 $\overline{I}$ 是 $\overline{R}$ 的一个理想;}
-\item{$\overline{R}$ 的一个子环 $\overline{S}$ 的逆象 $S$ 是 $R$ 的一个子环; }
-\item{$\overline{R}$ 的一个理想 $\overline{I}$ 的逆象 $I$ 是 $R$ 的一个理想. }
+\item{$R$ 的一个子环 (subring) $S$ 的象 $\overline{S}$ 是 $\overline{R}$ 的一个子环 (subring); }
+\item{$R$ 的一个理想 (ideal) $I$ 的象 $\overline{I}$ 是 $\overline{R}$ 的一个理想 (ideal);}
+\item{$\overline{R}$ 的一个子环 (subring) $\overline{S}$ 的逆象 $S$ 是 $R$ 的一个子环 (subring); }
+\item{$\overline{R}$ 的一个理想 (ideal) $\overline{I}$ 的逆象 $I$ 是 $R$ 的一个理想 (ideal). }
 \end{enumerate}
 \end{theorem}
 
@@ -3461,10 +3740,13 @@ a - b \in (n)
 [x] +[y] =[x+y], \quad [x][y] = [xy]
 \end{align*}
 
-证明 $[0]$ 是 $R$ 的一个理想, 而且给定的类刚好是模 $[0]$ 的 $R$ 剩余类.
+证明 $[0]$ 是 $R$ 的一个理想, 而且给定的类刚好是模 $[0]$ 的 $R$ 剩余类 $R/[0]$ .
 \end{exercise}
 
 \begin{proof}
+
+证明分两步.
+
 \begin{itemize}
 \item{首先, 我们证明: $[0]$ 是 $R$ 的一个理想.
 
@@ -3472,11 +3754,11 @@ a - b \in (n)
 \begin{align*}
 [u-v] = [u] -[v] = [0] - [0] = [0] \\
 [ru] = [r] [u] = [r] [0] = [r \, 0] = [0] \\
-[u r] = [u][r] = [0] [r] = [0 \, r] =  [0]
+[u r] = [u][r] = [0] [r] = [0 \, r] =  [0] .
 \end{align*}
 因此, $u - v \in [0]$, $r u \in [0]$, $u r \in [0]$. 所以, $[0]$ 是 $R$ 的一个理想.
 }
-\item{下面, 我们证明: 给定的类刚好是模 $[0]$ 的 $R$ 剩余类.
+\item{下面, 我们证明: 给定的类刚好是模 $[0]$ 的 $R$ 的剩余类.
 
 假设 $[u] =[v]$. 那么, 
 \begin{align*}
@@ -3495,28 +3777,31 @@ a - b \in (n)
 综上所述, 
 $$[u] = [v] \iff u - v \in [0]. $$
 
-也就是说, 给定的类刚好是 模 $[0]$ 的 $R$ 剩余类.
+也就是说, 给定的类刚好是 模 $[0]$ 的 $R$ 的剩余类 $R/[0]$.
 }
 \end{itemize}
 
 \end{proof}
 
 \begin{exercise}
-假定 $\phi$ 是 环 $R$ 到 环 $\overline{R}$ 的一个同态满射. 证明: $\phi$ 是 环 $R$ 到 环 $\overline{R}$ 的同构映射, 当且只当 $\phi$ 的核 是 $R$ 的零理想的时候.
+假定 $\phi$ 是 环 $R$ 到 环 $\overline{R}$ 的一个同态满射 (epimorphism). 证明: $\phi$ 是 环 $R$ 到 环 $\overline{R}$ 的同构映射 (isomorphism), 当且只当 (if and only if) $\phi$ 的核 是 $R$ 的零理想的时候 $ker(\phi) = \{ 0\}$.
 \end{exercise}
 
 \begin{proof}
-假设 $\phi(a) = \overline{a}$, $a \in R$, $\overline{a} \in \overline{R}$. 如果 $\phi$ 是一个同构映射, 那么 $\phi$ 是一个 一一映射. 所以, 在 $\phi$ 之下, 只有 $R$ 的零元 $0$ 是 $\overline{R}$ 的零元 $\overline{0}$ 的 逆象. 也就是说, $\phi$ 的核是 $R$ 的零理想 $\{0\}$.
+假设 同态满射 是$\phi(a) = \overline{a}$, $a \in R$, $\overline{a} \in \overline{R}$. 如果 $\phi$ 是一个同构映射, 那么 $\phi$ 是一个 一一映射. 所以, 在 $\phi$ 之下, 只有 $R$ 的零元 $0$ 是 $\overline{R}$ 的零元 $\overline{0}$ 的 逆象. 也就是说, $\phi$ 的核是 $R$ 的零理想 $\{0\}$.
 
-反过来假设 $\phi$ 的核 是 $R$ 的零理想 $\{ 0 \}$. 那么, $R$ 的任意非零元 $c \neq 0$, 它的象有 $\overline{c} \neq 0$. 那么,
+反过来假设 $\phi$ 的核 是 $R$ 的零理想 $\{ 0 \}$. 那么, $R$ 的任意非零元 $c \neq 0$, 它的象有 $\overline{c} \neq 0$. 
+
+因此,
 \begin{align*}
 & a \neq b,\, a, b \in R \\
 \Longrightarrow & a - b \neq 0 \\
 \Longrightarrow & \overline{a} - \overline{b} = \overline{a - b} \neq \overline{0} \\
 \Longrightarrow & \overline{a} \neq \overline{b}
 \end{align*}
-所以, $\phi$ 是 一个单射. 也就是说, $\phi$ 是一个同构映射.
+所以, $\phi$ 是 一个单射 (injective). 也就是说, $\phi$ 是一个同构映射 (isomorphism).
 \end{proof}
+
 
 \begin{exercise}\label{exercise_quotient_ring_R_1_i}
 假定 $R$ 是 所有复数 $a + b i $, $a$, $b$ 是整数, 做成的环. 环 $R/(1+i)$ 有多少元?
@@ -3527,7 +3812,7 @@ $$[u] = [v] \iff u - v \in [0]. $$
 
 如果 $a+bi \in (1+i)$, 那么 $a+bi$ 可以写成: 
 \begin{align*}
-(a+bi) = (x + yi)(1+i) = (x-y) + (x+y)i , \quad \forall x, y \in \mathbb{Z}
+(a+bi) = (x + yi)(1+i) = (x-y) + (x+y)i , \quad \forall x, y \in \mathbb{Z} .
 \end{align*}
 $x-y$ 和 $x+y$ 为整数. 如果 $x$ 和 $y$ 同为奇数或者同为偶数, 那么 $a$ 和 $b$ 同为偶数; 如果 $x$ 和 $y$ 一奇一偶, 那么  $a$ 和 $b$ 同为奇数. 因此, 我们得出 $a$ 和 $b$ 必须有相同的 奇偶性.
 
@@ -3546,7 +3831,7 @@ x = \frac{a+b}{2}, \quad y = \frac{b-a}{2}
 \end{align*}
 也就是说, $a+bi$ 可以写成 $(x + yi)(1+i)$ 的形式, 其中 $x+yi \in R$. 所以有 $a+bi \in (1+i)$. 这时候, 我们有
 \begin{align*}
-[a+bi] = [0] , \quad \mbox{或者说 } \, a + bi \equiv 0 ( (1+i) )
+[a+bi] = [0] , \quad \mbox{或者说 } \, \, a + bi \equiv 0 ( (1+i) ) .
 \end{align*}
 
 下一步, 考虑 $a$ 和 $b$ 一奇一偶. 那么有
@@ -3559,37 +3844,38 @@ a + b i = 1 + u, \quad u \in (1+i)
 \end{align*}
 也就是有
 \begin{align*}
-[a+bi] = [1] , \quad \mbox{或者说 } \, a + bi \equiv 1 ( (1+i) )
+[a+bi] = [1] , \quad \mbox{或者说 } \, \, a + bi \equiv 1 ( (1+i) ) .
 \end{align*}
 
 综上所述, 环 $R/(1+i)$ 有两个元素 $[0]$ 和 $[1]$.
 
 \end{proof}
 
+
 \section{最大理想(Maximal Ideal)}
 
-我们讨论两种由一个交换环 得到 域 的重要方法. 第一种是利用 最大理想 的方法, 在本节讨论.
+我们讨论两种由一个交换环 得到 域 的重要方法. 第一种是利用 最大理想 (maximal ideal) 的方法, 在本节讨论.
 
-\begin{definition}
-一个环 $R$ 的一个不等于 $R$ 的理想 $I$ 叫做一个 \textbf{最大理想(Maximal Ideal)}, 如果除了 $R$ 和 $I$ 之外, 没有包含 $I$ 的理想.
+\begin{definition}\label{def_maximal_ideal}
+一个环 $R$ 的一个不等于 $R$ 的理想 $I$ 叫做一个 \textbf{最大理想(maximal ideal)}, 如果除了 $R$ 和 $I$ 之外, 没有包含 $I$ 的理想.
 \end{definition}
 
 \begin{memo}\label{memo_maximal_ideal}
-如果 $I$ 是 $R$ 的最大理想, 那么, 不存在另外一个理想 $J$ 在 $I$ 和 $R$ 的中间: 
+可以这样去理解最大理想: 如果 $I$ 是 $R$ 的最大理想 (maximal ideal), 那么, 在 $I$ 和 $R$ 的中间 就不存在另外一个理想 $J$: 
 \begin{align*}
 \nexists J, \mbox{ s.t. } I \subset J \subset R
 \end{align*}
 \end{memo}
 
 \begin{example}\label{example_prime_number_max_ideal}
-考虑整数环 $R$. 由一个素数 $p$ 生成的主理想 $(p)$ 是一个最大理想. 
+考虑整数环 (ring of integers) $R$. 由一个素数 $p$ 生成的主理想 (principle ideal, 见定义 \ref{def_principle_ideal}) $(p)$ 是一个最大理想 (maximal ideal, 见定义 \ref{def_maximal_ideal}). 
 
 \end{example}
 
 \begin{proof}
-假定 $J$ 是一个不等于 $(p)$ 的 $R$ 的理想, 并且 $(p) \subset J$. 那么, $J$ 一定包含一个不能被 $p$ 整除的 整数 $q$. 由于 $p$ 是 素数, $q$ 和 $p$ 互素, 所以存在整数 $s$ 和 $t$, 使得
+假定 $J$ 是一个不等于 $(p)$ 的 $R$ 的理想, 并且 $(p) \subset J$. 那么, $J$ 一定包含一个不能被 $p$ 整除的 整数 $q$. 由于 $p$ 是 素数, $q$ 和 $p$ 互素, 所以 $gcd(p, q) = 1$. 那么\footnote{根据 "初等数论, 闵嗣鹤 严士健 第三版" 1.3 的 推论1.1: 任意两个不全为零的整数 $a$, $b$, 存在两个整数 $s$, $t$ 使得 $as + bt = gcd(a,b)$. } 存在整数 $s$ 和 $t$, 使得
 \begin{equation}
- s p + t q = 1 \nonumber
+ s p + t q = gcd(p, q) =  1 . \nonumber
 \end{equation} 
 
 因为 $p \in J$ 和 $q \in J$, 而且 $J$ 是理想, 所以有
@@ -3599,56 +3885,66 @@ s p + t q \in J \Longrightarrow 1 \in J \Longrightarrow J = R . \nonumber
 
 \end{proof}
 
-我们可以利用最大理想, 从一个环构建一个域.
+我们可以利用最大理想 (maximal ideal), 从一个环 (ring) 构建一个域 (field).
 
 
 \begin{lemma}\label{lemma_max_ideal_quotient_ring}
-如果 $I$ 是 环 $R$ 的一个理想, 那么 剩余类环 $R/I$ 除了零理想和单位理想之外没有别的理想, 当且仅当 $I$ 是 最大理想的时候.
+如果 $I$ 是 环 $R$ 的一个理想 (ideal), 那么 剩余类环 (quotient ring) $R/I$ 除了零理想 (zero ideal $\{ 0 \}$ ) 和单位理想 (unit ideal, i.e., the ring itself) 之外没有别的理想, 当且仅当 (if and only if) $I$ 是 最大理想 (maximal ideal) 的时候.
 \end{lemma}
 
+\begin{memo}
+$R/I$ 是一个除环 (division ring), 那么根据 定理 \ref{theorem_2_7_1_division_ring_two_ideals}, $R/I$ 除了零理想 (zero ideal $\{ 0 \}$ ) 和单位理想 (unit ideal, i.e., the ring itself) 之外没有别的理想.
+
+但是 定理 \ref{theorem_2_7_1_division_ring_two_ideals} 的逆定理不成立: 如果 $R/I$ 除了零理想 (zero ideal $\{ 0 \}$ ) 和单位理想 (unit ideal, i.e., the ring itself) 之外没有别的理想, 那么 $R/I$ 不一定是一个除环 (division ring), 见 备注 \ref{memo_simple_ring_not_division_ring}.
+
+因此, 引理 \ref{lemma_max_ideal_quotient_ring} 可以表述为: 给定 $I$ 是 环 $R$ 的一个理想 (ideal), 有 剩余类环 (quotient ring) $R/I$:
+\begin{enumerate}
+\item{如果 剩余类环 (quotient ring) $R/I$ 是 一个除环 (division ring), 那么, $R/I$ 除了零理想 (zero ideal $\{ 0 \}$ ) 和单位理想 (unit ideal, i.e., the ring itself) 之外没有别的理想, 从而得出, $I$ 是 最大理想 (maximal ideal).}
+\item{如果 $I$ 是 最大理想 (maximal ideal), 那么 $R/I$ 除了零理想 (zero ideal $\{ 0 \}$ ) 和单位理想 (unit ideal, i.e., the ring itself) 之外没有别的理想.}
+\end{enumerate}
+\end{memo}
+
 \begin{proof}
-假设 $R$ 到 $\overline{R} = R/I$ 的同态满射为 $\phi$:
+根据 定理 \ref{thm_ring_quotient_ring}, 存在 $R$ 到 $\overline{R} := R/I$ 的同态满射 (epimorphism) $\phi$:
 \begin{align*}
 \phi: R \longrightarrow \overline{R} = R/I
 \end{align*}
 $R/I$ 中的 零元 $[0] \in R/I $ 可以记为 $\overline{0} \in \overline{R} $.
 
 \begin{itemize}
-\item{$\Longrightarrow$: 假设 $I$ 是最大理想. 并且假设 $\overline{J} \neq \{ \overline{0} \}$ 是 $\overline{R}$ 中的一个非零理想. 
+\item{$\Longrightarrow$: 假设 $I$ 是最大理想 (maximal ideal). 并且假设 $\overline{J} \neq \{ \overline{0} \}$ 是 $\overline{R}$ 中的一个非零理想. 
 
 那么, 由 定理 \ref{theorem_subring_image_preimage_homomorphism_invariance}, $\overline{J}$ 在 $\phi$ 中的逆象 $J$ 是 $R$ 的 理想. 
 
-根据 $\overline{R}= R/I$, 我们知道 $\phi(I) = \{ \overline{0} \} = \{ [0] \}$. 而且, 因为 $\overline{J}$ 是 $\overline{R}$ 的理想, 我们得出 零理想 包含在 $\overline{J}$ 里面: $ \{ \overline{0} \} \subset \overline{J} $. 所以有:
+我们知道 $\phi(I) = \{ \overline{0} \} $. 因为 $\overline{J}$ 是 $\overline{R}$ 的理想, 我们得出 零理想 (zero ideal) 包含在 $\overline{J}$ 里面: $ \{ \overline{0} \} \subset \overline{J} $. 所以有:
 \begin{align*}
-I = \phi^{-1} (\{ [0] \}) \subset \phi^{-1} (\overline{J}) = J \Longrightarrow I \subset J
+I = \phi^{-1} (\{ \overline{0} \}) \subset \phi^{-1} (\overline{J}) = J \Longrightarrow I \subset J
 \end{align*}
 
-根据假设 $I$ 是 $R$ 的最大理想, 我们得出 $J = R$.
+根据假设 $I$ 是 $R$ 的最大理想 (maximal ideal), 因此有 $J = R$.
 
-因为 $\phi$ 是 $R$ 到 $\overline{R} =  R/I$ 的满射, 我们有 $\overline{J} = \overline{R} $. 因此, $R/I$ 中只有 零理想 $\{ \overline{0} \}$ 和单位理想 $\overline{R}$.
+因为 $\phi$ 是 $R$ 到 $\overline{R} $ 的满射, 我们有 $\overline{J} = \overline{R} $. 因此, $\overline{R} $ 中只有 零理想 $\{ \overline{0} \}$ 和单位理想 $\overline{R}$.
 }
-\item{$\Longleftarrow$: 我们证明其逆否命题: 假设 $I$ 不是最大理想, 我们要证明 在 $R/I$ 中存在 不是零理想 也不是单位理想的其他理想.
+\item{$\Longleftarrow$: 我们证明其逆否命题 (contrapositive): 假设 $I$ 不是最大理想 (maximal ideal), 我们要证明 在 $R/I$ 中存在 不是零理想 (zero ideal) 也不是单位理想 (unit ideal) 的其他理想:
 
-根据我们的假设, 因为 $I$ 不是最大理想, 那么有 一个 $R$ 的理想 $J$, 使得 $I \subset J \subset R$ 并且有 $J \neq R$. 
-
-根据 定理 \ref{theorem_subring_image_preimage_homomorphism_invariance}, $\overline{J} = \phi(J) $ 是 $\overline{R} = R/I$ 的一个理想.
+如果 $I$ 不是最大理想 (maximal ideal), 那么存在 一个 $R$ 的理想 $J$, 使得 $I \subset J \subset R$ 并且有 $J \neq R$. 根据 定理 \ref{theorem_subring_image_preimage_homomorphism_invariance}, $\overline{J} = \phi(J) $ 是 $\overline{R} $ 的一个理想.
 
 \begin{enumerate}
-\item{由于 $I$ 是 $J$ 的真子集, $I \subset J$, $J$ 中一定包含一个不属于 $I$ 的元. 我们知道 $\phi(I) = \{ \overline{0} \}$, 那么因为 $J$ 中包含不属于 $I$ 的元, 所以得出 $\overline{J} \neq \{ \overline{0 }\}$. 也就是说 $\overline{J}$ 不是 $\overline{R} = R/I$ 中的 零理想. [由于 $J$ 大于 $I$, 所以 $\overline{J} \neq \overline{I} = \{ \overline{0} \}$.]}
-\item{我们还需要说明 $\overline{J} \neq \overline{R} = R/I$. 再次用反证法: 假设 $\overline{J} = \overline{R} = R/I$, 那么 对于任意的 $r \in R$, 可以找到对应的元 $j \in J$ 使得 
+\item{由于 $I$ 是 $J$ 的真子集, $I \subset J$, $J$ 中一定包含一个不属于 $I$ 的元. 我们知道 $\phi(I) = \{ \overline{0} \}$, 那么因为 $J$ 中包含不属于 $I$ 的元, 所以有 $\overline{J} \supset \{ \overline{0 }\}$. 也就是说 $\overline{J}$ 不是 $\overline{R} $ 中的 零理想.}
+\item{我们还需要说明 $\overline{J} \neq \overline{R} $. 再次用反证法: 假设 $\overline{J} = \overline{R} $, 那么 对于任意的 $r \in R$, 可以找到对应的元 $j \in J$ 使得 
 \begin{align*}
 \phi(r) = [r] \in \overline{R} =  \overline{J} \ni [j] = \phi(j)
 \end{align*}
 也就是说
 \begin{align*}
-[r] = [j] \Longrightarrow r - j \in I \subset J
+[r] = [j] \Longrightarrow r - j \in I \subset J .
 \end{align*}
 由于 $J$ 是 $R$ 的理想, 加上 $j \in J$, 可以得出
 \begin{align*}
-j + (r - j) \in J \Longleftarrow r \in J
+j + (r - j) \in J \Longleftarrow r \in J.
 \end{align*}
 
-所以说, 对于任意 $r \in R$, 有 $r \in J$, 所以 $R \subseteq J$, 也就是说 $R = J$. 这与我们之前的假定 $J \neq R$ 相矛盾. 因此, 我们证明了 $\overline{J} \neq \overline{R} = R/I$.}
+所以说, 对于任意 $r \in R$, 有 $r \in J$, 也就是 $R \subseteq J$. 结合之前的假设 $J \subset R$, 可以得出 $R = J$. 但是这与我们之前的假定 $J \neq R$ 相矛盾. 因此, 我们证明了 $\overline{J} \neq \overline{R} $.}
 \end{enumerate}
 
 综上所述, 我们证明了逆否命题: 如果 $I$ 不是最大理想, 那么存在 $\overline{R}$ 上的一个理想 $\overline{J}$, $\overline{J}$ 既不是 零理想  也不是 单位理想.
@@ -3656,10 +3952,10 @@ j + (r - j) \in J \Longleftarrow r \in J
 \end{itemize}
 \end{proof}
 
-一个域只有 零理想 和 单位理想. 反过来, 一个只有这两个理想的环 不一定是域. 我们需要进一步限定条件.
+一个域只有 零理想 和 单位理想. 反过来, 一个只有这两个理想的环 不一定是域 (也不一定是除环). 因此, 我们需要进一步限定条件.
 
 \begin{lemma}\label{lemma_max_ideal_to_field}
-如果一个有单位元的交换环 $R$ 除了 零理想和单位理想以外没有其他的理想, 那么 $R$ 一定是一个域.
+如果一个有单位元 (multiplicative identity) 的交换环 (commutative ring) $R$ 除了 零理想 (zero ideal) 和单位理想 (unit ideal) 以外没有其他的理想, 那么 $R$ 一定是一个域 (field).
 \end{lemma}
 
 \begin{proof}
@@ -3671,11 +3967,18 @@ j + (r - j) \in J \Longleftarrow r \in J
 也就是说, $R$ 上的任意一个非零元 $a$ 都有一个逆元 $a' \in R$. 因此可得, $R$ 是一个域.
 \end{proof}
 
-由上述引理 \ref{lemma_max_ideal_quotient_ring} 和 引理 \ref{lemma_max_ideal_to_field}, 我们立刻得出
+一个域 (field) 一定是一个除环 (division ring). 因此, 引理 \ref{lemma_max_ideal_to_field} 有以下的推论:
+\begin{corollary}
+如果一个有单位元 (multiplicative identity) 的交换环 (commutative ring) $R$ 除了 零理想 (zero ideal) 和单位理想 (unit ideal) 以外没有其他的理想, 那么 $R$ 一定是一个除环 (division ring).
+\end{corollary}
+
+
+
+由上述引理 \ref{lemma_max_ideal_quotient_ring} 和 引理 \ref{lemma_max_ideal_to_field}, 我们立刻得出:
 
 
 \begin{theorem}\label{theorem_max_ideal_to_field}
-假定 $R$ 是一个有单位元的交换环, $I$ 是 $R$ 的一个理想. 那么 $R/I$ 是一个域, 当且仅当 $I$ 是一个最大理想的时候.
+假定 $R$ 是一个有单位元 (multiplicative identity) 的交换环 (commutative ring), $I$ 是 $R$ 的一个理想 (ideal). 那么 $R/I$ 是一个域 (field), 当且仅当 (if and only if) $I$ 是一个最大理想 (maximal ideal) 的时候.
 \end{theorem}
 
 \begin{memo}
@@ -3683,7 +3986,7 @@ j + (r - j) \in J \Longleftarrow r \in J
 \end{memo}
 
 \begin{example}
-$R$ 是整数环. $(p)$ 是由素数 $p$ 生成的主理想. 那么由上面的例子 \ref{example_prime_number_max_ideal}, 我们知道 $(p)$ 是 $R$ 的一个最大理想. 因此 $R/(p)$ 是 一个域. 这个结果已经在上述 例子 \ref{example_mod_prime_number_field} 中有过说明.
+$R$ 是整数环 (ring of integers). $(p)$ 是由素数 $p$ 生成的主理想. 那么由上面的例子 \ref{example_prime_number_max_ideal}, 我们知道 $(p)$ 是 $R$ 的一个最大理想 (maximal ideal). 因此 $R/(p)$ 是 一个域 (field). 这个结果已经在上述 例子 \ref{example_residue_ring_mod_prime_number_field} 中说明过.
 \end{example}
 
 \begin{exercise}
@@ -3710,37 +4013,37 @@ R/(1+i) = \{ [0], [1] \}
 \end{align*}
 其中 $[0] = \{0 + x| x \in (1+i)\}$, $[1] = \{1 + x| x \in (1+i)\}$. 
 
-因此, $R/(1+i)$ 和 模 $2$ 的剩余类环同构. 由于 $2$ 是 素数, 根据 例子 \ref{example_mod_prime_number_field} 的讨论, 模 $2$ 的剩余类环是一个域, 因此, $R/(1+i)$ 也是一个域.
+因此, $R/(1+i)$ 和 模 $2$ 的剩余类环同构. 由于 $2$ 是 素数, 根据 例子 \ref{example_residue_ring_mod_prime_number_field} 的讨论, 模 $2$ 的剩余类环是一个域, 因此, $R/(1+i)$ 也是一个域.
 \end{proof}
 
 
 \begin{exercise}
-环 $R$ 上的一个 一元多项式环 $R[x]$. 当 $R$ 是整数环的时候, $R[x]$ 的主理想 $(x)$ 是不是一个最大理想? 当 $R$ 是有理数域的时候呢?
+给定 环 $R$ 上的一个 一元多项式环 $R[x]$. 当 $R$ 是整数环 (ring of integers) 的时候, $R[x]$ 的主理想 (principle ideal) $(x)$ 是不是一个最大理想 (maximal ideal)? 当 $R$ 是有理数域 (field of rational numbers) 的时候呢?
 \end{exercise}
 
 \begin{proof}
 考虑 $R[x]$ 的理想 $(2,x)$. $(2,x)$ 可以写成
 \begin{align*}
-(2,x) = \{  2 p_1 (x) + x p_2 (x), \quad p_1 (x), \, p_2(x) \in R[x] \}
+(2,x) = \{  2 p_1 (x) + x p_2 (x) \, | \,  p_1 (x), \, p_2(x) \in R[x] \}
 \end{align*}
 类似的, $(x)$ 可以写成
 \begin{align*}
-(x) = \{ x f(x), \quad f(x) \in R[x] \}
+(x) = \{ x f(x) \, | \,  f(x) \in R[x] \} .
 \end{align*}
 显然有
 \begin{align*}
-(x) \subseteq (2,x), \\
-2 \in (2, x), \, 2 \not \in (x) \Longrightarrow (x) \subset (2,x)
+& (x) \subseteq (2,x), \\
+& 2 \in (2, x), \, 2 \not \in (x) \Longrightarrow (x) \subset (2,x)
 \end{align*}
 也就说, $(x)$ 是 $(2,x)$ 的真子集.
 
 \begin{itemize}
-\item{当 $R$ 是 整数环的时候, 有 备注 \ref{memo_2_x_not_max_ideal}, 我们知道 $(2,x)$ 不是一个主理想, 它不能写成 $(p(x))$的形式, $\forall p(x) \in R[x]$. 而 $1 \in R[x]$, 也就是说
+\item{当 $R$ 是 整数环的时候, 有 备注 \ref{memo_2_x_not_max_ideal}, 我们知道 $(2,x)$ 不是一个主理想 (principle ideal), 它不能写成 $(p(x))$ 的形式, $\forall p(x) \in R[x]$. 而 $1 \in R[x]$, 也就是说
 \begin{align*}
 (2, x) \neq (1) = R[x]
 \end{align*}
 
-综上所述, 我们证明了 $(x) \subset (2,x) \subset R$. 所以, $(x)$ 不是 $R[x]$ 的一个最大理想.
+综上所述, 我们证明了 $(x) \subset (2,x) \subset R[x]$. 所以, $(x)$ 不是 $R[x]$ 的一个最大理想.
 }
 \item{当 $R$ 是有理数域的时候, 假设 $I$ 是 $R[x]$ 的一个理想, 并且 $(x) \subset I$. 
 
@@ -3759,11 +4062,11 @@ R/(1+i) = \{ [0], [1] \}
 
 
 \begin{exercise}
-把所有偶数做成一个环 $R$. 证明: $(4)$ 是 $R$ 的最大理想, 但是 $R/(4)$ 不是一个域.
+把所有偶数做成一个环 $R$. 证明: $(4)$ 是 $R$ 的最大理想 (maximal ideal), 但是 $R/(4)$ 不是一个域 (field).
 \end{exercise}
 
 \begin{proof}
-$R$ 是交换环, 没有单位元. 所以, 它的主理想的元可以写成 $ra + na $, $r \in R$, $n \in \mathbb{Z}$ 的形式. 
+$R$ 是交换环 (commutative ring), 没有单位元 (multiplicative identity). 所以, 它的主理想的元可以写成 $ra + na $, $r \in R$, $n \in \mathbb{Z}$ 的形式. 
 
 具体到 $(4)$, 我们有
 \begin{align*}
@@ -3786,16 +4089,18 @@ $R$ 是交换环, 没有单位元. 所以, 它的主理想的元可以写成 $ra
 \end{proof}
 
 
-\begin{exercise}
-考虑有理数域 $F$ 上的 全部 $2 \times 2$ 矩阵环 $F_{22}$. 证明: $F_{22}$ 只有零理想和单位理想, 但不是一个除环.
+\begin{exercise}\label{exercise_simple_ring_not_division_ring}
+考虑有理数域 $F$ 上的 所有的 $2 \times 2$ 矩阵 所组成的环 $M_{2} (F)$.
+
+证明: $M_{2} (F)$ 只有零理想 (zero ideal) 和单位理想 (unit ideal), 但不是一个除环 (division ring).
 \end{exercise}
 
 \begin{proof}
-矩阵环 $F_{22}$ 是非交换环, 有单位元.
+矩阵环 $M_{2} (F)$ 是非交换环 (non-commutative ring), 有单位元 (multiplicative identity).
 
-假设 $I$ 是 $F_{22}$ 的一个非零理想, $I \neq \{ 0 \}$. $I$ 含有 $2$ 阶矩阵 $A \neq 0$.
+假设 $I$ 是 $M_{2} (F)$ 的一个非零理想, $I \neq \{ 0 \}$. $I$ 含有 $2 \times 2$ 的矩阵 $A \neq 0$.
 \begin{itemize}
-\item{如果 $rank(A) = 2$, 那么 $A$ 有逆元 $A^{-1} \in F_{22}$. 我们有
+\item{如果 $rank(A) = 2$, 那么 $A$ 有逆元 $A^{-1} \in M_{2} (F)$. 我们有
 \begin{align*}
 A^{-1} A = \left(
 \begin{array}{cc}
@@ -3803,10 +4108,10 @@ A^{-1} A = \left(
 0 & 1
 \end{array}
 \right)
-= E \in I \Longrightarrow I = (E) = F_{22}
+= E \in I \Longrightarrow I = (E) = M_{2} (F) .
 \end{align*}
 }
-\item{如果 $rank(A)=1$, 那么存在初等矩阵 $P, Q \in F_{22}$, 使得
+\item{如果 $rank(A)=1$, 那么存在初等矩阵 $P, Q \in M_{2} (F)$, 使得
 \begin{align*}
 P A Q = \left(
 \begin{array}{cc}
@@ -3814,11 +4119,30 @@ P A Q = \left(
 0 & 0
 \end{array}
 \right)
-\in I
+\in I .
 \end{align*}
 
 同时, 有
+
 \begin{align*}
+P_1 = \left(
+\begin{array}{cc}
+0 & 1 \\
+1 & 0
+\end{array}
+\right) \in M_{2} (F),
+\quad
+Q_1 = 
+\left(
+\begin{array}{cc}
+0 & 1 \\
+1 & 0
+\end{array}
+\right) \in M_{2} (F),
+\end{align*}
+使得
+\begin{align*}
+P_1 \cdot PAQ \cdot Q_1 = 
 \left(
 \begin{array}{cc}
 0 & 1 \\
@@ -3868,11 +4192,11 @@ P A Q = \left(
 \end{array}
 \right)
 = E \in I
-\Longrightarrow I = (E) = F_{22}
+\Longrightarrow I = (E) = M_{2} (F) .
 \end{align*}
 }
 \end{itemize}
-综上所述, $F_{22}$ 只有零理想和单位理想.
+综上所述, $M_{2} (F)$ 只有零理想和单位理想.
 
 
 我们知道
@@ -3895,9 +4219,9 @@ P A Q = \left(
 0 & 0 \\
 0 & 0
 \end{array}
-\right)
+\right) .
 \end{align*}
-所以说, $F_{22}$ 有零因子, 因此不是一个除环.
+所以说, $M_{2} (F)$ 有零因子 (zero divisor), 因此不是一个除环 (division ring).
 
 \end{proof}
 
@@ -3906,28 +4230,30 @@ P A Q = \left(
 下面讨论由一个环得出一个域的第二种方法.
 
 \begin{memo}
-普通的整数的集合作成一个环 (整数环), 有理数的集合 做成一个域 (有理数域), 而整数环是有理数域的一个子环.
+考虑 整数环 (ring of integers) 是由普通的整数做成的集合, 而 有理数作成的集合 做成一个 有理数域 (field of rational numbers). 也就是说, 整数环 (ring of integers) 是有理数域 (field of rational numbers) 的一个子环 (subring).
 
-从这个发现出发, 我们问: 给定一个环 $R$, 嫩股不能找到一个除环或者是域包含这个环 $R$?
+从这个发现出发, 我们问: 给定一个环 $R$, 嫩股不能找到一个除环 (division ring) 或者是域 (field) 包含这个环 $R$?
 
-在备注 \ref{memo_division_ring_properties} 中, 我们讨论了, 一个除环或者是一个域里面没有零因子. 因此, 一个环 $R$ 如果能被一个除环或者一个域包含, 那么 $R$ 不能有零因子.
+在备注 \ref{memo_division_ring_properties} 中, 我们讨论了, 一个除环 (division ring) 或者是一个域 (field) 里面没有零因子 (has no zero divisors). 因此, 一个环 $R$ 如果能被一个除环 (division ring) 或者一个域 (field) 包含, 那么 $R$ 不能有零因子 ($R$ has no zero divisor).
 
-接下来, 我们问: 如果一个环 $R$ 是非交换环,那么, 如果 $R$ 没有零因子, 是不是能推出 $R$ 能包含在一个除环或者是一个域里面呢? 答案是: 不可以. 因为, 一个无零因子的 非交换环 不一定能被一个除环包含.
+接下来, 我们问: 如果一个环 $R$ 是非交换环 (non-commutative ring),那么, 如果 $R$ 没有零因子 (has no zero divisor), 是不是能推出 $R$ 能包含在一个除环或者是一个域里面呢? 答案是: 不可以. 因为, 一个无零因子的 非交换环 不一定能被一个除环包含.
 
-那么, 如果 $R$ 是交换环呢?
+那么, 如果 $R$ 是交换环 (commutative ring) 呢?
 \end{memo}
 
 \begin{theorem}\label{theorem_R_to_Q}
-任意一个无零因子的交换环 $R$ 都是一个域 $Q$ 的子环.
+任意一个无零因子 (has no zero divisor) 的交换环 (commutative ring) $R$ 都是一个域 (field) $Q$ 的子环 (subring).
 \end{theorem}
 
 
 \begin{proof}
 当 $R$ 只有零元的时候, 定理成立. 
 
-下面, 我们考虑 $R$ 至少有两个元的情况, $a, b, c, \ldots \in R$. 做一个集合
+下面, 我们考虑 $R$ 至少有两个元的情况, $a, b, c, \ldots \in R$. 
+
+作一个集合
 \begin{align*}
-A = \{ \frac{a}{b} | \forall a, b \in R, b \neq 0 \}
+A = \{ \frac{a}{b} \, | \,  \forall a, b \in R, b \neq 0 \}
 \end{align*}
 
 规定 $A$ 的一个关系 $\sim$:
@@ -3944,15 +4270,15 @@ A = \{ \frac{a}{b} | \forall a, b \in R, b \neq 0 \}
 & \frac{a}{b} \sim \frac{a'}{b'} , \quad \frac{a'}{b'} \sim \frac{a''}{b''}  \\
 \Longrightarrow & ab' = a' b, \quad a' b'' = a'' b' \\
 \Longrightarrow & (a b'') b' =  a b' b'' = (a b') b'' = (a' b) b'' = a' b'' b = (a' b'')b = (a'' b')b = (a'' b) b' \\
-\Longrightarrow & a b '' = a'' b, \quad \mbox{ 因为 } b' \neq 0 \mbox{  而且  } R \mbox{  无零因子} \\
+\Longrightarrow & a b '' = a'' b, \quad \mbox{ 因为 } b' \neq 0 \mbox{  而且  } R \mbox{  无零因子 (has no zero divisor)} \\
 \Longrightarrow & \frac{a}{b} \sim \frac{a''}{b''}
 \end{align*}
 }
 \end{enumerate}
 
-因此, 我们知道 $\sim$ 是一个等价关系. 这个等价关系把 $A$ 分成了若干个类 $\left[ \frac{a}{b} \right]$. 考虑以下的集合
+因此, 我们知道 $\sim$ 是一个等价关系. 这个等价关系把 $A$ 分成了若干个类 $\left[ \dfrac{a}{b} \right]$. 考虑以下的集合
 \begin{align*}
-Q_0 \left \{ \left[ \frac{a}{b} \right]  \mid \forall a , b \in R , b \neq 0 \right \}
+Q_0 = \left \{ \left[ \frac{a}{b} \right]  \mid \forall a , b \in R ,\, b \neq 0 \right \}
 \end{align*}
 
 并且, 对于 $Q_0$ 我们规定以下的加法和乘法:
@@ -3961,9 +4287,9 @@ Q_0 \left \{ \left[ \frac{a}{b} \right]  \mid \forall a , b \in R , b \neq 0 \ri
 & \left[ \frac{a}{b} \right] \left[ \frac{c}{d} \right] = \left[ \frac{ac}{bd} \right]
 \end{align*}
 
-验证这样规定的加法和乘法是有效的:
+验证这样规定的加法和乘法是有效 (well-defined) 的:
 \begin{enumerate}
-\item{由于 $R$ 没有零因子, 因此, 
+\item{由于 $R$ 没有零因子 (has no zero divisor), 因此, 
 \begin{align*}
 b \neq 0, \, d \neq 0 \Longrightarrow bd \neq 0 .
 \end{align*}
@@ -3987,7 +4313,7 @@ b \neq 0, \, d \neq 0 \Longrightarrow bd \neq 0 .
 }
 \end{enumerate}
 
-接下来, 我们验证$Q_0$ 对于加法做成一个加群:
+接下来, 我们验证$Q_0$ 对于加法做成一个加群 (additive group):
 \begin{enumerate}
 \item{交换律:
 \begin{align*}
@@ -3998,40 +4324,40 @@ b \neq 0, \, d \neq 0 \Longrightarrow bd \neq 0 .
 \begin{align*}
 & \left[ \frac{a}{b} \right] + \left(\left[ \frac{c}{d} \right] + \left[ \frac{e}{f} \right]  \right) = \left[ \frac{a}{b} \right] + \left[ \frac{cf + de  }{df} \right]  =  \left[ \frac{adf + bcf + bde  }{bdf} \right] \\
 & \left( \left[ \frac{a}{b} \right] + \left[ \frac{c}{d} \right] \right) + \left[ \frac{e}{f} \right] =  \left[ \frac{a d  + b c }{b d} \right] + \left[ \frac{e}{f} \right] = \left[ \frac{a d f + b c f+ bde}{b d f} \right] \\
-\Longrightarrow & \left[ \frac{a}{b} \right] + \left(\left[ \frac{c}{d} \right] + \left[ \frac{e}{f} \right]  \right) = \left[ \frac{adf + bcf + bde  }{bdf} \right] = \left( \left[ \frac{a}{b} \right] + \left[ \frac{c}{d} \right] \right) + \left[ \frac{e}{f} \right] 
+\Longrightarrow & \left[ \frac{a}{b} \right] + \left(\left[ \frac{c}{d} \right] + \left[ \frac{e}{f} \right]  \right) = \left[ \frac{adf + bcf + bde  }{bdf} \right] = \left( \left[ \frac{a}{b} \right] + \left[ \frac{c}{d} \right] \right) + \left[ \frac{e}{f} \right] .
 \end{align*}
 }
-\item{有单位元 $ \left[ \frac{0}{b} \right] $:
+\item{有单位元 (additive identity) $ \left[ \dfrac{0}{b} \right] $:
 \begin{align*}
-\left[ \frac{0}{b} \right] + \left[ \frac{c}{d} \right] = \left[ \frac{b c}{b d} \right] = \left[ \frac{c}{d} \right] 
+\left[ \frac{0}{b} \right] + \left[ \frac{c}{d} \right] = \left[ \frac{b c}{b d} \right] = \left[ \frac{c}{d} \right] .
 \end{align*}
 
 }
-\item{有逆元:
+\item{有逆元 (additive inverse):
 \begin{align*}
-\left[ \frac{a}{b} \right] + \left[ \frac{-a}{b} \right] = \left[ \frac{a b - a b}{b b} \right] = \left[ \frac{(a  - a) b}{b b} \right] = \left[ \frac{a  - a }{ b} \right] = \left[ \frac{0}{b} \right] 
+\left[ \frac{a}{b} \right] + \left[ \frac{-a}{b} \right] = \left[ \frac{a b - a b}{b b} \right] = \left[ \frac{(a  - a) b}{b b} \right] = \left[ \frac{a  - a }{ b} \right] = \left[ \frac{0}{b} \right] .
 \end{align*}
 }
 \end{enumerate}
 
-$Q_0$ 的所有非零元做成的集合 对于乘法来说做成一个交换群:
+$Q_0$ 的所有非零元做成的集合 对于乘法来说做成一个交换群 (commutative group):
 \begin{enumerate}
-\item{交换律:
+\item{交换律 (commutative law):
 \begin{align*}
-\left[ \frac{a}{b} \right] \left[ \frac{c}{d} \right] = \left[ \frac{ac }{bd} \right] = \left[ \frac{c}{d} \right] \left[ \frac{a}{b} \right] .
+\left[ \frac{a}{b} \right] \left[ \frac{c}{d} \right] = \left[ \frac{ac }{bd} \right] = \left[ \frac{c}{d} \right] \left[ \frac{a}{b} \right] , \quad R \mbox{ commutative: } bd = db, \, b \in R, d \in R .
 \end{align*}
 }
-\item{结合律:
+\item{结合律 (associative law):
 \begin{align*}
 \left[ \frac{a}{b} \right]  \left(\left[ \frac{c}{d} \right]  \left[ \frac{e}{f} \right]  \right) = \left[ \frac{ac e}{b d f} \right]  = \left( \left[ \frac{a}{b} \right]  \left[ \frac{c}{d} \right] \right) \left[ \frac{e}{f} \right] .
 \end{align*}
 }
-\item{有单位元 $ \left[ \frac{a}{a} \right] $:
+\item{有单位元 (multiplicative identity) $ \left[ \dfrac{a}{a} \right] $:
 \begin{align*}
 \left[ \frac{a}{a} \right] \left[ \frac{a}{b} \right] = \left[ \frac{aa }{ab} \right] = \left[ \frac{a}{b} \right] .
 \end{align*}
 }
-\item{对于任意元 $\left[ \frac{a}{b} \right] $, 有逆元 $\left[ \frac{b}{a} \right] $:
+\item{对于任意元 $\left[ \dfrac{a}{b} \right] $, 有逆元 (multiplicative inverse) $\left[ \dfrac{b}{a} \right] $:
 \begin{align*}
 \left[ \frac{a}{b} \right] \left[ \frac{b}{a} \right] = \left[ \frac{ab}{ba} \right] = \left[ \frac{a}{a} \right] .
 \end{align*}
@@ -4040,7 +4366,7 @@ $Q_0$ 的所有非零元做成的集合 对于乘法来说做成一个交换群:
 
 综上所述, $Q_0$ 对于加法做成一个加群, 而且 $Q_0$ 的所有非零元做成的集合 对于乘法来说做成一个交换群, 因此, $Q_0$ 是一个域.
 
-我们选择一个固定的非零元 $ q \in R$, $q \neq 0$. 考虑以下形式的元的集合:
+我们选择一个固定的非零元 $ 0 \neq q \in R$. 考虑以下形式的元的集合:
 \begin{align*}
 R_0 = \left\{ \left[ \frac{q a}{q} \right] \in Q_0 \mid \forall a \in R  \right\} 
 \end{align*} 
@@ -4050,17 +4376,17 @@ R_0 = \left\{ \left[ \frac{q a}{q} \right] \in Q_0 \mid \forall a \in R  \right\
 \phi: R \longrightarrow R_0, \quad \phi(a) = \left[ \frac{q a}{q} \right]
 \end{align*}
 
-$\phi$ 是一个 一一映射:
+我们验证 $\phi$ 是一个 一一映射:
 \begin{enumerate}
-\item{有效: 给定 $a = a'$,
+\item{$\phi$ 有效 (well-defined): 给定 $a = a'$,
 \begin{align*}
 & \phi(a) = \left[ \frac{q a}{q} \right], \, \phi(a') = \left[ \frac{q a'}{q} \right] \\
 & a = a' \Longrightarrow q a q = q a' q \Longrightarrow \left[ \frac{q a}{q} \right] = \left[ \frac{q a'}{q} \right] \Longrightarrow \phi(a) = \phi(a')
 \end{align*}
 }
-\item{满射: 任意一个在 $\left[ \frac{q a}{q} \right] \in R_0$ 中的元 都能找到 一个元 $a \in R$ 对应于 
+\item{满射 (surjective): 任意一个在 $\left[ \dfrac{q a}{q} \right] \in R_0$ 中的元 都能找到 一个元 $a \in R$ 对应于 
 $$\phi(a) = \left[ \frac{q a}{q} \right] .$$}
-\item{单射: 给定 $\phi(a) = \phi(a') $, 
+\item{单射 (injective): 给定 $\phi(a) = \phi(a') $, 
 \begin{align*}
 & \phi(a) = \phi(a') \Longrightarrow \left[ \frac{q a}{q} \right] = \left[ \frac{q a'}{q} \right] \Longrightarrow q a q = q a' q \\
 & \Longrightarrow a q q = a' q q \Longrightarrow (a - a') q q = 0 \Longrightarrow a - a' = 0, \mbox{ 因为有 } q \neq 0, \, q q \neq 0 \\
@@ -4075,7 +4401,7 @@ $$\phi(a) = \left[ \frac{q a}{q} \right] .$$}
 & \phi(a)  \phi(b) =  \left[ \frac{q a}{q} \right]  \left[ \frac{q b}{q} \right] = \left[ \frac{q^2 a b}{q^2} \right] = \left[ \frac{q (a b) }{q} \right] = \phi(ab)
 \end{align*}
 
-所以, $\phi$ 是 $R$ 和 $R_0$ 的同构映射:
+所以, $\phi$ 是 $R$ 和 $R_0$ 的同构映射 (isomorphism):
 \begin{align*}
 R \cong R_0
 \end{align*}
@@ -4087,7 +4413,7 @@ R \cong R_0
 \end{proof}
 
 \begin{memo}
-既然 $Q$ 是包含 $R$ 的域, 那么 $R$ 里的任意非零元 $b \neq 0$ 在 $Q$ 中有逆元 $b^{-1}$. 所以, 在 $Q$ 中, 我们用$\frac{a}{b}$ 表示:
+既然 $Q$ 是包含 $R$ 的域, 那么 $R$ 里的任意非零元 $b \neq 0$ 在 $Q$ 中有逆元 $b^{-1}$. 所以, 在 $Q$ 中, 我们用 符号 $\dfrac{a}{b}$ 表示以下:
 \begin{align*}
 a b^{-1} = b^{-1} a = \frac{a}{b} \quad (a, b \in R, \, b \neq 0)
 \end{align*}
@@ -4095,11 +4421,11 @@ a b^{-1} = b^{-1} a = \frac{a}{b} \quad (a, b \in R, \, b \neq 0)
 \end{memo}
 
 \begin{theorem}\label{theorem_fraction_field_structure}
-$Q$ 刚好是由所有元
+$Q$ 刚好是由所有元 $\dfrac{a}{b} $, $a, b \in R$, $b \neq 0$ 所做成.
 \begin{align*}
-\frac{a}{b} \quad (a, b \in R,\, b \neq 0)
+Q := \bigg\{ \frac{a}{b} \, | \, a, b \in R,\, b \neq 0 \bigg\} .
 \end{align*}
-所做成的. 这里
+这里规定
 \begin{align*}
 \frac{a}{b}  = a b^{-1} = b^{-1} a  \quad (a, b \in R, \, b \neq 0)
 \end{align*}
@@ -4113,33 +4439,29 @@ $Q$ 刚好是由所有元
 \end{align*}
 而且 我们知道 $R \cong R_0 $ 和 $Q \cong Q_0$ .
 
-如果 对于任意元 $  \left[ \frac{a }{ b} \right]  \in Q_0$, 都能写成
-$$ \frac{\left[ \frac{q a}{q} \right]}{\left[ \frac{q b}{q} \right]} = \left[ \frac{q a}{q} \right] \left[ \frac{q b}{q} \right]^{-1} ,$$
-
-那么根据 $Q \cong Q_0$ 以及 $\phi$ 是两者之间的一个 一一映射, 我们也就可以得出
-\begin{align*}
-\left[ \frac{a }{ b} \right] =  \frac{\left[ \frac{q a}{q} \right]}{\left[ \frac{q b}{q} \right]} =  \left[ \frac{q a}{q} \right] \left[ \frac{q b}{q} \right]^{-1} = \phi(a) \phi(b)^{-1} = \frac{\phi(a)}{\phi(b)} = \phi(\frac{a}{b}) ;
-\end{align*}
-也就对应了 在 $Q$ 中的任意元可以写成 $ \frac{a}{b} $ 的形式.
-
 我们知道在 $Q_0$ 中的逆元可以写成:
 \begin{align*}
  \left[ \frac{q b}{q} \right] ^{-1} =  \left[ \frac{q }{q b} \right] ,
 \end{align*}
 
-因此, 任意的 $\left[ \frac{a }{ b} \right] \in Q_0 $ 有
+因此, 对于任意的 $\left[ \dfrac{a }{ b} \right] \in Q_0 $, 有
 \begin{align*}
 \left[ \frac{a }{ b} \right] =  \left[ \frac{q^2 a }{q^2 b} \right]  = \left[ \frac{q a}{q} \right] \left[ \frac{q }{q b} \right] = \left[ \frac{q a}{q} \right] \left[ \frac{q b}{q} \right]^{-1} = \frac{\left[ \frac{q a}{q} \right]}{\left[ \frac{q b}{q} \right]} 
 \end{align*}
 
-因此有, 每一个元 $\frac{a}{b} \in Q$. 
 
-由于 $Q \cong Q_0$, $Q$ 也只能有可以写成 $\frac{a}{b}$ 的元.
+根据 $Q \cong Q_0$ 以及 $\phi$ 是两者之间的一个 一一映射, 我们可以得出
+\begin{align*}
+\left[ \frac{a }{ b} \right] =  \frac{\left[ \frac{q a}{q} \right]}{\left[ \frac{q b}{q} \right]} =  \left[ \frac{q a}{q} \right] \left[ \frac{q b}{q} \right]^{-1} = \phi(a) \phi(b)^{-1} = \frac{\phi(a)}{\phi(b)} = \phi(\frac{a}{b}) ;
+\end{align*}
+也就对应了 在 $Q$ 中的任意元可以写成 $ \dfrac{a}{b} $ 的形式. 因此有, 每一个元 $\dfrac{a}{b} \in Q$. 
+
+由于 $Q \cong Q_0$, $Q$ 也只能有可以写成 $\dfrac{a}{b}$ 的元.
 
 \end{proof}
 
 \begin{memo}
-$Q$ 的元可以写成 $\frac{a}{b}$ 的形式. 那么有以下性质:
+$Q$ 的元可以写成 $\dfrac{a}{b}$ 的形式. 那么有以下性质:
 \begin{align*}
 & \frac{a}{b} = \frac{c}{d} \iff ad = bc \\
 & \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd} \\
@@ -4149,15 +4471,15 @@ $Q$ 的元可以写成 $\frac{a}{b}$ 的形式. 那么有以下性质:
 \end{memo}
 
 \begin{definition}\label{def_field_of_fraction}
-一个域 $Q$ 叫做环 $R$ 的一个\textbf{商域}, 假如 $Q$ 包含 $R$, 并且 $Q$ 刚好是由所有元组成的:
+一个域 $Q$ 叫做环 $R$ 的一个\textbf{商域 (field of fractions)}, 假如 $R \subseteq Q$, 并且 $Q$ 刚好是由所有元组成的:
 \begin{align*}
-\frac{a}{b} \in Q, \quad a, b \in R, \, b \neq 0
+Q :=  \{ \frac{a}{b} \in Q \, | \,  a, b \in R, \, b \neq 0 \}
 \end{align*}
 
 \end{definition}
 
 \begin{theorem}\label{theorem_fraction_field_unique}
-同构的环 的商域 也同构. 抽象来说, 一个环最多只有一个商域.
+同构的环 的商域 也同构 (isomrophism). 抽象来说, 一个环 (ring) 最多只有一个商域 (field of fractions).
 \end{theorem}
 
 \begin{proof}
@@ -4165,10 +4487,10 @@ $Q$ 的元可以写成 $\frac{a}{b}$ 的形式. 那么有以下性质:
 
 假定 $\phi: R \longrightarrow R'$ 是一一映射, 我们规定 
 \begin{align*}
-f(\frac{a}{b}) = \frac{\phi(a)}{\phi(b)} \in F', \quad, \frac{a}{b} \in F
+f(\frac{a}{b}) = \frac{\phi(a)}{\phi(b)} \in F', \, \frac{a}{b} \in F
 \end{align*}
 
-可以说明 $f$ 是一个映射, 而且这个映射是满射, 也是单射. 因此, 我们可以得出 域同构 $F \cong F'$.
+可以说明 $f$ 是一个映射, 而且这个映射是满射 (surjective), 也是单射 (injective). 因此, 我们可以得出 域同构 $F \cong F'$.
 
 
 \end{proof}
@@ -4188,10 +4510,10 @@ a b^{-1} = b^{-1} a = \frac{a}{b} , \quad \forall a , b \in R, \, b \neq 0
 
 作 $F$ 的子集
 \begin{align*}
-\overline{Q} = \{ \frac{a}{b} |  \forall a , b \in R, \, b \neq 0 \}
+\overline{Q} = \{ \frac{a}{b} \, | \,  \forall a , b \in R, \, b \neq 0 \}
 \end{align*}
 
-我们知道 $\overline{Q}$ 是 $R$ 的商域: 根据 备注 \ref{memo_division_subring}, $\overline{Q}$ 是 $F$ 的一个子除环 (而且 交换), 如下:
+我们知道 $\overline{Q}$ 是 $R$ 的商域: 根据 备注 \ref{memo_division_subring}, $\overline{Q}$ 是 $F$ 的一个子除环 (而且 交换), 验证如下:
 \begin{enumerate}
 \item{$\overline{Q}$ 的加法和乘法 和 $F$ 一致 (可交换):
 \begin{align*}
@@ -4199,7 +4521,7 @@ a b^{-1} = b^{-1} a = \frac{a}{b} , \quad \forall a , b \in R, \, b \neq 0
 & \frac{a}{b} \frac{c}{d} = \frac{ac}{bd} = \frac{c}{d} \frac{a}{b}
 \end{align*}
 }
-\item{$\overline{Q}$ 包含 一个不等于零的元 $\frac{a}{a} = 1 \in \overline{Q}$.}
+\item{$\overline{Q}$ 包含 一个不等于零的元 $\dfrac{a}{a} = 1 \in \overline{Q}$.}
 \item{
 \begin{align*}
 \frac{a}{b}, \frac{c}{d} \in \overline{Q} \Longrightarrow \frac{a}{b} - \frac{c}{d} = \frac{ad - bc}{bd} \in \overline{Q}
