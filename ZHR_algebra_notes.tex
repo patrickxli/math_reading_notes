@@ -37,9 +37,13 @@
 
 \newtheorem{prototheorem}{定理}[section]
 \newenvironment{theorem}
-   {\colorlet{shadecolor}{pink!30}\begin{shaded}\begin{prototheorem}}
+   {\colorlet{shadecolor}{red!30}\begin{shaded}\begin{prototheorem}}
    {\end{prototheorem}\end{shaded}}
 
+\newtheorem{protoproposition}{命题}[section]
+\newenvironment{proposition}
+   {\colorlet{shadecolor}{green!15}\begin{shaded}\begin{protoproposition}}
+   {\end{protoproposition}\end{shaded}}
 
 
 % \newtheorem{theorem}{定理}[section]
@@ -4551,8 +4555,10 @@ $F$ 可以看成是一个环, $F$ 的商域 $Q$ 包含 $F$: $F \subseteq Q$.
 
 \chapter{Factoring in Integral Domain (整环里的因子分解) }
 
+\textbf{Recall:} By Memo \ref{memo_ring_integers_is_integral_domain}, the ring of integers $R$ is an integral domain as Definition \ref{def_integral_domain}. By Exercise \ref{exercise_R_id_to_Rx_id}, $R[x]$ is also an integral domain. 
 
-In the \textbf{ring of integers}, we have \textbf{Fundamental Theorem of Arithmetic}, also called the \textbf{unique factorization theorem} and \textbf{prime factorization theorem}.
+
+In the \textbf{ring of integers}, we have \textbf{Fundamental Theorem of Arithmetic}, also called the \textbf{unique factorization theorem} or \textbf{prime factorization theorem}.
 
 \begin{theorem}\label{theorem_integer_unique_factoring}
 Every integer $a \geq 1$ can be represented uniquely as a product of prime numbers, up to the order of the factors.
@@ -4571,19 +4577,19 @@ In this section we generalize the concepts of division and prime number to integ
 Recall the definition of integral domain:
 
 \begin{definition}\label{def_en_integral_domain}
-A ring $R$ is an \textbf{integral domain (整环)}, if for any elements $a, b \in R$,
+A ring $R$ is an \textbf{integral domain (整环)}, if for $\forall a, b \in R$,
 \begin{enumerate}
-\item{Multiplication is commutative:
+\item{Multiplication is \textbf{commutative}:
 \begin{equation}
 a b = b a
 \end{equation}
 }
-\item{Multiplication has an identity denoted by $1$:
+\item{$R$ has a \textbf{multiplicative identity}, denoted by $1$:
 \begin{equation}
 1 a = a 1 = a
 \end{equation}
 }
-\item{$R$ has no \textbf{nonzero zero divisors}
+\item{$R$ has \textbf{no nonzero zero divisors}
 \begin{equation}
 ab = 0 \Rightarrow a = 0, \mbox{ or  } b = 0
 \end{equation}
@@ -4595,12 +4601,12 @@ An integral domain is a \emph{nonzero commutative ring with no nonzero zero divi
 \end{definition}
 
 \begin{definition}\label{def_integral_domain_unit}
-An element $e \in I$ is a \textbf{unit}, if $e$ has a multiplicative inverse:
+An element $e \in I$ is a \textbf{unit}, or \textbf{multiplicative invertible}, if $e$ has a multiplicative inverse:
 \begin{align*}
 1 = e e^{-1} .
 \end{align*}
 
-In other words, the unit divides the multiplicative identity $1$.
+In other words, the unit, or the multiplicative invertible element, divides the multiplicative identity $1$.
 
 \end{definition}
 
@@ -4611,12 +4617,13 @@ An element $b \in I$ \textbf{divides} $a \in I$, if there exists $c \in I$ such 
 a = bc
 \end{align*}
 
-If $a$ is \textbf{divisible} by $b$ ($b$ divides $a$), we say $b$ is a \textbf{factor (or divisor)} of $a$, denoted by 
+If $a$ is \textbf{divisible} by $b$ (\textbf{$b$ divides $a$}), we say $b$ is a \textbf{factor (or divisor)} of $a$, denoted by 
 \begin{align*}
-b \mid a .
+b \mid a ,
 \end{align*}
+reading as $b$ divides $a$.
 
-If $b$ can not divide $a$, we denote it by
+If $b$ can \emph{not} divide $a$, we denote it by
 \begin{align*}
 b \nmid a .
 \end{align*}
@@ -4628,205 +4635,122 @@ $b$ is an \textbf{associate (associated element)} of $a$, if:
 \begin{align*}
 b = e a
 \end{align*}
-where $e$ is a unit.
+where $e$ is a unit, or multiplicative invertible element.
+
+This also means that $a$ is an associate of $b$, since $a = e^{-1} b$ by $e$ multiplicative invertible.
+
 \end{definition}
 
 \begin{memo}
-The ring of integers has two units, $1$ and $-1$.
-
-The ring of Gauss integers
+Some examples of multiplicative invertible elements or units, in rings:
+\begin{itemize}
+\item{The ring of integers has two multiplicative invertible elements or units, $1$ and $-1$.}
+\item{The ring of Gauss integers
 \begin{align*}
 \mathbb{Z}[i] = \{ a + bi \, | \, a, b \in \mathbb{Z} \}
 \end{align*}
-has units, $\pm 1$ and $\pm i$.
-
-The ring $\mathbb{R}[x]$ of real polynomials has units as nonzero constant polynomials.
-
-An integral domain has at least two units, $1$ and $-1$. General speaking, an integral domain has more than two units, see Exercise \ref{integral_domain_unique_factorization_exercise_2}.
-
-Fields are rings in which $0 \neq 1$ and in which every nonzero element is a unit.
+has multiplicative invertible elements or units, $\pm 1$ and $\pm i$.
+}
+\item{The ring $\mathbb{R}[x]$ of real polynomials has multiplicative invertible elements or units: nonzero constant polynomials.}
+\item{An integral domain has at least two units, $1$ and $-1$. General speaking, an integral domain has more than two units, see Exercise \ref{integral_domain_unique_factorization_exercise_2}.}
+\item{Fields are rings in which $0 \neq 1$ and in which every nonzero element is multiplicative invertible or is a unit.}
+\end{itemize}
 \end{memo}
 
 \begin{theorem}\label{thm_integral_domain_unit_product_inverse}
 In an integral domain, the product of units is also a unit; the multiplicative inverse of a unit is also a unit.
+
+(\textbf{Equivalent statement:} In an integral domain, the product of multiplicative invertible elements is also multiplicative invertible; the multiplicative inverse of a multiplicative invertible element is also multiplicative invertible.)
 \end{theorem}
 
 \begin{memo}
-Given an integral domain $I$, consider any element $a \in I$ and any unit $e \in I$. We have
+Given an integral domain $I$, consider any element $a \in I$ and any multiplicative invertible element or unit, $e \in I$. We have:
 \begin{align*}
 a = e e^{-1} a = e (e^{-1} a ) =  e^{-1} (e a) .
 \end{align*}
 
-This implies that any element $a \in I $ is divisible by any unit $e$ and by any associative of $a$ itself $e a$. 
+This implies that for any element $a \in I $, 
+\begin{itemize}
+\item{any multiplicative invertible element $e$ divides $a$, and}
+\item{any associative of $a$, $e a$ or $e^{-1} a$, divides $a$. }
+\end{itemize}
+
 \end{memo}
 
 \begin{definition}\label{def_integral_domain_proper_divisor}
-For any element $a$ in an integral domain $I$, the \textbf{trivial divisor} of $a \in I $ are units and the associates of $a$. The other divisors of $a$, if exists, are \textbf{proper divisors of $a$}.
+Consider an integral domain $I$. For any $a \in I$, the \textbf{trivial divisor} of $a \in I $ are:
+\begin{itemize}
+\item{multiplicative invertible elements (units), and}
+\item{the associates of $a$.}
+\end{itemize} 
+ 
+The other divisors of $a$, if exists, are called \textbf{proper divisors of $a$}.
 
-An \textbf{irreducible element} in an integral domain is a non-zero element that is not a unit, and has no proper divisor - its only divisors are units and associates.
+\end{definition}
+
+\begin{definition}\label{def_ID_irreducible_element}
+An \textbf{irreducible element} in $I$ is:
+\begin{itemize}
+\item{a non-zero element;}
+\item{not an multiplicative invertible element (unit);}
+\item{with \textbf{no proper divisor} - its only divisors are trivial divisors.}
+\end{itemize}
+
 
 \end{definition}
 
 \begin{memo}
-Given a prime number $p$, $\pm 1$ and $\pm p$ divide $p$. And there is no other divisor than $\pm 1$ and $\pm p$. In other words, prime number $p$ has only trivial divisors. 
+Given a prime number $p$ in an integral domain $I$, $\pm 1$ and $\pm p$ divide $p$. And there is no other divisor than $\pm 1$ and $\pm p$. In other words, prime number $p$ has only trivial divisors. 
 
 Of course, a prime number $p \neq 0$, $p \neq \pm 1$.
 \end{memo}
 
-\begin{definition}\label{def_integral_domain_prime_element}
-An element $p$ in an integral domain $I$ is a \textbf{prime element}, if $p$ is not a zero, $p$ is not a unit, and $p$ has only trivial divisors. 
+\begin{definition}\label{def_ID_prime_element}
+In an integral domain $I$, an element $p \in I$ is a \textbf{prime element}, if:
+\begin{itemize}
+\item{$p$ is a non-zero element,}
+\item{$p$ is not an multiplicative invertible element (unit),}
+\item{\textbf{if $p | bc$, then $p | b$, or $p | c$.}}
+\end{itemize}
 \end{definition}
 
-We have the following theorem for prime element:
-
-\begin{theorem}\label{integral_domain_unique_factorization_theorem_2}
-In an integral domain $I$, the product between a unit $e$ and a prime element $p$, $e p$ is also a prime element.
-\end{theorem}
+\begin{proposition}\label{proposition_ID_prime_is_irreducible}
+In an integral domain $I$, prime element is irreducible element.
+\end{proposition}
 
 \begin{proof}
-We show in the following steps:
-\begin{enumerate}
-\item{Since $e \neq 0$, $p \neq 0$, and integral domain has no nonzero zero divisor, so $e p \neq 0$.}
-\item{$e p $ is not a unit: By contradiction. Assume $e p$ is a unit, then it has an inverse, denoted as $e'$. We have the following:
+Assume $a$ is a prime element in $I$. Consider $b$ is a factor of $a$, then there exists $c \in I$ such that
 \begin{align*}
-1 = e' (e p) = (e' e ) p
+a = bc .
 \end{align*}
-This means $p$ has inverse $e' e$, so $p$ is a unit, this is contradictory to the presumption that $p$ is prime element (a prime element is not a unit).}
-\item{Assume $b$ is the factor of $e p$, and assume $b$ is not a unit, we want to show \underline{$b$ is the associate of $e p$}, so we can conclude $e p$ is prime elment.}
+
+This means $a | bc $. $a$ is a prime element, by definition, we have either $a | b$, or $a | c $.
 \begin{itemize}
-\item{Since $b$ is not unit, then
-\begin{align*}
-& e p = b c  \\
-\Longrightarrow & p = e^{-1} b c = b (e^{-1} c ) \\
-\Longrightarrow & b \mbox{ divides } p, \mbox{ write } b \mid p
-\end{align*}
-
-Since $p$ is a prime element, $b$ is not a unit, thus $b$ is the associate of $p$.} 
-\item{Given some unit $e''$, we have
-\begin{align*}
-b = e'' p = e'' e^{-1} e p = (e'' e^{-1} ) (e p)
-\end{align*}
-
-By Theorem \ref{thm_integral_domain_unit_product_inverse}, the product of units and the inverse of unit are units, so $e'' e^{-1} $ is a unit. Thus, \underline{$b$ is the associate of $e p$.}
-}
+\item{When $ a | b$, that is $b$ is a factor of $a$. It has $b = a x$ for some $x \in I$. So $a = b c = a x c$, so $a (x c - 1) =0$. Since $a \neq 0$, $xc - 1 = 0$, which means $xc = 1$. So $c$ is multiplicative invertible element. Thus, by $a = bc \implies b = a c^{-1}$. This implies that $b$ is the associate of $a$.}
+\item{When $a | c$, that is $c $ is a factor of $a$. It has $c = ad$ for some $d \in I$. Thus, $a = bc = b ad \implies a (bd - 1) =0$. Since $a \neq 0 $, $bd-1=0$, which means $bd = 1$, so $b$ is multiplicative invertible element (unit).}
+\item{Therefore, $b$ is the factor of $a$. And $b$ is either the associate of $a$, or the multiplicative invertible element (unit) in $I$. This means $a$ has only trivial divisors, so $a$ is irreducible element by Definition \ref{def_ID_irreducible_element}. }
 \end{itemize}
-
-\end{enumerate}
 \end{proof}
 
-\begin{theorem}\label{thm_integral_domain_proper_divisor_redef}
-Given an integral domain $I$, a nonzero element $a \in I$ has proper divisor if and only if
-\begin{align*}
-a = b c
-\end{align*}
-where $b$ and $c$ are not unit.
-\end{theorem}
+
+\begin{proposition}\label{proposition_ID_irreducible_not_prime}
+In an integral domain, irreducible element is not necessarily prime element.
+\end{proposition}
 
 \begin{proof}
-If $a$ has a proper divisor $b$, then we can write
+We prove by showing a counterexample of integral domain with irreducible element but not prime. 
+
+Consider the integral domain 
 \begin{align*}
-a = bc
+I = \{a + b \sqrt{-3} \, | \, a, b \in \mathbb{Z} \} = \{ a + b i \sqrt{3} \, | \, a, b \in \mathbb{Z} \}
 \end{align*}
-\begin{itemize}
-\item{Since $b$ is the proper divisor of $b$, $b$ is not a unit by definition \ref{def_integral_domain_proper_divisor}. }
-\item{We show that $c$ is not a unit: By contradiction, assume $c$ is a unit. Then 
-\begin{align*}
-a = bc \Longrightarrow a c^{-1} = b c c^{-1} = b \Longleftrightarrow b = a c^{-1}
-\end{align*} 
-$c$ is a unit, so $c^{-1}$ is also a unit by Theorem  \ref{thm_integral_domain_unit_product_inverse}. $b = a c^{-1}$ means $b$ is the associate of $a$. This contradicts to the presumption that $b$ is the proper divisor of $a$. Thus, $c$ is not a unit.}
-\end{itemize}
 
-For the opposite direction,assume
-\begin{align*}
-a = bc
-\end{align*}
-where $b$ and $c$ are not unit. We show $b$ is not the associate of $a$ by contradiction: Assume $b$ is the associate of $a$, then we can write for some unit $e$ that
-\begin{align*}
-& b = e a \\
- \Longrightarrow & a = bc = e a c = a ec \\
-\Longrightarrow & 1 = ec \mbox{ by cancellation law in integral domain}
-\end{align*}
-Here we know integral domain has no nonzero zero divisors, and thus cancellation law holds in integral domain.
-
-$1 = ec $ implies that $c$ is a unit. This contradicts to the presumption that $c$ is not a unit.
-
-Therefore $b$ is not a unit, and $b$ is not the associate of $a$. Thus, $b$ is the proper divisor of $a$.
-\end{proof}
-
-\begin{corollary}\label{corollary_integral_domain_proper_divisor_redef}
-In an integral domain, assume $a \neq 0$, and $a$ has proper divisor $b$ with $a = bc$, then $c$ is also a proper divisor of $a$.
-\end{corollary}
-
-\begin{proof}
-From the first half in the proof of Theorem \ref{thm_integral_domain_proper_divisor_redef}, we have shown that $c$ is not a unit.
-
-From the second half in the proof of Theorem \ref{thm_integral_domain_proper_divisor_redef}, we can show that $c$ is not an associate and thus is a proper divisor of $a$: By contradiction, assume $c$ is an associate of $a$. Then we have some unit $e$ such that
-\begin{align*}
-& c = e a \\
-\Longrightarrow & a = b c = b e a \\
-\Longrightarrow & 1 = b e \mbox{ by cancellation law in integral domain}
-\end{align*}
-$ 1 = be $ implies that $b$ is a unit. This contradicts to the presumption that $b$ is not a unit since $b$ by assumption is a proper divisor of $a$.
-
-Thus, we just show $c$ is also a proper divisor of $a$.
-\end{proof}
-
-We want to know which condition can ensure that an element can be uniquely factorized as a product of a finite number of prime elements.
-
-\begin{definition}\label{def_integral_domain_unique_factorization}
-In an integral domain $I$, an element $a$ has \textbf{unique factorization}, if the following conditions are satisfied:
+Elements in $I$ are complex numbers. From properties of complex numbers, we have the following:
 \begin{enumerate}
-\item{$a = p_1 p_2 \cdots p_r$ ($p_i$ is prime element in $I$);}
-\item{If there exists $a = q_1 q_2 \cdots q_s$ ($q_i$ is prime element in $I$), then
-\begin{align*}
-r = s
-\end{align*}
-and by suitable rearrangement, $q_i$ is an associate of $p_i$ for each $i$, i.e.
-\begin{align*}
-q_i = e_i p_i \quad ( e_i \in I \mbox{ is a unit } ).
-\end{align*}  
-}
-\end{enumerate}
-\end{definition}
-
-
-\begin{memo}
-By definition \ref{def_integral_domain_unique_factorization}, zero and units in an integral domain do not have unique factorization:
-\begin{enumerate}
-\item{If we write 
-\begin{align*}
-0 = a_1 a_2 \cdots a_n
-\end{align*}
-Then since $I$ is integral domain, it has no nonzero zero divisors, thus there must be some $a_i = 0$. But $0$ is not a prime element, so $a_i$ is not a prime element, and thus $0$ can not be uniquely factorized.
-}
-\item{If we write a unit $e$ (a unit has an inverse)as:
-\begin{align*}
-& e = a_1 a_2 \cdots a_n \\
-\Longrightarrow & e^{-1} e = e^{-1}  a_1 a_2 \cdots a_n \\
-\Longrightarrow & 1 = a_1 (e^{-1}  a_2 \cdots a_n )
-\end{align*}
-
-Thus, $a_1$ has an inverse. This means $a_1$ is a unit, not a prime element. Therefore, $e$ can not be uniquely factorized.
-}
-\end{enumerate}
-
-With this reason, we exclude zero and units when we study unique factorization.
-\end{memo}
-
-\begin{example}\label{example_unique_factorization_multi_factors}
-Not all nonzero non-unit elements in an integral domain have unique factorization.
-
-Consider
-\begin{align*}
-I = \{ a + b \sqrt{-3} \, |\, a, b \in \mathbb{Z} \}
-\end{align*}
-
-$I$ is an integral domain. Elements in $I$ are complex numbers. From properties of complex numbers, we have the following:
-\begin{enumerate}
-\item{$e \in I$ is a unit iff $|e|^2 = 1$. \label{example_multi_factors_arguement_1}}
+\item{$e \in I$ is multiplicative invertible (or unit) iff $|e|^2 = 1$. \label{proposition_ID_irreducible_not_prime_arguement_1}}
 
 \begin{itemize}
-\item{Assume $e = a + b \sqrt{-3}$ is a unit, then $e$ has an inverse $e'$. By property of complex number $|e e'|^2 = |e|^2 |e'|^2$, we have:
+\item{Assume $e = a + b \sqrt{-3}$ is multiplicative invertible, then $e$ has an inverse $e'$. By property of complex number $|e e'|^2 = |e|^2 |e'|^2$, we have:
 \begin{align*}
 & 1 = e e' \\
 \Longrightarrow & |1 |^2 = |e e'|^2 =  |e|^2 |e'|^2 \\
@@ -4835,53 +4759,230 @@ $I$ is an integral domain. Elements in $I$ are complex numbers. From properties 
 
 $|e|^2 = a^2 + 3 b^2$ is a positive integer, so is $|e'|^2$ a positive integer, thus, to make $1 = |e|^2 |e'|^2$, there must be $|e|^2 =1 $.
 }
-\item{Assume $|e|^2 = a^2 + 3 b^2 = 1$. Then it must be $b = 0$ (if $b \neq 0  \Longrightarrow 3b^2 \geq 3 \Longrightarrow |e|^2 \geq 3$ since $a^2 \geq 0$), this implies that $a = \pm 1$. This means $e = \pm 1 $. Thus, $e$ is a unit.}
-\item{Remark: $e \in I$ is unit iff $|e|^2 = 1$ means $I$ has only two units $\pm 1$.}
+\item{Assume $|e|^2 = a^2 + 3 b^2 = 1$. Then it must be $b = 0$ (if $b \neq 0  \Longrightarrow 3b^2 \geq 3 \Longrightarrow |e|^2 \geq 3$ since $a^2 \geq 0$), this implies that $a = \pm 1$. This means $e = \pm 1 $. Thus, $e$ is multiplicative invertible.}
+\item{Remark: $e \in I$ is multiplicative iff $|e|^2 = 1$ means $I$ has only two multiplicative invertible elements (or units) $\pm 1$.}
 \end{itemize}
 
 
-\item{Element $a \in I$ such that $|a|^2 = 4$ is a prime element.\label{example_multi_factors_arguement_2}}
+\item{Element $\alpha = a + b \sqrt{-3} \in I$ such that $| \alpha |^2 = 4$ is irreducible.\label{proposition_ID_irreducible_not_prime_arguement_2}}
 
 \begin{itemize}
-\item{Since $|a|^2 = 4$, $a \neq 0$. Then by previous argument \ref{example_multi_factors_arguement_1}, $a$ is not a unit (for $a$ to be a unit, it has to be $|a|^2 = 1$). }
-\item{$a \neq 0$, and $a$ is not a unit. From the definition of prime element, we need to check if $a$ has \textbf{no} proper factor.
+\item{Since $| \alpha |^2 = 4$, $\alpha \neq 0$. Then by previous argument \ref{proposition_ID_irreducible_not_prime_arguement_1}, $ \alpha $ is not multiplicative invertible (because $ \alpha $ to be multiplicative invertible, it has to be $|\alpha|^2 = 1$). }
+\item{$\alpha \neq 0$, and $ \alpha $ is not multiplicative invertible. From the definition of irreducible element at \ref{def_ID_irreducible_element}, we need to verify that $ \alpha $ has \textbf{no} proper divisor.
 
-Assume $\beta$ is the factor of $a$:
+Assume $\beta = c + d \sqrt{-3}$ is the divisor of $\alpha $:
 \begin{align*}
-& \beta = c + d \sqrt{-3}, \quad a = \beta \gamma \\
-\Longrightarrow & |a|^2 = |\beta |^2 | \gamma |^2 \\
-\Longrightarrow & 4 =  |\beta |^2 | \gamma |^2 \quad \mbox{by } \, |a|^2 = 4
+& \alpha = \beta \gamma \\
+\Longrightarrow & |\alpha |^2 = |\beta |^2 | \gamma |^2 \\
+\Longrightarrow & 4 =  |\beta |^2 | \gamma |^2 \quad \mbox{, by } \, |\alpha |^2 = 4
 \end{align*}
 
-Since $\beta = c + d \sqrt{-3}$, for any arbitrary $c$ and $d$ as integers,
-\begin{align*}
-|\beta |^2 = c^2 + 3 d^2 \neq 2 .
-\end{align*}
-So, we have 
+Since $\beta = c + d \sqrt{-3}$ is for any arbitrary integers $c$ and $d$, it is obvious that
+$|\beta |^2 = c^2 + 3 d^2 \neq 2 $ and we have 
 \begin{align*}
 |\beta |^2 = 1, \mbox{ or } |\beta |^2 = 4 .
 \end{align*}
 
 \begin{itemize}
-\item{If $|\beta |^2 = 1$, then by previous argument, $\beta$ is a unit. So $\beta$ is not a proper factor of $a$.}
+\item{If $|\beta |^2 = 1$, then by previous argument, $\beta$ is multiplicative invertible. So $\beta$ is not a proper divisor of $a$.}
 \item{If $|\beta |^2 = 4 $, then 
 \begin{align*}
-& 4 =  |\beta |^2 | \gamma |^2  \\
+& |\alpha |^2 = |\beta |^2 | \gamma |^2 \\
+\Longrightarrow & 4 =  |\beta |^2 | \gamma |^2  \\
 \Longrightarrow & 4 = 4 | \gamma |^2  \\
 \Longrightarrow & | \gamma |^2 = 1 \\
-\Longrightarrow & \gamma \mbox{ is a unit}
+\Longrightarrow & \gamma \mbox{ is multiplicative invertible}
 \end{align*}
 
-By $a = \beta \gamma $ and $\gamma$ is a unit ($\gamma$ is invertible and $\gamma^{-1}$ is also a unit), we have $\beta = \gamma^{-1} a$. So $\beta$ is an associate of $a$, not a proper factor of $a$.
+By $\alpha = \beta \gamma $ and $\gamma$ is multiplicative invertible ($\gamma$ is multiplicative invertible and $\gamma^{-1}$ is also multiplicative invertible), we have $\beta = \gamma^{-1} \alpha$. So $\beta$ is an associate of $\alpha$, not a proper divisor of $\alpha$.
 }
-\item{ Thus, $a$ has only trivial factors, so $a$ is a prime element.}
+\item{ Thus, $\alpha $ has only trivial divisors, so $\alpha$ is an irreducible element.}
 \end{itemize}
 
 }
 \end{itemize}
-\item{Check the element $ 4 \in I$:
+\item{Consider the element $ 4 \in I$:
 \begin{align}
-4 = 2 \cdot 2 = (1+ \sqrt{-3} ) (1 - \sqrt{-3}) \label{example_multi_factors_eq_1}
+4 = 2 \cdot 2 = (1+ \sqrt{-3} ) (1 - \sqrt{-3}) \label{proposition_ID_irreducible_not_prime_eq_1}
+\end{align}
+
+We know
+\begin{align*}
+|2|^2 = 4, \quad |1 + \sqrt{-3}|^2 = 4, \quad |1 - \sqrt{-3}|^2 = 4 .
+\end{align*}
+By argument \ref{proposition_ID_irreducible_not_prime_arguement_2}, $ 1 + \sqrt{-3} $ is irreducible element of $I$.
+
+Equation \ref{proposition_ID_irreducible_not_prime_eq_1} implies $1 + \sqrt{-3} | 2 \cdot 2$. We need to show $1 + \sqrt{-3} \nmid 2 $:
+
+By contradiction, if $1 + \sqrt{-3} | 2 $, then it must be
+\begin{align*}
+2 &= ( 1 + \sqrt{-3}) ( a + b \sqrt{-3} ) \quad \mbox{for some }  a + b \sqrt{-3} \in I \\
+&= a - 3b + (a+b) \sqrt{-3} \\
+\implies & a - 3b =2, \quad a + b = 0 \\
+\implies & - 4b = 2 
+\end{align*}
+
+No integer $b$ can have $- 4b = 2 $. Therefore, $1 + \sqrt{-3} \nmid 2 $. By Definition \ref{def_ID_prime_element}, this means $ 1 + \sqrt{-3} $ is \emph{not} prime.
+}
+\end{enumerate}
+
+In summary, we just show $ 1 + \sqrt{-3} \in I$ is irreducible but \emph{not} prime.
+
+\end{proof}
+
+\begin{memo}
+Consider the set of integers $\mathbb{Z}$, as we will see later on, it is UFD. UFD has the proper that prime is equivalent to irreducible. This keeps the consistency with which in number theory the definition of prime number is by the definition of irreducible element.
+\end{memo}
+
+
+\begin{theorem}\label{integral_domain_unique_factorization_theorem_2}
+Let $I$ be an integral domain, the product between a multiplicative invertible element (unit) $e$ and an irreducible element $p$, $e p$ is also an irreducible element.
+\end{theorem}
+
+\begin{proof}
+We show in the following steps:
+\begin{enumerate}
+\item{Since $e \neq 0$, $p \neq 0$, and integral domain has no non-zero zero divisor, so $e p \neq 0$.}
+\item{$e p $ is not a multiplicative invertible element (unit): By contradiction. Assume $e p$ is multiplicative invertible (unit), then it has an inverse, denoted as $e'$. We have the following:
+\begin{align*}
+1 = e' (e p) = (e' e ) p
+\end{align*}
+This means $p$ has a multiplicative inverse $e' e$, so $p$ is multiplicative invertible (unit), this is contradictory to the presumption that $p$ is an irreducible element and an irreducible element is not multiplicative invertible (unit). Thus, $ep$ has to be multiplicative invertible.}
+\item{Assume $b$ is the factor of $e p$, which is $ep = bc$ for some $c \in I$. Assume $b$ is not multiplicative invertible (unit), we want to show \underline{$b$ is the associate of $e p$}, by this we can conclude $e p$ is prime element:}
+\begin{itemize}
+\item{Since $b$ is not multiplicative invertible (unit), then
+\begin{align*}
+& e p = b c  \\
+\Longrightarrow & p = e^{-1} b c = b (e^{-1} c ) \\
+\Longrightarrow & b \mid p, \quad \mbox{that is } b \mbox{ divides } p
+\end{align*}
+
+Since $p$ is an irreducible element, $b$ is not multiplicative invertible (unit), thus $b$ has to be the associate of $p$.} 
+\item{Since $b$ has to be the associate of $p$, by Definition \ref{def_integral_domain_associates}: we have for some multiplicative invertible (unit) $e''$ such that
+\begin{align*}
+b = e'' p = e'' e^{-1} e p = (e'' e^{-1} ) (e p) .
+\end{align*}
+
+By Theorem \ref{thm_integral_domain_unit_product_inverse}, the product of multiplicative invertible (units) and the inverse of multiplicative invertible (unit) are multiplicative invertible (units), so $e'' e^{-1} $ is a multiplicative invertible (unit). Thus, \underline{$b$ is the associate of $e p$.}
+}
+\end{itemize}
+
+\end{enumerate}
+\end{proof}
+
+
+
+\begin{theorem}\label{thm_integral_domain_proper_divisor_redef}
+Given an integral domain $I$, a nonzero element $a \in I$ has proper divisor if and only if
+\begin{align*}
+a = b c ,
+\end{align*}
+where $b$ and $c$ are not multiplicative invertible (unit).
+\end{theorem}
+
+\begin{proof}
+If $a$ has a proper divisor $b$, then we can write
+\begin{align*}
+a = bc .
+\end{align*}
+\begin{itemize}
+\item{Since $b$ is the proper divisor of $a$, $b$ is not multiplicative invertible (unit) by Definition \ref{def_integral_domain_proper_divisor}. }
+\item{We show that $c$ is not multiplicaitve invertible (unit): By contradiction, assume $c$ is multiplicative invertible (unit). Then 
+\begin{align*}
+a = bc \Longrightarrow a c^{-1} = b c c^{-1} = b \Longleftrightarrow b = a c^{-1}
+\end{align*} 
+$c$ is multiplicative invertible (unit), so $c^{-1}$ is also a multiplicative invertible (unit) by Theorem  \ref{thm_integral_domain_unit_product_inverse}. $b = a c^{-1}$ means that $b$ is the associate of $a$. This contradicts to the presumption that $b$ is the proper divisor of $a$. Thus, $c$ is not a multiplicative invertible (unit).}
+\end{itemize}
+
+For the opposite direction, assume
+\begin{align*}
+a = bc ,
+\end{align*}
+where $b$ and $c$ are not multiplicative invertible (units). We show $b$ is not the associate of $a$ by contradiction: Assume $b$ is the associate of $a$, then we can write for some multiplicative invertible (unit) $e$ such that
+\begin{align*}
+& b = e a \\
+ \Longrightarrow & a = bc = e a c = a ec \\
+\Longrightarrow & 1 = ec \mbox{ by cancellation law in integral domain } .
+\end{align*}
+
+(Here we know integral domain has no nonzero zero divisors, and thus cancellation law holds in integral domain.)
+
+$1 = ec $ implies that $c$ is a multiplicative invertible (unit). This contradicts to the presumption that $c$ is not a multiplicative invertible (unit). Therefore, we just show that $b$ is not the associate of $a$ by contradiction.
+
+In summary, $b$ is not a multiplicative invertible (unit), and $b$ is not the associate of $a$. Thus, $b$ is the proper divisor of $a$.
+\end{proof}
+
+\begin{corollary}\label{corollary_integral_domain_proper_divisor_redef}
+In an integral domain, assume a non-zero element $a \neq 0$ has proper divisor $b$ with $a = bc$, then $c$ is also a proper divisor of $a$.
+\end{corollary}
+
+\begin{proof}
+From the first half in the proof of Theorem \ref{thm_integral_domain_proper_divisor_redef}, we have shown that $c$ is not a multiplicative invertible (unit).
+
+From the second half in the proof of Theorem \ref{thm_integral_domain_proper_divisor_redef}, we can show that $c$ is not an associate and thus is a proper divisor of $a$: By contradiction, assume $c$ is an associate of $a$. Then we have some multiplicative invertible (unit) $e$ such that
+\begin{align*}
+& c = e a \\
+\Longrightarrow & a = b c = b e a \\
+\Longrightarrow & 1 = b e \mbox{ by cancellation law in integral domain}
+\end{align*}
+$ 1 = be $ implies that $b$ is a multiplicative invertible (unit). This contradicts to the presumption that $b$ is not a multiplicative invertible (unit) since $b$ by assumption is a proper divisor of $a$.
+
+Thus, we just show $c$ is also a proper divisor of $a$.
+\end{proof}
+
+We want to know which condition can ensure that an element can be uniquely factorized as a product of a finite number of prime elements.
+
+\begin{definition}\label{def_integral_domain_unique_factorization}
+Let $I$ be an integral domain. An element $a \in I$ has \textbf{unique factorization}, if the following conditions are satisfied:
+\begin{enumerate}
+\item{$a = p_1 p_2 \cdots p_r$ ($p_i$ is irreducible element in $I$);}
+\item{If there exists $a = q_1 q_2 \cdots q_s$ ($q_i$ is irreducible element in $I$), then
+\begin{align*}
+r = s
+\end{align*}
+and by suitable rearrangement, $q_i$ is an associate of $p_i$ for each $i$, i.e.
+\begin{align*}
+q_i = e_i p_i \quad ( e_i \in I \mbox{ is a multiplicative invertible (unit) } ).
+\end{align*}  
+}
+\end{enumerate}
+\end{definition}
+
+
+\begin{memo}
+By definition \ref{def_integral_domain_unique_factorization}, zero and multiplicative invertible (units) in an integral domain do not have unique factorization:
+\begin{enumerate}
+\item{If we write 
+\begin{align*}
+0 = a_1 a_2 \cdots a_n
+\end{align*}
+Then since $I$ is integral domain, it has no nonzero zero divisors, thus there must be some $a_i = 0$. But $0$ is not an irreducible element, so $a_i$ is not an irreducible element, and thus $0$ can not be uniquely factorized.
+}
+\item{If we write a multiplicative invertible (unit) $e$, with its multiplicative inverse as $e'$, by:
+\begin{align*}
+& e = a_1 a_2 \cdots a_n \\
+\Longrightarrow & e^{-1} e = e^{-1}  a_1 a_2 \cdots a_n \\
+\Longrightarrow & 1 = a_1 (e^{-1}  a_2 \cdots a_n )
+\end{align*}
+
+Thus, $a_1$ has an inverse. This means $a_1$ is a multiplicative invertible (unit), not an irreducible element. Therefore, $e$ can not be uniquely factorized.
+}
+\end{enumerate}
+
+With this reason, we exclude zero and multiplicative invertible (units) when we study unique factorization.
+\end{memo}
+
+\begin{example}\label{example_unique_factorization_multi_factors}
+Not all non-zero non-multiplicative-invertible elements in an integral domain have unique factorization.
+
+Consider again the integral domain in Proposition \ref{proposition_ID_irreducible_not_prime}: 
+\begin{align*}
+I = \{ a + b \sqrt{-3} \, |\, a, b \in \mathbb{Z} \}
+\end{align*}
+
+Check again the element $ 4 \in I$:
+\begin{align}
+4 = 2 \cdot 2 = (1+ \sqrt{-3} ) (1 - \sqrt{-3}) . \label{example_multi_factors_eq_1}
 \end{align}
 
 \begin{itemize}
@@ -4889,14 +4990,13 @@ By $a = \beta \gamma $ and $\gamma$ is a unit ($\gamma$ is invertible and $\gamm
 \begin{align*}
 |2|^2 = 4, \quad |1 + \sqrt{-3}|^2 = 4, \quad |1 - \sqrt{-3}|^2 = 4 .
 \end{align*}
-By argument \ref{example_multi_factors_arguement_2}, $2$, $1+ \sqrt{-3}$, and $1 - \sqrt{-3}$ are all prime elements of $I$. Equation \ref{example_multi_factors_eq_1} means $4$ has two ways of factorization in $I$.
+By argument \ref{proposition_ID_irreducible_not_prime_arguement_2}, $2$, $1+ \sqrt{-3}$, and $1 - \sqrt{-3}$ are all irreducible elements of $I$. Equation \ref{example_multi_factors_eq_1} means $4$ has two ways of factorization in $I$.
 }
-\item{$I$ has only two units $e = \pm 1$. This means $ 2 \neq (1+ \sqrt{-3}) e $ and $2 \neq (1 - \sqrt{-3}) e$. So $1+ \sqrt{-3}$ and $1 - \sqrt{-3}$ are not associates of $2$. }
+\item{$I$ has only two multiplicative invertible (units) $e = \pm 1$. This means $ 2 \neq (1+ \sqrt{-3}) e $ and $2 \neq (1 - \sqrt{-3}) e$. So $1+ \sqrt{-3}$ and $1 - \sqrt{-3}$ are not associates of $2$. }
 \item{By definition of unique factorization, the factorization $4 = 2 \cdot 2$ is different from the factorization $4 = (1+ \sqrt{-3} ) (1 - \sqrt{-3})$. Thus, $4$ does not have unique factorization in $I$.}
 \end{itemize}
-}
 
-\end{enumerate}
+
 
 \end{example}
 
@@ -4905,7 +5005,7 @@ Prove that $0$ is not a proper factor for any element $a$ in an integral domain 
 \end{exercise}
 
 \begin{proof}
-Given a unit $e \in I$, we have $ 0 = e \cdot 0$, which means $0$ is the associate of $0$.
+Given a multiplicative invertible (unit) $e \in I$, we have $ 0 = e \cdot 0$, which means $0$ is the associate of $0$ itself.
 
 Given any element $a $ in an integral domain $I$, consider
 \begin{align*}
@@ -4920,51 +5020,60 @@ By $0$ is the associate of $0$, we know $0$ is the associate of $a=0$. Thus, $0$
 \begin{exercise}\label{integral_domain_unique_factorization_exercise_2}
 Consider the following integral domain $I$:
 \begin{align*}
-I = \{ \frac{m}{2^n}  | m, \, n  \in \mathbb{Z}, n \geq 0 \}
+I = \{ \frac{m}{2^n} \, | \, m, \, n  \in \mathbb{Z}, n \geq 0 \}
 \end{align*}
 
-What are the units of $I$? What are the prime elements of $I$?
+What are the multiplicative invertible (units) of $I$? What are the irreducible elements of $I$?
 \end{exercise}
 
 \begin{proof}
 Elements in $I$ can be rewritten as
 \begin{equation}\label{integral_domain_unique_factorization_exercise_2_reformat}
-\frac{m}{2^n} \Longleftrightarrow 2^i u , \quad i \in \mathbb{Z}, \, u \, \mbox{ is odd number}
+\frac{m}{2^n} \iff 2^i u , \quad i \in \mathbb{Z}, \, u \, \mbox{ is an odd number}.
 \end{equation}
 
-Remark: We know any integer $m \in I$, since $m = \frac{m}{2^0}$. So we know $2^i \in I$ and $u \in I$, since $2^i$ and $u$ are integers. We know $(2^{i})^{-1} = 2^{-i} \in I$ since $i \in \mathbb{Z}$, but we can not guarantee if $u^{-1} \in I$ or not.   
+Remark: It is obvious that 
+\begin{align*}
+\{ 2^i u i \in \mathbb{Z}, \, u \, \mbox{ is an odd number} \} \subseteq \{ \frac{m}{2^n} \, | \, m, \, n  \in \mathbb{Z}, n \geq 0  \} .
+\end{align*}
+
+For any $\dfrac{m}{2^n} $, $m$ is either even number or odd number. If $m$ is odd number, it can be written as the form of $2^i u $; if $m$ is even number, it can be written as the form of $2^i \cdot 1$ with $u= 1$. Therefore, Equation \ref{integral_domain_unique_factorization_exercise_2_reformat} holds with $\dfrac{m}{2^n} \iff 2^i u $. 
 
 \begin{enumerate}
-\item{We show units of $I$ are $\pm 2^i$, $i \in \mathbb{Z}$.}
+\item{We show multiplicative invertible (units) of $I$ are $\pm 2^i$, $i \in \mathbb{Z}$.}
 \begin{itemize}
-\item{If $e = 2^i u$ is a unit of $I$, then there exists an inverse $e^{-1}$ with $e^{-1} 2^i u = 1 $. This means 
+\item{If $e = 2^i u$ is a multiplicative invertible (unit) of $I$, then there exists a multiplicative inverse $e^{-1}$ with $e^{-1} 2^i u = 1 $. This means 
 \begin{align*}
 e^{-1} = 2^{-i} u^{-1}
 \end{align*}
 
 $e^{-1}$ must follow the format in Equation \ref{integral_domain_unique_factorization_exercise_2_reformat}:
 \begin{align*}
-e^{-1} = 2^{-i} u^{-1} = 2^{i'} u', \quad i' \in \mathbb{Z}, \, u' \, \mbox{ is odd number}
+e^{-1} = 2^{-i} u^{-1} = 2^{i'} u', \quad -i =: i' \in \mathbb{Z}, \, u^{-1} =: u' \, \mbox{ is an odd number}
 \end{align*}
-This means $u$ and $u^{-1}$ are odd number, which implies that $u = \pm 1$. So we have
+This means $u$ and $u' := u^{-1}$ are odd number, which implies that $u = \pm 1$. So we have
 \begin{align*}
 e = 2^i u = \pm 2^i .
 \end{align*}
 }
-\item{Suppose an element $e = \pm 2^i$ ($i \in \mathbb{Z}$). Then it has an inverse $\pm 2^{-1} \in I$, so $e$ is a unit of $I$.
+\item{Suppose an element $e = \pm 2^i$ ($i \in \mathbb{Z}$). Then it has multiplicative inverse $\pm 2^{-i} \in I$, so $e$ is a multiplicative invertible unit of $I$.
 }
-\item{Summing up, we have shown unit of $I$ has the form of $\pm 2^{i}$.}
+\item{Summing up, we have shown the multiplicative invertible unit of $I$ has the form of $\pm 2^{i}$.}
 \end{itemize}
-\item{We show $2^i u $ is prime element of $I$: By Theorem \ref{integral_domain_unique_factorization_theorem_2} and $2^i$ is unit of $I$, to show $2^i u $ is prime element of $I$ is to show its associate $u$ is prime element of $I$.
+\item{We show $2^i u $ is irreducible element of $I$: By Theorem \ref{integral_domain_unique_factorization_theorem_2} and $2^i$ is unit of $I$, to show $2^i u $ is irreducible element of $I$ is to show its associate $u$ is irreducible element of $I$.
 
-In particular, we want to show the odd number $u$ is a prime number (in the ring of integers) iff $u$ is a prime element in $I$.}
+In particular, we want to show the odd number $u$ is an irreducible number (in the ring of integers $\mathbb{Z}$) iff $u$ is an irreducible element in $I$.}
 \begin{itemize}
-\item{First, we show if the odd number $u$ is a prime element of $I$, then $u$ is a prime number. It is done by contrapositive: to show if the odd number $u$ is not a prime number, then $u$ is not a prime element of $I$:
+\item{First, we show if the odd number $u$ is an irreducible element of $I$, then $u$ is an irreducible number. It is done by contrapositive: to show if the odd number $u$ is not irreducible, then $u$ is not an irreducible element of $I$:
 
-If $u$ as the odd number is not a prime number, then there is factorization $u = u_1 u_2$ where $u_1$ and $u_2$ are odd number and with $u_1, \, u_2 \neq \pm 1$. So, $u_1$ and $u_2$ can not be written as the form of $\pm 2^i$ ($i \in \mathbb{Z}$), they are not units of $I$. This means $u$ has proper divisor, by Theorem \ref{thm_integral_domain_proper_divisor_redef}. Therefore, $u$ is not a prime element of $I$.}
-\item{Next, we show if the odd number $u$ is a prime number, then $u$ is a prime element of $I$:
+If $u$ as the odd number is not an irreducible number in $\mathbb{Z}$, then there is factorization $u = u_1 u_2$ where $u_1$ and $u_2$ are odd number and with $u_1, \, u_2 \neq \pm 1$.
 
-Assume the odd number $u$ is a prime number and assume $u$ has in $I$ a factorization:
+$u_1$ and $u_2$ can not be written as the form of $\pm 2^i$ ($i \in \mathbb{Z}$), they are \underline{not} multiplicative invertible units of $I$.
+
+By Theorem \ref{thm_integral_domain_proper_divisor_redef}, this means $u$ has proper divisor, and thus $u$ is not an irreducible element of $I$.}
+\item{Next, we show if the odd number $u$ is an irreducible number in $\mathbb{Z}$, then $u$ is an irreducible element of $I$:
+
+Assume the odd number $u$ is an irreducible number and assume $u $ has a factorization in $I$:
 \begin{align*}
 u = (2^{i_1}u_1 ) ( 2^{i_2} u_2 ) = 2^{i_1 + i_2} u_1 u_2
 \end{align*}
@@ -4975,11 +5084,11 @@ $u$ is an odd number, so $i_1 + i_2 =0$. This means
 u = 2^0 u_1 u_2 = u_1 u_2 .
 \end{align*}
 
-Since $u$ is prime number, this means $u_1 = \pm 1$ or $u_2 = \pm 1$, which means $2^{i_1}u_1 = \pm  2^{i_1} \in I$ or $ 2^{i_2} u_2 = \pm 2^{i_2} \in I$. So at least one of $2^{i_1}u_1$ and $2^{i_2} u_2 $ is the unit of $I$, while another one is the associate of $u$ in $I$. So $u$ is nonzero element in $I$, is not a unit, has only unit and associate as divisors. $u$ is thus a prime element of $I$. 
+Since $u$ is irreducible, this means $u_1 = \pm 1$ or $u_2 = \pm 1$, which means $2^{i_1}u_1 = \pm  2^{i_1} \in I$ or $ 2^{i_2} u_2 = \pm 2^{i_2} \in I$. So at least one of $2^{i_1}u_1$ and $2^{i_2} u_2 $ is the multiplicative invertible unit of $I$, while another one is the associate of $u$ in $I$. So $u$ is nonzero element in $I$, is not a multiplicative invertible unit, has only multiplicative invertible unit and associate as divisors. $u$ is thus an irreducible element of $I$. 
  }
-\item{Summing up, we have shown that the odd number $u$ is a prime number (in the ring of integers) iff $u$ is a prime element in $I$. 
+\item{Summing up, we have shown that the odd number $u$ is an irreducible number (in the ring of integers $\mathbb{Z}$) iff $u$ is an irreducible element in $I$. 
 
-By Theorem \ref{integral_domain_unique_factorization_theorem_2}, prime element in $I$ has the form $2^i u$ where the odd number $u$ is prime number.}
+By Theorem \ref{integral_domain_unique_factorization_theorem_2}, irreducible element in $I$ has the form $2^i u$ where $u$ is irreducible number in $\mathbb{Z}$.}
 \end{itemize}
 
 \end{enumerate}
@@ -4993,7 +5102,7 @@ Consider an integral domain
 I = \{ a + bi | a, \, b \in \mathbb{Z} \} .
 \end{align*}
 
-Prove $5$ is not prime element of $I$. Does $5$ have unique factorization?
+Prove $5$ is not irreducible element of $I$. Does $5$ have unique factorization?
 
 \end{exercise}
 
@@ -5001,10 +5110,10 @@ Prove $5$ is not prime element of $I$. Does $5$ have unique factorization?
 \begin{proof}
 Similar to Example \ref{example_unique_factorization_multi_factors}, we can prove:
 \begin{enumerate}
-\item{$ e \in I$ is a unit iff $|e|^2 = 1$.}
+\item{$ e \in I$ is multiplicative invertible (unit) iff $|e|^2 = 1$.}
 
 \begin{itemize}
-\item{Assume $e = a + b i$ is a unit, then $e$ has an inverse $e'$. By property of complex number $|e e'|^2 = |e|^2 |e'|^2$, we have:
+\item{Assume $e = a + b i$ is multiplicative invertible , then $e$ has a multiplicative inverse $e'$. By property of complex number $|e e'|^2 = |e|^2 |e'|^2$, we have:
 \begin{align*}
 & 1 = e e' \\
 \Longrightarrow & |1 |^2 = |e e'|^2 =  |e|^2 |e'|^2 \\
@@ -5015,49 +5124,46 @@ $|e|^2 = a^2 + b^2$ is a positive integer, so is $|e'|^2$ a positive integer, th
 }
 \item{Assume $|e|^2 = a^2 + b^2 = 1$. Then it must be either $a=0$ or $b = 0$, this implies that $e = \pm 1$ or $e = \pm i$.
 
-$e = \pm 1$ is unit of $I$. For $e = \pm i$, we know $i \cdot - i = 1$, so $i$ and $-i$ are mutually inverse, thus $e = \pm i$ is unit of $I$ as well.}
-\item{Remark: $e \in I$ is unit iff $|e|^2 = 1$ means $I$ has only $4$ units $\pm 1$ and $\pm i$.}
+$e = \pm 1$ is multiplicative invertible in $I$. 
+
+For $e = \pm i$, we know $i \cdot - i = 1$, so $i$ and $-i$ are mutually inverse, thus $e = \pm i$ is multiplicative invertible in $I$ as well.}
+\item{Summing up, we have just shown that $ e \in I$ is multiplicative invertible (unit) iff $|e|^2 = 1$.}
+\item{Remark: $e \in I$ is multiplicative invertible (unit) iff $|e|^2 = 1$ means $I$ has only $4$ multiplicative invertible (units): $\pm 1$ and $\pm i$.}
 \end{itemize}
 
 
-\item{$a \in I$ with $|a|^2 = 5$ is a prime element of $I$.}
+\item{$\alpha \in I$ with $|\alpha|^2 = 5$ is irreducible in $I$.}
 
 \begin{itemize}
-\item{Since $|a|^2 = 5$, $a \neq 0$. Then by argument aforementioned, $a$ is not a unit (for $a$ to be a unit, it has to be $|a|^2 = 1$). }
-\item{$a \neq 0$, and $a$ is not a unit. From the definition of prime element, we need to check if $a$ has \textbf{no} proper factor.
+\item{Since $|\alpha|^2 = 5$, $\alpha \neq 0$. Then by argument aforementioned, $\alpha$ is not multiplicative invertible (for $\alpha$ to be multiplicative invertible, it has to be $|\alpha|^2 = 1$). }
+\item{$\alpha \neq 0$, and $\alpha$ is not multiplicative invertible. From the definition of irreducible element at Definition \ref{def_ID_irreducible_element}, we need to check $\alpha$ has \textbf{no} proper factor.
 
-Assume $\beta$ is the factor of $a$:
+Assume $\beta$ is the factor of $\alpha$:
 \begin{align*}
-& \beta = c + d i, \quad a = \beta \gamma \\
-\Longrightarrow & |a|^2 = |\beta |^2 | \gamma |^2 \\
-\Longrightarrow & 5 =  |\beta |^2 | \gamma |^2 \quad \mbox{by } \, |a|^2 = 5
+& \beta = c + d i, \quad \alpha = \beta \gamma \\
+\Longrightarrow & |\alpha|^2 = |\beta |^2 | \gamma |^2 \\
+\Longrightarrow & 5 =  |\beta |^2 | \gamma |^2, \quad \mbox{ by } \, |\alpha|^2 = 5
 \end{align*}
 
-Since $\beta = c + d i$, for any arbitrary $c$ and $d$ as integers,
-\begin{align*}
-|\beta |^2 = c^2 + d^2 \neq 2 .
-\end{align*}
-
-
-Since $5 =  |\beta |^2 | \gamma |^2$, $|\beta |^2$ can not be even number. So, we have 
+Since $5 =  |\beta |^2 | \gamma |^2$, $|\beta |^2$ and $ | \gamma |^2$ are both integers, we have 
 \begin{align*}
 |\beta |^2 = 1, \mbox{ or } |\beta |^2 = 5 .
 \end{align*}
 
 
 \begin{itemize}
-\item{If $|\beta |^2 = 1$, then by previous argument, $\beta$ is a unit. So $\beta$ is not a proper factor of $a$.}
+\item{If $|\beta |^2 = 1$, then by previous argument, $\beta$ is multiplicative invertible. So $\beta$ is not a proper factor of $a$.}
 \item{If $|\beta |^2 = 5 $, then 
 \begin{align*}
 & 5 =  |\beta |^2 | \gamma |^2  \\
 \Longrightarrow & 5 = 5 | \gamma |^2  \\
 \Longrightarrow & | \gamma |^2 = 1 \\
-\Longrightarrow & \gamma \mbox{ is a unit}
+\Longrightarrow & \gamma \mbox{ is mulitplicative invertible (unit)}
 \end{align*}
 
-By $a = \beta \gamma $ and $\gamma$ is a unit ($\gamma$ is invertible and $\gamma^{-1}$ is also a unit), we have $\beta = \gamma^{-1} a$. So $\beta$ is an associate of $a$, not a proper factor of $a$.
+By $\alpha = \beta \gamma $ and $\gamma$ is a multiplicative invertible ($\gamma$ is multiplicative invertible and $\gamma^{-1}$ is also multiplicative invertible), we have $\beta = \gamma^{-1} \alpha$. So $\beta$ is an associate of $\alpha$, not a proper factor of $\alpha$.
 }
-\item{ Thus, $a$ has only trivial factors, so $a$ is a prime element.}
+\item{ Thus, $\alpha$ has only trivial factors, so $\alpha$ is an irreducible element.}
 \end{itemize}
 
 }
@@ -5065,35 +5171,35 @@ By $a = \beta \gamma $ and $\gamma$ is a unit ($\gamma$ is invertible and $\gamm
 
 
 Now we need to prove:
-\item{$5$ is not a prime element of $I$, and $5$ has unique factorization.}
+\item{$5$ is not an irreducible element of $I$, but $5$ has unique factorization.}
 \begin{itemize}
-\item{First $5$ is not a prime element of $I$:
+\item{First, $5$ is not an irreducible element of $I$:
 We can write
 \begin{align*}
-5 = (1 + 2 i ) (1 - 2 i )
+5 = (1 + 2 i ) (1 - 2 i ) .
 \end{align*}
-Here $|1 + 2i|^2 = | 1-2i|^2 = 5$. By aforementioned argument that $|a|^2 = 5$ is a prime element of $I$, $1 + 2i$ and $1 - 2i$ are prime elements of $I$. So, $5 $ is not a prime element of $I$.}
-\item{Assume a factorization of $5$ by prime elements has the form:
+Here $|1 + 2i|^2 = | 1-2i|^2 = 5$. By aforementioned argument that $|\alpha|^2 = 5$ is irreducible in $I$, $1 + 2i$ and $1 - 2i$ are irreducible elements of $I$. So, $5 $ is \underline{not} an irreducible element of $I$.}
+\item{Assume a factorization of $5$ by irreducible elements has the form:
 \begin{align*}
-5 = a_1 a_2 \ldots a_m
+5 = \alpha_1 \alpha_2 \ldots \alpha_m ,
 \end{align*}
-where $a_i$ is prime element of $I$, $i = 1, \ldots, m$.
+where $\alpha_i$ is irreducible element of $I$, $i = 1, \ldots, m$.
 
-Since $5$ is not a prime element, we have $m \geq 2$.
+Since $5$ is not an irreducible element, we have $m \geq 2$.
 
 On the other hand, we know
 \begin{align*}
-25 = |5|^2 = |a_1|^2 |a_2|^2 \ldots |a_m|^2
+25 = |5|^2 = |\alpha_1|^2 |\alpha_2|^2 \ldots |\alpha_m|^2 ,
 \end{align*}
-where $|a_i|^2 =5$ by $a_i$ prime element of $I$. So we have $m=2$.
+where $|\alpha_i|^2 =5$ by $\alpha_i$ irreducible element of $I$. So we have $m=2$.
 
 Assume then
 \begin{align*}
-5 = a_1 a_2 \ldots a_m \Longrightarrow 5 = \alpha \beta
+5 = \alpha_1 \alpha_2 \ldots \alpha_m \Longrightarrow 5 = \alpha \beta
 \end{align*} 
 with $|\alpha|^2 =  | \beta |^2 = 5$.
 
-We see 4 types of prime factorization for $5$:
+We see 4 types of factorization for $5$:
 \begin{align*}
 & 5 = (1 + 2i) (1 - 2i) \\
 & 5 = (-1 - 2i) (-1 + 2i) = [ -1 (1 + 2i) ] [-1 (1 - 2i ) ] \\
@@ -5101,7 +5207,7 @@ We see 4 types of prime factorization for $5$:
 & 5 = ( -2 - i ) (-2 + i) = [ -i ( 1 - 2i) ] [ i ( 1 + 2i ) ]
 \end{align*} 
 
-Since $\pm 1$ and $\pm i$ are units of $I$, so there 4 types of prime factorization are actually equivalent. Thus, $5$ has a unique factorization.
+Since $\pm 1$ and $\pm i$ are multiplicative invertible (units) in $I$, so these 4 types of factorization are actually equivalent. Thus, $5$ has a unique factorization.
 }
 \end{itemize}
 
@@ -5110,9 +5216,9 @@ Since $\pm 1$ and $\pm i$ are units of $I$, so there 4 types of prime factorizat
 
 \end{proof}
 
-\section{Unique Factorization Domain (唯一分解环(整环))}
+\section{Unique Factorization Domain (唯一分解整环)}
 
-From previous discussion, Unique Factorization Theorem (UFT) does not necessarily hold in integral domain. We also know Unique Factorization Theorem holds in some integral domain such as rings of integers. We want to classify those integral domains that maintain the UFT.
+From previous discussion, Unique Factorization Theorem (UFT) does not necessarily hold in integral domain. We also know Unique Factorization Theorem holds in some integral domain such as rings of integers $\mathbb{Z}$. We want to classify those integral domains that maintain the UFT.
 
 \begin{definition}
 An integral domain $I$ is called a \textbf{Unique Factorization Domain (UFD)}, if every nonzero and non-unit element in $I$ has unique factorization.
